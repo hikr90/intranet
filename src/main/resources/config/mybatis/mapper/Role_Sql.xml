@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="role">
+	<select id="roleInqyDao1010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* roleInqyDao1010 : 권한 목록 조회 */
+		SELECT 
+					ROLE_CD
+				,	ROLE_NM
+				,	USE_YN
+				,	DISP_ORDER
+				,	REMARK
+		FROM role
+		WHERE 1=1
+			<if test="srchNm != null and srchNm != ''">
+				AND REGEXP_REPLACE(LOWER(ROLE_NM),'[^0-9가-힣A-Za-z]','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]','')||'%'
+			</if>
+		ORDER BY ROLE_CD
+	</select>
+	
+	<select id="roleInqyDao1020" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* roleInqyDao1020 : 권한 상세 조회 */
+		SELECT 
+					ROLE_CD
+				,	ROLE_NM
+				,	USE_YN
+				,	DISP_ORDER
+				,	REMARK
+		FROM role
+		WHERE ROLE_CD = #{roleCd, jdbcType=VARCHAR}
+	</select>
+	
+	<select id="roleInqyDao2010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* roleInqyDao2010 : 메뉴 권한 목록 조회 */
+		SELECT 
+					DATA.*
+				,	LEVEL AS LV
+		FROM (
+				SELECT 
+					    	MA.ROLE_CD
+					    ,	A.ROLE_NM
+					    ,	MA.MENU_CD
+					    ,	M.MENU_NM
+					    ,	M.MENUTYPE_CD
+					    ,	M.UPPR_MENU_CD
+					    ,	M.DISP_ORDER
+				FROM MENU_ROLE MA
+				LEFT OUTER JOIN role A
+					ON A.ROLE_CD = MA.ROLE_CD
+					AND A.USE_YN = 'Y'
+				LEFT OUTER JOIN MENU M
+					ON M.MENU_CD = MA.MENU_CD
+				WHERE 1=1
+					AND A.ROLE_CD = #{roleCd, jdbcType=VARCHAR}
+			) DATA 
+			START WITH DATA.UPPR_MENU_CD IS NULL
+			CONNECT BY PRIOR DATA.MENU_CD = DATA.UPPR_MENU_CD
+			ORDER SIBLINGS BY DATA.MENU_CD	
+	</select>
+
+	<select id="roleInqyDao3010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* roleInqyDao3010 : 사용자 목록 조회 */
+		WITH INTR_MAIN AS 
+			(
+				SELECT 
+				        DATA.ORG_CD
+				    ,   DATA.ORG_NM
+				    ,	'' AS UPPR_ORG_CD
+				    ,   '' AS EMP_IDX
+			    	,   '' AS EMP_NM
+			    	,   LEVEL AS LV
+			    	,   'N' AS ISLEAF
+				FROM 
+					(
+						SELECT
+						        LD.ORG_CD
+						    ,   LD.ORG_NM
+						    ,   LD.UPPR_ORG_CD
+						    ,   UD.ORG_NM AS UPPR_ORG_NM
+					    	,   UD.DISP_ORDER
+						FROM ORG LD
+						LEFT OUTER JOIN ORG UD
+							ON LD.UPPR_ORG_CD = UD.ORG_CD
+							AND UD.USE_YN = 'Y'
+					) DATA
+					START WITH DATA.UPPR_ORG_CD IS NULL
+					CONNECT BY PRIOR DATA.ORG_CD = DATA.UPPR_ORG_CD
+					ORDER SIBLINGS BY DATA.ORG_CD
+				)
+				SELECT 
+					RESULT.* 
+				FROM (
+						SELECT 
+								IM.*
+						FROM INTR_MAIN IM
+						UNION ALL
+						SELECT 
+					        	INTR_SUB.*
+					        ,	'Y'
+						FROM (
+								SELECT 
+								        '' AS ORG_CD
+								    ,   IM.ORG_NM
+								    ,	E.ORG_CD AS UPPR_ORG_CD
+								    ,   E.EMP_IDX
+								    ,   E.EMP_NM
+								    ,   IM.LV + 1  AS LV
+								FROM EMP_INFO E
+								LEFT OUTER JOIN INTR_MAIN IM
+									ON IM.ORG_CD = E.ORG_CD
+								WHERE E.LEAV_DT IS NULL
+								ORDER BY E.EMP_NM
+							) INTR_SUB
+					) RESULT
+				START WITH RESULT.UPPR_ORG_CD IS NULL
+				CONNECT BY PRIOR RESULT.ORG_CD = RESULT.UPPR_ORG_CD
+				ORDER SIBLINGS BY RESULT.ORG_NM ASC, RESULT.EMP_NM ASC
+	</select>
+
+	<select id="roleInqyDao4010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* roleInqyDao4010 : 사용자 권한 목록 조회 */
+		SELECT 
+					DATA.*
+		FROM (
+				SELECT 
+				    	EA.ROLE_CD
+				    ,	A.ROLE_NM
+				    ,	EA.EMP_IDX
+                    ,   E.EMP_NM
+				    ,	D.ORG_NM
+				    ,	EA.DISP_ORDER
+				FROM EMP_ROLE EA
+                LEFT OUTER JOIN EMP_INFO E
+                    ON E.EMP_IDX = EA.EMP_IDX
+				LEFT OUTER JOIN role A
+					ON A.ROLE_CD = EA.ROLE_CD
+					AND A.USE_YN = 'Y'
+				LEFT OUTER JOIN ORG D
+					ON D.ORG_CD = E.ORG_CD
+				WHERE 1=1
+					<if test="roleCd != null and roleCd != ''">
+						AND A.ROLE_CD = #{roleCd, jdbcType=VARCHAR}
+					</if>
+			) DATA 
+            ORDER BY DATA.EMP_NM, DATA.EMP_IDX
+	</select>
+	
+	<select id="roleInqyDao5010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* roleInqyDao5010 : 로그인 권한 사용자 목록 조회 */
+		SELECT 
+					EA.ROLE_CD
+				, 	A.ROLE_NM
+				,	E.EMP_ID
+				,	E.EMP_PWD
+				,	E.EMP_NM
+		FROM EMP_INFO E
+        INNER JOIN EMP_ROLE EA 
+            ON EA.EMP_IDX = E.EMP_IDX
+        LEFT OUTER JOIN role A
+            ON A.ROLE_CD = EA.ROLE_CD
+		WHERE 1=1
+		ORDER BY EA.ROLE_CD ASC, E.EMP_IDX
+	</select>
+	
+	<insert id="roleProcDao1010" parameterType="java.util.HashMap">
+		/* roleProcDao1010 : 권한 등록 처리 */
+		INSERT INTO role
+		(
+					ROLE_CD
+				,	ROLE_NM
+				,	USE_YN
+				,	DISP_ORDER
+				,	REMARK
+		)
+		VALUES
+		(
+				(SELECT 'ROLE_' || LPAD(NVL(MAX(SUBSTR(ROLE_CD,LENGTH(ROLE_CD)-3,LENGTH(ROLE_CD))),0) + 1,4,0) AS ROLE_CD FROM role)
+			,	#{roleNm, jdbcType=VARCHAR}
+			,	#{useYn, jdbcType=VARCHAR}
+			,	(
+					SELECT 
+						NVL(MAX(DISP_ORDER),0) + 1 
+					FROM role
+				)
+			,	#{remark, jdbcType=VARCHAR}
+		)
+	</insert>
+
+	<update id="roleProcDao1020" parameterType="java.util.HashMap">
+		/* roleProcDao1020 : 권한 수정 처리 */
+		UPDATE role
+			SET		ROLE_NM = #{roleNm, jdbcType=VARCHAR}
+				,	USE_YN = #{useYn, jdbcType=VARCHAR}
+				,	REMARK = #{remark, jdbcType=VARCHAR}
+		WHERE ROLE_CD = #{roleCd, jdbcType=VARCHAR}
+	</update>
+	
+	<delete id="roleProcDao1030" parameterType="java.util.HashMap">
+		/* roleProcDao1030 : 권한 삭제 처리 */
+		DELETE FROM role
+			WHERE ROLE_CD = #{roleCd, jdbcType=VARCHAR}
+	</delete>
+	
+	<delete id="roleProcDao1040" parameterType="java.util.HashMap">
+		/* roleProcDao1040 : 메뉴 권한 삭제 처리 */
+		DELETE FROM MENU_ROLE
+			WHERE ROLE_CD = #{roleCd, jdbcType=VARCHAR}
+	</delete>
+	
+	<insert id="roleProcDao1050" parameterType="java.util.HashMap">
+		/* roleProcDao1050 : 메뉴 권한 등록 처리 */
+		INSERT INTO MENU_ROLE
+		(
+					ROLE_CD
+				,	MENU_CD
+				,	USE_YN
+				,	DISP_ORDER
+				,	REMARK
+		)
+		VALUES
+		(
+				#{roleCd, jdbcType=VARCHAR}
+			,	#{menuCd, jdbcType=VARCHAR}
+			,	'Y'
+			,	(
+					SELECT 
+						NVL(MAX(DISP_ORDER),0) + 1 
+					FROM MENU_ROLE WHERE ROLE_CD = #{roleCd, jdbcType=VARCHAR}
+				)
+			,	NULL
+		)
+	</insert>
+	
+	<delete id="roleProcDao1060" parameterType="java.util.HashMap">
+		/* roleProcDao1060 : 사용자 권한 삭제 처리 */
+		DELETE FROM EMP_ROLE
+			WHERE ROLE_CD = #{roleCd, jdbcType=VARCHAR}
+	</delete>
+	
+	<insert id="roleProcDao1070" parameterType="java.util.HashMap">
+		/* roleProcDao1070 : 사용자 권한 등록 처리 */
+		INSERT INTO EMP_ROLE
+		(
+					ROLE_CD
+				,	EMP_IDX
+				,	USE_YN
+				,	DISP_ORDER
+				,	REMARK
+		)
+		VALUES
+		(
+				#{roleCd, jdbcType=VARCHAR}
+			,	#{empIdx, jdbcType=VARCHAR}
+			,	'Y'
+			,	(
+					SELECT 
+						NVL(MAX(DISP_ORDER),0) + 1 
+					FROM EMP_ROLE WHERE ROLE_CD = #{roleCd, jdbcType=VARCHAR}
+				)
+			,	NULL
+		)
+	</insert>
+</mapper>

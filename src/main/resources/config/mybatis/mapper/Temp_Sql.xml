@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="temp">
+	<select id="tempInqyDao1010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* tempInqyDao1010 : 기안문 양식 목록 조회 */
+		SELECT 
+				T.TEMP_CD
+	        ,   T.TEMP_NM
+	        ,	T.TEMPTYPE_CD
+	        ,	T.REG_MAPPING_ID
+	        ,	T.DET_MAPPING_ID
+	        ,   T.DISP_ORDER
+	        ,   T.REMARK
+	        ,	'1' AS LV
+	        ,	'Y' AS ISLEAF
+	        ,   COUNT(T.TEMP_CD) OVER() AS LIST_CNT
+	        ,	ROW_NUMBER() OVER(ORDER BY T.TEMP_CD ASC) AS NUM
+		FROM TEMPLATE T
+		WHERE 1=1
+			<if test="srchNm != null and srchNm != ''">
+		    	AND REGEXP_REPLACE(LOWER(T.TEMP_NM),'[^0-9가-힣A-Za-z]','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]','')||'%'
+		    </if>
+		ORDER BY T.TEMP_CD ASC
+	</select>
+	
+	<select id="tempInqyDao1020" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* tempInqyDao1020 : 기안문 양식 상세 조회 */
+		SELECT 
+				T.TEMP_CD
+	        ,   T.TEMP_NM
+	        ,	T.TEMP_CONT
+	        ,	T.TEMPTYPE_CD
+	        ,	T.USE_YN
+		FROM TEMPLATE T
+		WHERE 1=1
+			AND T.TEMP_CD = #{tempCd, jdbcType=VARCHAR}
+	</select>
+	
+	<update id="tempProcDao1010" parameterType="java.util.HashMap">
+		/* tempProcDao1010 : 기안문 양식 수정 처리 */
+		UPDATE TEMPLATE
+			SET		TEMP_NM = #{tempNm, jdbcType=VARCHAR}
+					,	TEMP_CONT = #{tempCont, jdbcType=VARCHAR}
+					,	USE_YN = #{useYn, jdbcType=VARCHAR}
+		WHERE TEMP_CD = #{tempCd, jdbcType=VARCHAR}
+	</update>
+</mapper>

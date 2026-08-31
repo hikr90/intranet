@@ -1,0 +1,59 @@
+/* ================== Font ================== */
+html,
+body,
+input,
+mark,
+textarea,
+button,
+select {
+    font-family:'NanumSquare','Malgun Gothic',arial,dotum,tahoma,sans-serif;
+    font-size: 10px; font-weight: 400;
+}
+
+@font-face {
+    font-family: 'NanumSquare';
+    font-style: normal;
+    font-weight: 400;
+    src: url(./file/NanumSquareR.eot);
+    src: local('Nanum Square Regular'),
+         local('NanumSquareR'),
+         url(./file/NanumSquareR.eot?#iefix) format('embedded-opentype'),
+         url(./file/NanumSquareR.woff2) format('woff2'),
+         url(./file/NanumSquareR.woff) format('woff'),
+         url(./file/NanumSquareR.ttf) format('truetype');
+  }
+  
+@font-face {
+    font-family: 'NanumSquare';
+    font-style: bold;
+    font-weight: 700;
+    src: url(./file/NanumSquareB.eot);
+    src: local('Nanum Square Bold'),
+         local('NanumSquareB'),
+         url(./file/NanumSquareB.eot?#iefix) format('embedded-opentype'),
+         url(./file/NanumSquareB.woff2) format('woff2'),
+         url(./file/NanumSquareB.woff) format('woff'),
+         url(./file/NanumSquareB.ttf) format('truetype');
+  }
+  
+@font-face {
+    font-family: 'NanumSquare';
+    font-weight: 300;
+    src: url(./file/NanumSquareL.eot);
+    src: local('Nanum Square Light'),
+         local('NanumSquareL'),
+         url(./file/NanumSquareL.eot?#iefix) format('embedded-opentype'),
+         url(./file/NanumSquareL.woff) format('woff'),
+         url(./file/NanumSquareL.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'NanumSquare';
+    font-weight: 800;
+    src: url(./file/NanumSquareEB.eot);
+    src: local('Nanum Square Extra Bold'),
+         local('NanumSquareEB'),
+         url(./file/NanumSquareEB.eot?#iefix) format('embedded-opentype'),
+         url(./file/NanumSquareEB.woff) format('woff'),
+         url(./file/NanumSquareEB.ttf) format('truetype');
+}

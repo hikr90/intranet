@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="banr">
+	<select id="banrInqyDao1010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* banrInqyDao1010 : 배너 시퀀스 조회 */
+		SELECT 'BANR_' || LPAD(NVL(MAX(REPLACE(BANR_CD,'BANR_')),0) + 1,4,0) AS SEQUENCE_ID FROM BANR
+	</select>
+	
+	<select id="banrInqyDao1020" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* banrInqyDao1020 : 배너 조회 */
+		SELECT
+				B.BANR_CD
+			,	B.BANR_SDT
+			,	B.BANR_EDT
+			,	B.BANR_IDX
+			,	B.WIDTH
+			,	B.HEIGHT
+			,	B.BANR_URL
+			,	B.USE_YN
+			,	F.FILE_ID
+			,	F.FILE_SNO
+			,	F.FILE_NM
+			,	F.FILETYPE_CD
+			,	F.FILE_PATH
+			,	F.FILE_EXT
+			,	F.FILE_SIZE
+			,	E.EMP_NM
+			,	E.EMP_IDX
+			,	O.ORG_CD
+			,	O.ORG_NM
+		FROM BANR B
+		INNER JOIN FILE_INFO F
+			ON B.BANR_CD = F.FILE_ID
+		INNER JOIN EMP_INFO E
+			ON B.BANR_IDX = E.EMP_IDX
+		INNER JOIN ORG O
+			ON O.ORG_CD = E.ORG_CD
+		WHERE F.FILETYPE_CD = 'BANR'
+			AND F.USE_YN = 'Y'
+	</select>
+	
+	<select id="banrInqyDao1030" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* banrInqyDao1030 : 배너 조회 (메인) */
+SELECT
+				B.BANR_CD
+			,	B.BANR_SDT
+			,	B.BANR_EDT
+			,	B.BANR_IDX
+			,	B.WIDTH
+			,	B.HEIGHT
+			,	B.BANR_URL
+			,	B.USE_YN
+			,	F.FILE_ID
+			,	F.FILE_SNO
+			,	F.FILE_NM
+			,	F.FILETYPE_CD
+			,	F.FILE_PATH
+			,	F.FILE_EXT
+			,	F.FILE_SIZE
+		FROM BANR B
+		INNER JOIN FILE_INFO F
+			ON B.BANR_CD = F.FILE_ID
+		WHERE F.FILETYPE_CD = 'BANR'
+			AND F.USE_YN = 'Y'
+			AND B.USE_YN = 'Y'
+			AND TRUNC(SYSDATE) BETWEEN TO_DATE(BANR_SDT, 'YYYY-MM-DD') AND TO_DATE(BANR_EDT, 'YYYY-MM-DD')
+	</select>
+	
+	<insert id="banrProcDao1010" parameterType="java.util.HashMap" useGeneratedKeys="false">
+		/* banrProcDao1010 : 배너 저장 (등록) 처리 */
+		INSERT INTO BANR
+		(
+				BANR_CD
+			,	BANR_SDT
+			,	BANR_EDT
+			,	BANR_IDX
+			,	WIDTH
+			,	HEIGHT
+			,	BANR_URL
+			,	REG_DT
+			,	REG_TM
+			,	USE_YN
+			,	DISP_ORDER
+			,	REMARK
+		)
+		VALUES
+		(
+				#{sequenceId, jdbcType=VARCHAR}
+			,	REPLACE(#{banrSdt, jdbcType=VARCHAR}, '-', '')
+			,	REPLACE(#{banrEdt, jdbcType=VARCHAR}, '-', '')
+			,	#{banrIdx, jdbcType=VARCHAR}
+			,	#{width, jdbcType=VARCHAR}
+			,	#{height, jdbcType=VARCHAR}
+			,	#{banrUrl, jdbcType=VARCHAR}
+			,	TO_CHAR(SYSDATE,'YYYYMMDD')
+			,	TO_CHAR(SYSDATE,'HH24MISS')
+			,	#{useYn, jdbcType=VARCHAR}
+			,	(
+					SELECT 
+						NVL(MAX(DISP_ORDER),0) + 1 
+					FROM BANR
+				)
+			,	NULL
+			)
+	</insert>
+	
+	<insert id="banrProcDao1020" parameterType="java.util.HashMap" useGeneratedKeys="false">
+		/* banrProcDao1020 : 배너 저장 (수정) 처리 */
+		UPDATE BANR
+			SET	BANR_SDT = REPLACE(#{banrSdt, jdbcType=VARCHAR}, '-', '')
+				,	BANR_EDT = REPLACE(#{banrEdt, jdbcType=VARCHAR}, '-', '')
+				,	BANR_IDX = #{banrIdx, jdbcType=VARCHAR}
+				,	WIDTH = #{width, jdbcType=VARCHAR}
+				,	HEIGHT = #{height, jdbcType=VARCHAR}
+				,	BANR_URL = #{banrUrl, jdbcType=VARCHAR}
+		WHERE BANR_CD =  #{sequenceId, jdbcType=VARCHAR}
+	</insert>
+	
+	<update id="banrProcDao1030" parameterType="java.util.HashMap">
+		/* banrProcDao1030 : 배너 삭제 처리 (수정)  */
+		UPDATE BANR
+			SET USE_YN = 'N'
+		WHERE 1=1
+	</update>
+</mapper>

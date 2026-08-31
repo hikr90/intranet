@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="query">
+	<select id="queryInqyDao1010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* queryInqyDao1010 : 쿼리 입력 조회 */
+		${query}
+	</select>
+
+	<select id="queryInqyDao1020" resultType="hashmap">
+		/* queryInqyDao1020 : 쿼리 입력 조회 (엑셀) */
+		${query}
+	</select>
+	
+	<update id="queryProcDao1010" parameterType="java.util.HashMap">
+		/* queryProcDao1010 : 쿼리 입력 조회 */
+		${query}
+	</update>
+</mapper>

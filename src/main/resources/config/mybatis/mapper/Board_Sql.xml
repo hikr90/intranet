@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="board">
+	<select id="boardInqyDao1010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* boardInqyDao1010 : 공지사항 시퀀스 조회 */
+		SELECT 'BRD_' || LPAD(NVL(MAX(REPLACE(BRD_ID,'BRD_')),0) + 1,4,0) AS SEQUENCE_ID FROM BOARD
+	</select>
+
+	<select id="boardInqyDao1020" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* boardInqyDao1020 : 공지사항 목록 조회 */
+		SELECT 
+		            SUB_DATA.NUM
+				,	SUB_DATA.BRD_ID
+				,	SUB_DATA.BRD_TITLE
+				,	SUB_DATA.EMP_NM
+				,	SUB_DATA.ORG_NM
+				,	SUB_DATA.RANK_NM
+				,	SUB_DATA.LIST_CNT
+				,	SUB_DATA.REG_DT
+				,	SUB_DATA.READ_HIT
+                ,   CASE WHEN SUB_DATA.FILE_CNT <![CDATA[>]]> 0
+                        THEN 'Y'
+                        ELSE 'N'
+                    END AS FILE_YN
+                ,	SUB_DATA.USE_YN
+		FROM (
+				SELECT 
+		    			B.BRD_ID
+					,   B.BRD_TITLE
+                    ,   B.EMP_IDX
+		    		,   E.EMP_NM
+		    		,   O.ORG_NM
+		    		,	R.RANK_NM
+                    ,   B.REG_DT
+                    ,   B.REG_TM
+                    ,	B.READ_HIT
+                    ,	ROW_NUMBER() OVER(ORDER BY B.REG_DT DESC, B.REG_TM DESC) AS NUM
+                    ,   COUNT(B.BRD_ID) OVER() AS LIST_CNT
+      				,	(SELECT 
+      							COUNT(FILE_ID) 
+      						FROM FILE_INFO 
+      						WHERE FILE_ID = B.BRD_ID
+      							AND USE_YN = 'Y'
+      					) AS FILE_CNT
+      				,	B.USE_YN
+		        FROM BOARD B
+	        	LEFT OUTER JOIN EMP_INFO E
+	            	ON B.EMP_IDX = E.EMP_IDX
+	            LEFT OUTER JOIN ORG O
+	            	ON O.ORG_CD = E.ORG_CD
+                       AND O.USE_YN = 'Y'
+                LEFT OUTER JOIN RANK R
+	            	ON R.RANK_CD = E.RANK_CD
+                    AND R.USE_YN = 'Y'
+		        WHERE B.USE_YN = 'Y'
+		            <if test="srchNm != null and srchNm != ''">
+		            	AND REGEXP_REPLACE(LOWER(B.BRD_TITLE),'[^0-9가-힣A-Za-z]','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]','')||'%'
+		            </if>
+		            <if test="srchSdt != null and srchSdt !=''">
+		            	AND B.REG_DT &gt;= REPLACE(#{srchSdt, jdbcType=VARCHAR},'-','')
+		            </if>
+		            <if test="srchEdt != null and srchEdt !=''">
+		            	AND B.REG_DT &lt;= REPLACE(#{srchEdt, jdbcType=VARCHAR},'-','')
+		            </if>
+		  			<if test="orgNm != null and orgNm != ''">
+		  				AND REGEXP_REPLACE(LOWER(O.ORG_NM),'[^0-9가-힣A-Za-z]','') LIKE '%'||REGEXP_REPLACE(LOWER(#{orgNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]','')||'%'
+					</if>
+					<if test="rankNm != null and rankNm != ''">
+		            	AND REGEXP_REPLACE(LOWER(R.RANK_NM),'[^0-9가-힣A-Za-z]','') LIKE '%'||REGEXP_REPLACE(LOWER(#{rankNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]','')||'%'
+					</if>
+					<if test="srchIdx != null and srchIdx != ''">
+		            	AND REGEXP_REPLACE(LOWER(E.EMP_NM),'[^0-9가-힣A-Za-z]','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchIdx, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]','')||'%'
+					</if>
+        	) SUB_DATA
+ 		WHERE 1=1 
+ 			<if test="(sIdx != null and sIdx !='') and (eIdx != null and eIdx !='')">
+ 				AND SUB_DATA.NUM BETWEEN #{sIdx, jdbcType=VARCHAR} AND #{eIdx, jdbcType=VARCHAR}
+        	</if>
+        ORDER BY SUB_DATA.NUM DESC
+	</select>	
+
+	<select id="boardInqyDao1030" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* boardInqyDao1030 : 공지사항 상세 조회 */
+		SELECT 
+					B.BRD_ID
+				,	B.BRD_TITLE
+				,	B.BRD_CONT
+				,	B.EMP_IDX
+				,	E.EMP_NM
+				,	E.ORG_CD
+				,	O.ORG_NM
+				,	E.RANK_CD
+				,	R.RANK_NM
+				,	B.BRD_CONT
+				,	B.READ_HIT
+				,	B.REG_DT
+				,	B.REG_TM
+				,	B.USE_YN
+				,	B.DISP_ORDER
+				,	B.REMARK
+		FROM BOARD B
+		LEFT OUTER JOIN EMP_INFO E
+			ON B.EMP_IDX = E.EMP_IDX
+		LEFT OUTER JOIN ORG O
+			ON O.ORG_CD = E.ORG_CD
+			AND O.USE_YN = 'Y'
+		LEFT OUTER JOIN RANK R
+			ON R.RANK_CD = E.RANK_CD
+			AND R.USE_YN = 'Y'
+		WHERE B.BRD_ID = #{sequenceId, jdbcType=VARCHAR}
+			AND B.USE_YN = 'Y'
+	</select>
+	
+	<insert id="boardProcDao1010" parameterType="java.util.HashMap">
+		/* boardProcDao1010 : 공지사항 등록 처리 */
+		INSERT INTO BOARD
+		(
+				BRD_ID
+			,	EMP_IDX
+			,	BRD_TITLE
+			,	BRD_CONT
+			,	READ_HIT
+			,	REG_DT
+			,	REG_TM
+			,	USE_YN
+			,	DISP_ORDER
+			,	REMARK
+		)
+		VALUES
+		(
+				#{sequenceId, jdbcType=VARCHAR}
+			,	#{empIdx, jdbcType=VARCHAR}
+			,	#{brdTitle, jdbcType=VARCHAR}
+			,	#{brdCont, jdbcType=VARCHAR}
+			,	'0'
+			,	TO_CHAR(SYSDATE,'YYYYMMDD')
+			,	TO_CHAR(SYSDATE,'HH24MISS')
+			,	#{useYn, jdbcType=VARCHAR}
+			,	(
+					SELECT 
+						NVL(MAX(DISP_ORDER),0) + 1 
+					FROM BOARD
+				)
+			,	NULL
+			)
+	</insert>
+	
+	<update id="boardProcDao1020" parameterType="java.util.HashMap">
+		/* boardProcDao1020 : 공지사항 삭제 처리 (수정)  */
+		UPDATE BOARD
+			SET USE_YN = 'N'
+		WHERE BRD_ID IN
+		<foreach collection="deleteList" item="deleteIdx" separator="," open="(" close=")">
+			#{deleteIdx}	
+		</foreach>
+	</update>	
+
+	<delete id="boardProcDao1030" parameterType="java.util.HashMap">
+		/* boardProcDao1030 : 공지사항 삭제 처리 (삭제) */
+		DELETE FROM BOARD
+		WHERE BRD_ID IN
+		<foreach collection="deleteList" item="deleteIdx" separator="," open="(" close=")">
+			#{deleteIdx}	
+		</foreach>
+	</delete>	
+
+	
+	<update id="boardProcDao1040" parameterType="java.util.HashMap">
+		/* boardProcDao1040 : 공지사항 수정 처리 */
+		UPDATE BOARD
+			SET 	BRD_TITLE = #{brdTitle, jdbcType=VARCHAR}
+				,	BRD_CONT = #{brdCont, jdbcType=VARCHAR}
+				,	USE_YN = #{useYn, jdbcType=VARCHAR}
+		WHERE BRD_ID = #{sequenceId, jdbcType=VARCHAR} 
+	</update>	
+
+	<update id="boardProcDao1050" parameterType="java.util.HashMap">
+		/* boardProcDao1050 : 공지사항 조회수 증가 */
+		UPDATE BOARD
+			SET 	READ_HIT = READ_HIT + 1
+		WHERE BRD_ID = #{sequenceId, jdbcType=VARCHAR} 
+	</update>
+</mapper>

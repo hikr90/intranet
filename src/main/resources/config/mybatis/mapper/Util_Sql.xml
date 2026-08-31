@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="util">
+	<select id="fileInqyDao1010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* fileInqyDao1010 : 컨텐츠 파일 데이터 조회 */
+		SELECT 
+		    FILE_ID,
+		    FILE_ID,
+		    FILE_SNO, 
+		    FILE_NM, 
+		    FILETYPE_CD,
+		    FILE_PATH,
+		    FILE_EXT,
+		    FILE_SIZE,
+		    USE_YN,
+		    DISP_ORDER,
+		    REMARK
+		FROM FILE_INFO
+		WHERE FILE_ID = #{sequenceId, jdbcType=VARCHAR}
+			AND USE_YN = 'Y'
+	</select>
+
+	<select id="fileInqyDao1020" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* fileInqyDao1020 : 단건 파일 데이터 조회 */
+		SELECT 
+		    FILE_ID,
+		    FILE_SNO, 
+		    FILE_NM, 
+		    FILETYPE_CD,
+		    FILE_PATH,
+		    FILE_EXT,
+		    FILE_SIZE, 
+		    USE_YN,
+		    DISP_ORDER,
+		    REMARK
+		FROM FILE_INFO
+		WHERE FILE_ID = #{sequenceId, jdbcType=VARCHAR}
+			AND FILE_SNO = #{fileSno, jdbcType=VARCHAR}
+			AND USE_YN = 'Y'
+	</select>
+	
+	<insert id="fileProcDao1010" parameterType="java.util.HashMap">
+		/* fileProcDao1010 : 파일 등록 처리 */
+		INSERT INTO FILE_INFO
+		(
+				FILE_ID
+			,	FILE_SNO
+			,	FILE_NM
+			,	FILETYPE_CD
+			,	FILE_PATH
+			,	FILE_EXT
+			,	FILE_SIZE
+			,	USE_YN
+			,	DISP_ORDER
+			,	REMARK		
+		)
+		VALUES
+		(
+				#{fileId, jdbcType=VARCHAR}
+			,	(
+					SELECT 
+                        LPAD(NVL(MAX(FILE_SNO),0) + 1,4,0)
+					FROM FILE_INFO 
+					WHERE FILE_ID = #{fileId, jdbcType=VARCHAR}
+				)
+			,	#{fileNm, jdbcType=VARCHAR}
+			,	#{filetypeCd, jdbcType=VARCHAR}
+			,	#{filePath, jdbcType=VARCHAR}
+			,	#{fileExt, jdbcType=VARCHAR}
+			,	#{fileSize, jdbcType=VARCHAR}
+			,	'Y'
+			,	(
+					SELECT 
+						NVL(MAX(DISP_ORDER),0) + 1 
+					FROM FILE_INFO
+					WHERE FILE_ID = #{fileId, jdbcType=VARCHAR}
+				)
+			,	NULL
+		)
+	</insert>
+	
+	<update id="fileProcDao1020" parameterType="java.util.HashMap">
+		/* fileProcDao1020 : 파일 삭제 처리 (수정) */
+		UPDATE FILE_INFO
+			SET USE_YN = 'N'
+		WHERE FILE_ID = #{fileId, jdbcType=VARCHAR}
+			<if test="fileSno != null and fileSno != ''">
+				AND FILE_SNO = #{fileSno, jdbcType=VARCHAR}
+			</if>
+	</update>
+	
+	<delete id="fileProcDao1030" parameterType="java.util.HashMap">
+		/* fileProcDao1030 : 파일 삭제 처리 (삭제) */
+		DELETE FILE_INFO
+		WHERE FILE_ID = #{fileId, jdbcType=VARCHAR}
+			<if test="fileSno != null and fileSno != ''">
+				AND FILE_SNO = #{fileSno, jdbcType=VARCHAR}
+			</if>
+	</delete>
+	
+	<select id="codeInqyDao1010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* codeInqyDao1010 : 공통코드 조회 */
+		SELECT 
+			DATA.*
+		FROM (
+			SELECT
+						'' AS COMMCODE_CD,
+						'전체' AS COMMCODE_NM,
+						#{commcodeGcd, jdbcType=VARCHAR} AS COMMCODE_GCD,
+						'' AS REG_DT,
+						'' AS REG_TM,
+						'Y' AS USE_YN,
+						'0' AS DISP_ORDER,
+						'' AS REMARK
+					FROM DUAL
+					UNION
+					SELECT 
+					    C.COMMCODE_CD,
+					    C.COMMCODE_NM,
+					    C.COMMCODE_GCD,
+					    C.REG_DT,
+					    C.REG_TM,
+					    C.USE_YN,
+					    C.DISP_ORDER,
+					    C.REMARK
+					FROM COMMCODE C
+					WHERE C.COMMCODE_GCD = #{commcodeGcd, jdbcType=VARCHAR}
+						AND C.USE_YN = 'Y'
+			) DATA
+		ORDER BY DATA.DISP_ORDER ASC
+	</select>
+</mapper>

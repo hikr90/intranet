@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="main">
+	<select id="mainInqyDao1010" resultType="emp" parameterType="java.util.HashMap"> 
+		/* mainInqyDao1010 : 로그인 사용자 조회 */
+		SELECT 
+				E.EMP_IDX
+			,	E.ORG_CD
+			,	O.ORG_NM
+			,	E.RANK_CD
+			,	R.RANK_NM
+			,	E.EMP_NM
+			,	E.IS_MALE
+			,	E.MOB_NO
+			,	E.ADDR
+			,	E.ADDR_INFO
+			,	E.EMAIL
+			,	E.EMP_ID
+			,	E.EMP_PWD
+			,	E.HIRE_DT
+			,	E.LEAV_DT
+         	,   CASE WHEN EA.ROLE_CD IS NOT NULL
+                    THEN 'Y' 
+                    ELSE 'N' END AS ROLE_YN
+		FROM EMP_INFO E
+		LEFT OUTER JOIN ORG O
+			ON O.ORG_CD = E.ORG_CD
+			AND O.USE_YN = 'Y'
+		LEFT OUTER JOIN RANK R
+			ON R.RANK_CD = E.RANK_CD
+			AND R.USE_YN = 'Y'
+        LEFT OUTER JOIN EMP_ROLE EA
+            ON EA.EMP_IDX = E.EMP_IDX
+            AND EA.ROLE_CD = 'ROLE_0001'
+		WHERE UPPER(EMP_ID) = UPPER(#{empId, jdbcType=VARCHAR})
+	</select>
+</mapper>

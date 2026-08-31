@@ -1,0 +1,591 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="emp">
+	<select id="empInqyDao1010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* empInqyDao1010 : 사원 인덱스 채번 */
+		SELECT 'EMP_' || LPAD(NVL(MAX(REPLACE(EMP_IDX,'EMP_')),0) + 1,4,0) AS SEQUENCE_ID FROM EMP_INFO
+	</select>
+
+	<select id="empInqyDao1020" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* empInqyDao1020 : 사원 목록 조회 */
+		SELECT 
+		            SUB_DATA.*
+		FROM (
+				SELECT 
+		    			E.EMP_IDX
+					,   E.ORG_CD
+                    ,   O.ORG_NM
+		    		,   E.RANK_CD
+                    ,   R.RANK_NM
+                    ,   E.EMP_NM
+                    ,   E.IS_MALE
+                    ,	SUBSTR(E.MOB_NO, 1, 3) || '-' || SUBSTR(E.MOB_NO, 4, 4) || '-' || SUBSTR(E.MOB_NO, 8, 4) AS MOB_NO
+                    ,   E.ADDR
+                    ,   E.ADDR_INFO
+                    ,   E.EMAIL
+                    ,   E.EMP_ID
+                    ,   E.EMP_PWD
+                    ,   E.HIRE_DT
+                    ,   E.LEAV_DT
+                    ,	ROW_NUMBER() OVER(ORDER BY E.HIRE_DT DESC, E.EMP_IDX DESC) AS NUM
+                    ,   COUNT(E.EMP_IDX) OVER() AS LIST_CNT
+					,	CASE WHEN E.LEAV_DT IS NOT NULL
+						THEN 'N'
+						ELSE 'Y' END LEAV_YN
+ 		        FROM EMP_INFO E
+		        LEFT OUTER JOIN ORG O
+		        	ON O.ORG_CD = E.ORG_CD
+                    AND O.USE_YN = 'Y'
+		        LEFT OUTER JOIN RANK R
+		        	ON R.RANK_CD = E.RANK_CD
+                    AND R.USE_YN = 'Y'
+		        WHERE 1=1
+		            <if test="srchNm != null and srchNm != ''">
+		            	AND REGEXP_REPLACE(LOWER(E.EMP_NM),'[^0-9가-힣A-Za-z]','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]','')||'%'
+		            </if>
+		            <if test="srchSdt != null and srchSdt !=''">
+		            	AND E.HIRE_DT &gt;= REPLACE(#{srchSdt, jdbcType=VARCHAR},'-','')
+		            </if>
+		            <if test="srchEdt != null and srchEdt !=''">
+		            	AND E.HIRE_DT &lt;= REPLACE(#{srchEdt, jdbcType=VARCHAR},'-','')
+		            </if>
+		            <if test="orgNm != null and orgNm != ''">
+		  				AND REGEXP_REPLACE(LOWER(O.ORG_NM),'[^0-9가-힣A-Za-z]','') LIKE '%'||REGEXP_REPLACE(LOWER(#{orgNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]','')||'%'
+					</if>
+					<if test="rankNm != null and rankNm != ''">
+						AND REGEXP_REPLACE(LOWER(R.RANK_NM),'[^0-9가-힣A-Za-z]','') LIKE '%'||REGEXP_REPLACE(LOWER(#{rankNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]','')||'%'
+					</if>
+					<if test="srchHireCd == 'HIRE_0010'.toString()">
+						AND E.LEAV_DT IS NULL
+					</if>
+					<if test="srchHireCd == 'HIRE_0020'.toString()">
+						AND E.LEAV_DT IS NOT NULL
+					</if>
+        	) SUB_DATA
+ 		WHERE 1=1 
+ 			<if test="(sIdx != null and sIdx !='') and (eIdx != null and eIdx !='')">
+ 				AND SUB_DATA.NUM BETWEEN #{sIdx, jdbcType=VARCHAR} AND #{eIdx, jdbcType=VARCHAR}
+        	</if>
+        ORDER BY SUB_DATA.EMP_IDX ASC
+	</select>
+	
+	<select id="empInqyDao1030" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* empInqyDao1030 : 사용자 정보 찾기 */
+		SELECT 
+				EMP_IDX
+			,	ORG_CD
+			,	RANK_CD
+			,	EMP_NM
+			,	IS_MALE
+			,	MOB_NO
+			,	ADDR
+			,	ADDR_INFO
+			,	EMAIL
+			,	EMP_ID
+			,	EMP_PWD
+			,	HIRE_DT
+			,	LEAV_DT
+		FROM EMP_INFO
+		WHERE 1=1 
+			AND UPPER(EMAIL) = UPPER(#{findEmail, jdbcType=VARCHAR})
+			<if test="findId != null and findId != ''">
+				AND UPPER(EMP_ID) = UPPER(#{findId, jdbcType=VARCHAR})
+			</if>
+			<if test="findNm != null and findNm != ''">
+				AND EMP_NM = #{findNm, jdbcType=VARCHAR}
+			</if>
+	</select>
+	
+	<select id="empInqyDao1040" resultType="CamelHashMap">
+		/* empInqyDao1040 : 관리자 계정 조회 */
+		SELECT 
+				EMP_IDX
+			,	ORG_CD
+			,	RANK_CD
+			,	EMP_NM
+			,	IS_MALE
+			,	MOB_NO
+			,	ADDR
+			,	ADDR_INFO
+			,	EMAIL
+			,	EMP_ID
+			,	EMP_PWD
+			,	HIRE_DT
+			,	LEAV_DT
+		FROM EMP_INFO
+		WHERE UPPER(EMP_ID) = 'ADMIN'
+	</select>
+	
+	<select id="intrEmpInqy1021" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrEmpInqy1021 : 부서 목록 조회 */
+		SELECT
+					ORG_CD
+				,	ORG_NM
+				,	UPPR_ORG_CD
+				,	USE_YN
+				,	DISP_ORDER
+				,	REMARK
+		FROM ORG
+		WHERE 1=1
+			<if test="srchNm != null and srchNm != ''">
+		    	AND REGEXP_REPLACE(LOWER(ORG_NM),'[^0-9가-힣A-Za-z]','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]','')||'%'
+			</if>
+		ORDER BY DISP_ORDER ASC
+	</select>
+	
+	<select id="intrEmpInqy1022" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrEmpInqy1022 : 직급 목록 조회 */
+		SELECT
+					RANK_CD
+				,	RANK_NM
+				,	USE_YN
+				,	DISP_ORDER
+				,	REMARK
+		FROM RANK
+		ORDER BY DISP_ORDER ASC
+	</select>
+	
+	<select id="intrEmpInqy1023" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrEmpInqy1023 : 부서 목록 (전체) 조회 */
+		SELECT
+			DATA.*
+		FROM (
+			SELECT 
+					'' AS ORG_CD
+				,	'전체' AS ORG_NM
+				,	'' AS UPPR_ORG_CD
+				,	'Y' AS USE_YN
+				,	'0' AS DISP_ORDER
+				,	'' AS REMARK
+			FROM DUAL
+			UNION
+			SELECT
+					ORG_CD
+				,	ORG_NM
+				,	UPPR_ORG_CD
+				,	USE_YN
+				,	DISP_ORDER
+				,	REMARK
+			FROM ORG
+			WHERE USE_YN = 'Y'
+		) DATA
+		ORDER BY DATA.DISP_ORDER ASC
+	</select>
+	
+	<select id="intrEmpInqy1031" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrEmpInqy1031 : 사원 상세 조회 */
+		SELECT
+					E.EMP_IDX
+				,	E.ORG_CD
+				,	O.ORG_NM
+				,	E.RANK_CD
+				,	R.RANK_NM
+				,	E.EMP_NM
+				,	E.IS_MALE
+				,	SUBSTR(E.MOB_NO, 1, 3) || '-' || SUBSTR(E.MOB_NO, 4, 4) || '-' || SUBSTR(E.MOB_NO, 8, 4) AS MOB_NO
+				,	E.ADDR
+				,	E.ADDR_INFO
+				,	E.EMAIL
+				,	E.EMP_ID
+				,	E.EMP_PWD
+				,	E.HIRE_DT
+				,	E.LEAV_DT
+				,	CASE WHEN E.LEAV_DT IS NOT NULL
+						THEN 'N'
+						ELSE 'Y' END LEAV_YN
+				,	CASE WHEN (SELECT COUNT(F.FILE_ID) AS EMP_IDX FROM FILE_INFO F WHERE F.FILE_ID = E.EMP_IDX AND F.USE_YN = 'Y') &gt; 0 THEN 'Y' ELSE 'N' END AS PROFILE_YN
+				,	ED.DUTY_TITLE
+		FROM EMP_INFO E
+		LEFT OUTER JOIN EMP_DUTY ED
+			ON ED.EMP_IDX = E.EMP_IDX
+		LEFT OUTER JOIN ORG O
+			ON O.ORG_CD = E.ORG_CD
+			AND O.USE_YN = 'Y'
+		LEFT OUTER JOIN RANK R
+			ON R.RANK_CD = E.RANK_CD
+			AND R.USE_YN = 'Y'
+		WHERE E.EMP_IDX = #{empIdx, jdbcType=VARCHAR}
+	</select>
+	
+	<select id="intrEmpInqy2021" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrEmpInqy2021 : 사원 아이디 중복 조회 */
+		SELECT
+					EMP_IDX
+				,	ORG_CD
+				,	RANK_CD
+				,	EMP_NM
+				,	IS_MALE
+				,	MOB_NO
+				,	ADDR
+				,	ADDR_INFO
+				,	EMAIL
+				,	EMP_ID
+				,	EMP_PWD
+				,	HIRE_DT
+				,	LEAV_DT
+		FROM EMP_INFO
+		WHERE UPPER(EMP_ID) = UPPER(#{empId, jdbcType=VARCHAR})
+	</select>
+	
+	<select id="intrEmpInqy2031" resultType="CamelHashMap">
+		/* intrEmpInqy2031 : 부서 사원 트리 조회 */
+		SELECT 
+				    SUB_DATA.*
+				,   CASE WHEN SUB_DATA.EMP_NM IS NULL
+						THEN 'N'
+					    ELSE 'Y'
+					END AS ISLEAF
+		FROM (
+				SELECT 
+							DATA.*
+					FROM (
+		                    	SELECT 
+		                	        		O.ORG_CD
+		                  				,   O.ORG_NM
+		                            	,   O.UPPR_ORG_CD
+	                                    ,   '' AS RANK_CD
+	                                    ,   '' AS RANK_NM		                            
+		                            	,   LEVEL AS LV
+	            				        ,   ''  AS EMP_IDX
+	         				            ,   ''  AS EMP_NM
+	                                    ,   0 AS ROW_NUM
+			                    FROM ORG O
+								WHERE O.USE_YN = 'Y'
+			                    	START WITH O.UPPR_ORG_CD IS NULL
+			                    	CONNECT BY PRIOR O.ORG_CD = O.UPPR_ORG_CD
+			                    	ORDER SIBLINGS BY O.ORG_CD
+		      			) DATA
+			      UNION
+				  SELECT 
+				  			E.ORG_CD
+				        ,   O.ORG_NM
+				        ,   O.UPPR_ORG_CD
+				        ,   E.RANK_CD AS RANK_CD
+                        ,   R.RANK_NM AS RANK_NM
+				        ,   2 AS LV
+				        ,   E.EMP_IDX
+				        ,   E.EMP_NM
+                        ,   ROW_NUMBER() OVER(ORDER BY EMP_NM ASC) AS ROW_NUM
+				    FROM EMP_INFO E 
+				    LEFT OUTER JOIN ORG O 
+				    	ON E.ORG_CD = O.ORG_CD
+				    LEFT OUTER JOIN RANK R
+                    	ON E.RANK_CD = R.RANK_CD
+                     WHERE E.LEAV_DT IS NULL
+				) SUB_DATA
+			WHERE 1=1
+			<if test="srchPnm != null and srchPnm != ''">
+            	AND REGEXP_REPLACE(LOWER(SUB_DATA.EMP_NM),'[^0-9가-힣A-Za-z]','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchPnm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]','')||'%'
+            </if>
+   		    ORDER BY SUB_DATA.ORG_CD ASC , SUB_DATA.LV ASC
+	</select>
+	
+	<select id="intrEmpInqy2041" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrEmpInqy2041 : 부서 사원 수 조회 */
+		SELECT 
+                  	O.ORG_NM
+                ,   COUNT(E.EMP_NM) AS ORG_CNT
+		FROM ORG O
+		LEFT OUTER JOIN EMP_INFO E
+			ON E.ORG_CD = O.ORG_CD
+            AND O.USE_YN = 'Y'
+            AND E.LEAV_DT IS NULL
+		GROUP BY O.ORG_NM, O.ORG_CD, O.REG_DT
+        ORDER BY ORG_NM ASC
+	</select>
+	
+	<select id="intrEmpInqy3011" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrEmpInqy3011 : 담당업무 조회 */
+		SELECT 
+		            SUB_DATA.*
+		FROM (
+				SELECT 
+		    			E.EMP_IDX
+		    		,	ED.DUTY_ID
+		    		,	ED.DUTY_TITLE
+		    		,	ED.DUTY_CONT
+		    		,	ED.TPIC_IDX
+					,   O.ORG_NM || ' ' || E.EMP_NM || ' ' || R.RANK_NM AS EMP_INFO
+					,	TPIC_O.ORG_NM || ' ' || TPIC_E.EMP_NM || ' ' || TPIC_R.RANK_NM AS TPIC_INFO
+                    ,	SUBSTR(E.MOB_NO, 1, 3) || '-' || SUBSTR(E.MOB_NO, 4, 4) || '-' || SUBSTR(E.MOB_NO, 8, 4) AS MOB_NO
+                    ,	ROW_NUMBER() OVER(ORDER BY E.HIRE_DT DESC, E.EMP_IDX DESC) AS NUM
+                    ,   COUNT(E.EMP_IDX) OVER() AS LIST_CNT
+ 		        FROM EMP_INFO E										/* 등록자 */
+ 		        LEFT OUTER JOIN EMP_DUTY ED
+ 		        	ON ED.EMP_IDX = E.EMP_IDX
+		        LEFT OUTER JOIN ORG O
+		        	ON O.ORG_CD = E.ORG_CD
+                    AND O.USE_YN = 'Y'
+		        LEFT OUTER JOIN RANK R
+		            ON R.RANK_CD = E.RANK_CD
+                    AND R.USE_YN = 'Y'
+                LEFT OUTER JOIN EMP_INFO TPIC_E 		/* 대직자 */
+                	ON TPIC_E.EMP_IDX = ED.TPIC_IDX
+		        LEFT OUTER JOIN ORG TPIC_O
+		        	ON TPIC_O.ORG_CD = TPIC_E.ORG_CD
+                    AND TPIC_O.USE_YN = 'Y'
+		        LEFT OUTER JOIN RANK TPIC_R
+		            ON TPIC_R.RANK_CD = TPIC_E.RANK_CD
+                    AND TPIC_R.USE_YN = 'Y'
+		        WHERE E.LEAV_DT IS NULL
+		            <if test="srchNm != null and srchNm != ''">
+		            	AND ( 
+		            		REGEXP_REPLACE(LOWER(ED.DUTY_TITLE),'[^0-9가-힣A-Za-z]','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]','')||'%'
+		            			OR
+		            		REGEXP_REPLACE(LOWER(ED.DUTY_CONT),'[^0-9가-힣A-Za-z]','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]','')||'%'
+		            		)
+		            </if>
+		            <if test="orgNm != null and orgNm != ''">
+		  				AND REGEXP_REPLACE(LOWER(O.ORG_NM),'[^0-9가-힣A-Za-z]','') LIKE '%'||REGEXP_REPLACE(LOWER(#{orgNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]','')||'%'
+					</if>
+					<if test="rankNm != null and rankNm != ''">
+						AND REGEXP_REPLACE(LOWER(R.RANK_NM),'[^0-9가-힣A-Za-z]','') LIKE '%'||REGEXP_REPLACE(LOWER(#{rankNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]','')||'%'
+					</if>
+        	) SUB_DATA
+ 		WHERE 1=1 
+ 			<if test="(sIdx != null and sIdx !='') and (eIdx != null and eIdx !='')">
+ 				AND SUB_DATA.NUM BETWEEN #{sIdx, jdbcType=VARCHAR} AND #{eIdx, jdbcType=VARCHAR}
+        	</if>
+        ORDER BY SUB_DATA.EMP_IDX ASC
+	</select>
+	
+	<select id="intrEmpInqy3012" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrEmpInqy3012 : 담당업무 상세 조회 */
+		SELECT
+				E.EMP_IDX
+			,	ED.DUTY_ID
+		    ,	ED.DUTY_TITLE
+		    ,	ED.DUTY_CONT
+		    ,	ED.TPIC_IDX
+			,   E.EMP_NM
+			,	TPIC_E.EMP_NM AS TPIC_NM
+		FROM EMP_INFO E										/* 등록자 */
+        LEFT OUTER JOIN EMP_DUTY ED
+        	ON ED.EMP_IDX = E.EMP_IDX
+       	LEFT OUTER JOIN ORG O
+			ON O.ORG_CD = E.ORG_CD
+            AND O.USE_YN = 'Y'
+       	LEFT OUTER JOIN RANK R
+        	ON R.RANK_CD = E.RANK_CD
+            AND R.USE_YN = 'Y'
+   		LEFT OUTER JOIN EMP_INFO TPIC_E 		/* 대직자 */
+        	ON TPIC_E.EMP_IDX = ED.TPIC_IDX
+       	LEFT OUTER JOIN ORG TPIC_O
+       		ON TPIC_O.ORG_CD = TPIC_E.ORG_CD
+            AND TPIC_O.USE_YN = 'Y'
+       	LEFT OUTER JOIN RANK TPIC_R
+        	ON TPIC_R.RANK_CD = TPIC_E.RANK_CD
+            AND TPIC_R.USE_YN = 'Y'
+		WHERE 1=1
+			AND E.EMP_IDX = #{empIdx, jdbcType=VARCHAR}
+	</select>
+	
+	<select id="intrEmpInqy4011" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrEmpInqy4011 : 입사 현황 */
+		SELECT 
+				(
+					SELECT 
+							COUNT(E.EMP_IDX) || '명'
+					FROM EMP_INFO E
+					WHERE E.LEAV_DT IS NULL
+						AND SUBSTR(E.HIRE_DT,1,4) = TO_CHAR(SYSDATE, 'YYYY')
+					) AS NEW_CNT
+			,	(
+					SELECT 
+							COUNT(E.EMP_IDX) || '명'
+					FROM EMP_INFO E 
+					WHERE E.LEAV_DT IS NOT NULL
+						AND SUBSTR(E.HIRE_DT,1,4) = TO_CHAR(SYSDATE, 'YYYY')
+					) AS LEAV_CNT
+			,	(
+					SELECT 
+							COUNT(E.EMP_IDX) || '명'
+					FROM EMP_INFO E
+					WHERE 1=1
+						AND SUBSTR(E.HIRE_DT,1,4) = TO_CHAR(SYSDATE, 'YYYY')
+				) AS EMP_CNT
+			,	TO_CHAR(SYSDATE, 'YYYY') AS CURR_YEAR
+		FROM DUAL
+	</select>
+
+	<select id="intrEmpInqy4012" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrEmpInqy4012 : 인사통계 목록 조회 */
+		SELECT 
+		    CASE WHEN G_ORG = 1 THEN '전체 합계' ELSE ORG_NM END AS ORG_NM,
+		    CASE WHEN G_YM = 1 THEN '연간 소계' ELSE YEAR_MM END AS YEAR_MM,
+		    HIRE_TOTAL,
+		    LEAV_TOTAL,
+		    G_ORG, G_YM
+		FROM (
+		    SELECT
+		        ORG_CD,
+		        MAX(ORG_NM) AS ORG_NM,
+		        YEAR_MM,
+		        SUM(HIRE_SUM) AS HIRE_TOTAL,
+		        SUM(LEAV_SUM) AS LEAV_TOTAL,
+		        GROUPING(ORG_CD) AS G_ORG,
+		        GROUPING(YEAR_MM) AS G_YM
+		    FROM (
+		    	-- 입사자, 퇴사자 데이터
+		        SELECT
+		            E.ORG_CD, O.ORG_NM, SUBSTR(E.HIRE_DT, 1, 6) AS YEAR_MM,
+		            COUNT(E.EMP_IDX) AS HIRE_SUM, 0 AS LEAV_SUM
+		        FROM EMP_INFO E LEFT OUTER JOIN ORG O ON E.ORG_CD = O.ORG_CD
+		        WHERE HIRE_DT BETWEEN NVL(#{srchYearCd, jdbcType=VARCHAR}, TO_CHAR(SYSDATE, 'YYYY')) || '0101' AND NVL(#{srchYearCd, jdbcType=VARCHAR}, TO_CHAR(SYSDATE, 'YYYY')) || '1231'
+		        GROUP BY E.ORG_CD, O.ORG_NM, SUBSTR(E.HIRE_DT, 1, 6)
+		        UNION ALL
+		        SELECT
+		            E.ORG_CD, O.ORG_NM, SUBSTR(E.LEAV_DT, 1, 6) AS YEAR_MM,
+		            0 AS HIRE_SUM, COUNT(E.EMP_IDX) AS LEAV_SUM
+		        FROM EMP_INFO E LEFT OUTER JOIN ORG O ON E.ORG_CD = O.ORG_CD
+		        WHERE LEAV_DT BETWEEN NVL(#{srchYearCd, jdbcType=VARCHAR}, TO_CHAR(SYSDATE, 'YYYY')) || '0101' AND NVL(#{srchYearCd, jdbcType=VARCHAR}, TO_CHAR(SYSDATE, 'YYYY')) || '1231'
+		        GROUP BY E.ORG_CD, O.ORG_NM, SUBSTR(E.LEAV_DT, 1, 6)
+		    )
+		    GROUP BY GROUPING SETS (
+		        (ORG_CD, YEAR_MM), 		-- 1. 일반 부서별 월 데이터
+		        (ORG_CD),          				-- 2. 부서별 가로 합계 (YEAR_MM : NULL)
+		        (YEAR_MM),         			-- 3. 월별 세로 합계 (ORG_CD : NULL)
+		        ()                 						-- 4. 전체 총합 (NULL)
+		    )
+		)
+		WHERE 1=1
+			<if test="srchNm != null and srchNm != ''">
+		    	AND REGEXP_REPLACE(LOWER(ORG_NM),'[^0-9가-힣A-Za-z]','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]','')||'%'
+			</if>
+		ORDER BY G_ORG, ORG_CD, G_YM, YEAR_MM
+	</select>
+
+	<select id="intrEmpInqy4013" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrEmpInqy4013 : 통계 연도 조회 */
+		SELECT
+				(TO_CHAR(SYSDATE, 'YYYY') - LEVEL + 1) AS COMMCODE_CD
+			,	(TO_CHAR(SYSDATE, 'YYYY') - LEVEL + 1) || '년' AS COMMCODE_NM
+		FROM DUAL
+		CONNECT BY LEVEL &lt;= 5
+	</select>
+	
+	<select id="intrEmpInqy4014" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrEmpInqy4014 : 통계 연월 조회 */
+		SELECT
+				NVL(#{srchYearCd, jdbcType=VARCHAR}, TO_CHAR(SYSDATE, 'YYYY')) || LPAD(LEVEL, 2, '0') AS YEAR_MM 
+			,	NVL(#{srchYearCd, jdbcType=VARCHAR}, TO_CHAR(SYSDATE, 'YYYY')) || '.' || LPAD(LEVEL, 2, '0') AS YEAR_NM 
+		FROM DUAL
+		CONNECT BY LEVEL &lt;= 12
+	</select>
+	
+	<insert id="intrEmpProc1011" parameterType="java.util.HashMap">
+		/* intrEmpProc1011 : 사원 등록 처리 */
+		INSERT INTO EMP_INFO
+		(
+				EMP_IDX
+			,	ORG_CD
+			,	RANK_CD
+			,	EMP_NM
+			,	IS_MALE
+			,	MOB_NO
+			,	ADDR
+			,	ADDR_INFO
+			,	EMAIL
+			,	EMP_ID
+			,	EMP_PWD
+			,	HIRE_DT
+			,	LEAV_DT
+		)
+		VALUES
+		(
+				#{sequenceId, jdbcType=VARCHAR}
+			,	#{setOrgCd, jdbcType=VARCHAR}
+			,	#{setRankCd, jdbcType=VARCHAR}
+			,	#{empNm, jdbcType=VARCHAR}
+			,	#{isMale, jdbcType=VARCHAR}
+			,	REPLACE(#{mobNo, jdbcType=VARCHAR},'-','')
+			,	#{addr, jdbcType=VARCHAR}
+			,	#{addrInfo, jdbcType=VARCHAR}
+			,	#{email, jdbcType=VARCHAR}
+			,	#{empId, jdbcType=VARCHAR}
+			,	#{empPwd, jdbcType=VARCHAR}
+			,	TO_CHAR(SYSDATE,'YYYYMMDD')
+			,	NULL
+		)
+	</insert>
+	
+	<update id="intrEmpProc1021" parameterType="java.util.HashMap">
+		/* intrEmpProc1021 : 사원 수정 처리 */
+		UPDATE EMP_INFO
+			SET 	ORG_CD = #{setOrgCd, jdbcType=VARCHAR}
+				,	RANK_CD = #{setRankCd, jdbcType=VARCHAR}
+				,	IS_MALE = #{isMale, jdbcType=VARCHAR}
+				,	MOB_NO = REPLACE(#{mobNo, jdbcType=VARCHAR},'-','')
+				,	ADDR = #{addr, jdbcType=VARCHAR}
+				,	ADDR_INFO = #{addrInfo, jdbcType=VARCHAR}
+				,	EMAIL = #{email, jdbcType=VARCHAR}
+				<if test="empPwd != null and empPwd != ''">
+					,	EMP_PWD = 	#{empPwd, jdbcType=VARCHAR}
+				</if>
+		WHERE EMP_IDX = #{empIdx, jdbcType=VARCHAR}
+	</update>
+	
+	<update id="intrEmpProc1031" parameterType="java.util.HashMap">
+		/* "intrEmpProc1031" : 사원 복직, 퇴사 처리 */
+		UPDATE EMP_INFO
+			SET LEAV_DT =
+				CASE WHEN LEAV_DT IS NULL
+					THEN TO_CHAR(SYSDATE,'YYYYMMDD')
+				ELSE NULL END
+		WHERE EMP_IDX = #{empIdx, jdbcType=VARCHAR}
+	</update>
+	
+	<update id="intrEmpProc1041" parameterType="java.util.HashMap">
+		/* intrEmpProc1041 : 사원 삭제 처리 */
+		DELETE FROM EMP_INFO
+			WHERE EMP_IDX = #{empIdx, jdbcType=VARCHAR}
+	</update>
+	
+	<update id="intrEmpProc1051" parameterType="java.util.HashMap">
+		/* intrEmpProc1051 : 사원 비밀번호 수정 처리 */
+		UPDATE EMP_INFO
+			SET 	EMP_PWD = #{chngPwd, jdbcType=VARCHAR}
+		WHERE EMP_ID = #{chngPwdId, jdbcType=VARCHAR}
+	</update>
+	
+	<update id="intrEmpProc2011" parameterType="java.util.HashMap">
+		/* intrEmpProc2011 : 담당업무 저장 처리 */
+		MERGE INTO EMP_DUTY ED1
+			USING (
+			    SELECT 
+			          #{dutyId, jdbcType=VARCHAR}    	AS DUTY_ID
+			        , #{dutyTitle, jdbcType=VARCHAR} 	AS DUTY_TITLE
+			        , #{dutyCont, jdbcType=VARCHAR}  AS DUTY_CONT
+			        , #{empIdx, jdbcType=VARCHAR}    AS EMP_IDX
+			        , #{tpicIdx, jdbcType=VARCHAR}    	AS TPIC_IDX
+			    FROM DUAL
+			) ED2
+			ON (ED1.DUTY_ID = ED2.DUTY_ID)
+			WHEN MATCHED THEN
+			    UPDATE SET 
+			          ED1.DUTY_TITLE = ED2.DUTY_TITLE
+			        , ED1.DUTY_CONT  = ED2.DUTY_CONT
+			        , ED1.TPIC_IDX   = ED2.TPIC_IDX
+			WHEN NOT MATCHED THEN
+			    INSERT (
+			    		DUTY_ID
+			        , 	DUTY_TITLE
+			        , 	DUTY_CONT
+			        ,	EMP_IDX
+			        , 	TPIC_IDX
+			    ) VALUES (
+			          	(SELECT 'DUTY_' || LPAD(NVL(MAX(REPLACE(DUTY_ID,'DUTY_')),0) + 1,4,0) FROM EMP_DUTY)
+			        , 	ED2.DUTY_TITLE
+			        , 	ED2.DUTY_CONT
+			        ,	ED2.EMP_IDX
+			        , 	ED2.TPIC_IDX
+			    )
+	</update>
+	
+	<delete id="intrEmpProc2021" parameterType="java.util.HashMap">
+		/* intrEmpProc2021 : 담당업무 삭제 처리 */
+		DELETE FROM EMP_DUTY
+			WHERE EMP_IDX = #{empIdx, jdbcType=VARCHAR}
+				AND DUTY_ID = #{dutyId, jdbcType=VARCHAR}
+	</delete>
+</mapper>

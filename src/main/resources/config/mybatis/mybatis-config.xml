@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "HTTP://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="cacheEnabled" value="false" />
+		<setting name="useGeneratedKeys" value="true" />
+		<setting name="defaultExecutorType" value="REUSE" />
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings> 
+	
+	<typeAliases>
+		<typeAlias type="com.intr.vo.EmpVO" alias="emp"/>
+		<typeAlias type="com.intr.utils.CamelHashMap" alias="CamelHashMap"/>
+	</typeAliases>
+	
+	<typeHandlers>
+        <typeHandler handler="com.intr.utils.TypeHandler" jdbcType="CLOB" javaType="java.lang.String"/>
+    </typeHandlers>
+	
+	<mappers>
+		<mapper resource="config/mybatis/mapper/Aprv_Sql.xml" />
+		<mapper resource="config/mybatis/mapper/Role_Sql.xml" />
+		<mapper resource="config/mybatis/mapper/Board_Sql.xml" />
+		<mapper resource="config/mybatis/mapper/Core_Sql.xml" />
+		<mapper resource="config/mybatis/mapper/Emp_Sql.xml" />
+		<mapper resource="config/mybatis/mapper/Main_Sql.xml" />
+		<mapper resource="config/mybatis/mapper/Query_Sql.xml" />
+		<mapper resource="config/mybatis/mapper/Task_Sql.xml" />
+		<mapper resource="config/mybatis/mapper/Temp_Sql.xml" />
+		<mapper resource="config/mybatis/mapper/Util_Sql.xml" />		
+		<mapper resource="config/mybatis/mapper/Proj_Sql.xml" />
+		<mapper resource="config/mybatis/mapper/Mtg_Sql.xml" />
+		<mapper resource="config/mybatis/mapper/Banr_Sql.xml" />
+		<mapper resource="config/mybatis/mapper/Regs_Sql.xml" />
+		<mapper resource="config/mybatis/mapper/Log_Sql.xml" />
+	</mappers>
+	
+</configuration>

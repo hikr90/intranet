@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="task">
+	<select id="taskInqyDao1010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* taskInqyDao1010 : 업무 시퀀스 조회 */
+		SELECT 'TASK_' || LPAD(NVL(MAX(REPLACE(TASK_ID,'TASK_')),0) + 1,4,0) AS SEQUENCE_ID FROM TASK
+	</select>
+
+	<select id="taskInqyDao1020" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* taskInqyDao1020 : 업무일지 조회 */
+		SELECT 
+			    T.TASK_ID
+			,   T.EMP_IDX
+			,	T.TASK_TITLE
+			,	T.TASK_CONT
+			,   T.TASK_DT
+			,	T.TASK_HH
+			,	T.TASK_MM
+			,	E.EMP_NM
+			,	O.ORG_NM
+			,	R.RANK_NM
+		FROM TASK T
+		LEFT OUTER JOIN EMP_INFO E
+			ON E.EMP_IDX = T.EMP_IDX
+		LEFT OUTER JOIN ORG O
+			ON O.ORG_CD = E.ORG_CD
+		LEFT OUTER JOIN RANK R
+			ON R.RANK_CD = E.RANK_CD
+		WHERE 1=1 
+            	AND T.EMP_IDX = #{empIdx, jdbcType=VARCHAR}
+				AND T.TASK_DT = CASE WHEN REPLACE(#{srchDt, jdbcType=VARCHAR},'-','') IS NULL
+												THEN TO_CHAR(SYSDATE,'YYYYMMDD') ELSE REPLACE(#{srchDt, jdbcType=VARCHAR},'-','') END 
+		ORDER BY T.TASK_SNO ASC
+	</select>
+	
+	<select id="taskInqyDao2010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* taskInqyDao2010 : 업무일지 목록 조회 */
+			SELECT
+				RESULT.*
+			FROM (
+				SELECT
+						T.TASK_ID
+					,	T.TASK_SNO
+					,	T.TASK_TITLE
+					,	T.TASK_DT
+					,	T.EMP_IDX
+					,	T.REG_DT
+					,	T.REG_TM
+					,	E.EMP_NM
+					,	E.ORG_CD
+					,	O.ORG_NM
+					,	R.RANK_NM
+					,	E.RANK_CD
+					,	COUNT(T.TASK_ID) OVER(PARTITION BY T.TASK_ID) AS ROW_CNT
+					,	ROW_NUMBER() OVER(PARTITION BY T.TASK_ID ORDER BY T.TASK_ID ASC, T.TASK_SNO ASC) AS ROW_NUM
+					,   COUNT(T.TASK_ID) OVER() AS LIST_CNT
+				FROM TASK T
+				INNER JOIN EMP_INFO E
+					ON E.EMP_IDX = T.EMP_IDX
+				INNER JOIN ORG O
+					ON O.ORG_CD = E.ORG_CD
+				INNER JOIN RANK R
+					ON R.RANK_CD = E.RANK_CD
+				WHERE 1=1
+					<if test="orgCd != null and orgCd != ''">
+				    	AND O.ORG_CD = #{orgCd, jdbcType=VARCHAR}
+				    </if>
+					<if test="srchNm != null and srchNm != ''">
+				    	AND REGEXP_REPLACE(LOWER(E.EMP_NM),'[^0-9가-힣A-Za-z]','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]','')||'%'
+				    </if>
+				    <if test="srchSdt != null and srchSdt !=''">
+				    	AND T.REG_DT &gt;= REPLACE(#{srchSdt, jdbcType=VARCHAR},'-','')
+				    </if>
+				    <if test="srchEdt != null and srchEdt !=''">
+				    	AND T.REG_DT &lt;= REPLACE(#{srchEdt, jdbcType=VARCHAR},'-','')
+				    </if>
+			) RESULT
+			ORDER BY RESULT.ROW_NUM ASC
+	</select>
+	
+	<select id="taskInqyDao2020" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* taskInqyDao2020 : 업무일지 상세 조회 */
+		SELECT 
+			    T.TASK_ID
+			,   T.EMP_IDX
+			,	T.TASK_TITLE
+			,	T.TASK_CONT
+			,   T.TASK_DT
+			,	T.TASK_HH
+			,	T.TASK_MM
+			,	E.EMP_NM
+			,	O.ORG_NM
+			,	R.RANK_NM
+		FROM TASK T
+		LEFT OUTER JOIN EMP_INFO E
+			ON E.EMP_IDX = T.EMP_IDX
+		LEFT OUTER JOIN ORG O
+			ON O.ORG_CD = E.ORG_CD
+		LEFT OUTER JOIN RANK R
+			ON R.RANK_CD = E.RANK_CD
+		WHERE 1=1 
+            	AND T.TASK_ID = #{taskId, jdbcType=VARCHAR}
+		ORDER BY T.TASK_SNO ASC
+	</select>
+	
+	<select id="taskInqyDao3010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* taskInqyDao3010 : 업무 캘린더 조회 */
+		SELECT 
+				TC.TLDR_ID
+			,	TC.TLDR_ID AS ID
+			,	TC.TLDR_TITLE AS "TITLE"
+			,	TO_CHAR(TO_DATE(TC.TLDR_SDT,'YYYY-MM-DD'), 'YYYY-MM-DD') || ' 00:00:00' AS "START"
+			,	TO_CHAR(TO_DATE(TC.TLDR_EDT,'YYYY-MM-DD'), 'YYYY-MM-DD') || ' 24:00:00' AS "END"
+		FROM TASK_CALENDAR TC
+		WHERE 1=1 
+			AND TC.EMP_IDX = #{empIdx, jdbcType=VARCHAR}        	
+			<if test="srchNm != null and srchNm != ''">
+            	AND REGEXP_REPLACE(LOWER(TC.TLDR_TITLE),'[^0-9가-힣A-Za-z]','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]','')||'%'
+            </if>
+            <if test="srchDt != null and srchDt != ''">
+            	AND TC.TLDR_DT = TO_CHAR(SYSDATE, 'YYYYMMDD')
+            </if>
+		ORDER BY TC.TLDR_ID ASC 		
+	</select>
+	
+	<select id="taskInqyDao3020" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* taskInqyDao3020 : 업무 캘린더 상세 조회 */
+		SELECT 
+				TC.TLDR_ID
+			,	TC.TLDR_TITLE
+			,	TC.TLDR_CONT
+			,	SUBSTR(TC.TLDR_SDT,0,4) || '-' || SUBSTR(TC.TLDR_SDT,5,2) || '-' || SUBSTR(TC.TLDR_SDT,7) AS TLDR_SDT
+			,	SUBSTR(TC.TLDR_EDT,0,4) || '-' || SUBSTR(TC.TLDR_EDT,5,2) || '-' || SUBSTR(TC.TLDR_EDT,7) AS TLDR_EDT
+		FROM TASK_CALENDAR TC
+		WHERE 1=1 
+			AND TC.TLDR_ID = #{sequenceId, jdbcType=VARCHAR}  
+	</select>
+	
+	<select id="taskInqyDao3030" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* taskInqyDao3030 : 업무 캘린더 (메인) 조회 */
+		SELECT 
+				TC.TLDR_ID
+			,	TC.TLDR_TITLE
+			,	TC.TLDR_CONT
+			,	SUBSTR(TC.TLDR_SDT,0,4) || '-' || SUBSTR(TC.TLDR_SDT,5,2) || '-' || SUBSTR(TC.TLDR_SDT,7) AS TLDR_SDT
+			,	SUBSTR(TC.TLDR_EDT,0,4) || '-' || SUBSTR(TC.TLDR_EDT,5,2) || '-' || SUBSTR(TC.TLDR_EDT,7) AS TLDR_EDT
+		FROM TASK_CALENDAR TC
+		WHERE 1=1 
+			AND TC.EMP_IDX = #{empIdx, jdbcType=VARCHAR}        	
+            AND TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN TC.TLDR_SDT AND TC.TLDR_EDT 
+		ORDER BY TC.TLDR_ID ASC 		
+	</select>
+	
+	<insert id="taskProcDao1010" parameterType="java.util.HashMap">
+		/* taskProcDao1010 : 업무일지 등록 처리 */
+		INSERT INTO TASK
+		(
+				TASK_ID
+			,	TASK_SNO
+			,	TASK_TITLE
+			,	TASK_CONT
+			,	TASK_HH
+			,	TASK_MM
+			,	TASK_DT
+			,	EMP_IDX
+			,	REG_DT
+			,	REG_TM
+			,	USE_YN
+			,	DISP_ORDER
+			,	REMARK
+		)
+		VALUES
+		(
+				#{sequenceId, jdbcType=VARCHAR}
+			,	(
+					SELECT 
+                        LPAD(NVL(MAX(TASK_SNO),0) + 1,4,0)
+					FROM TASK 
+					WHERE TASK_DT = REPLACE(#{taskDt, jdbcType=VARCHAR},'-','')
+						AND EMP_IDX = #{empIdx, jdbcType=VARCHAR}
+				)
+			,	#{taskTitle, jdbcType=VARCHAR}
+			,	#{taskCont, jdbcType=VARCHAR}
+			,	#{taskHh, jdbcType=VARCHAR}
+			,	#{taskMm, jdbcType=VARCHAR}
+			,	REPLACE(#{taskDt, jdbcType=VARCHAR},'-','')
+			,	#{empIdx, jdbcType=VARCHAR}
+			,	TO_CHAR(SYSDATE, 'YYYYMMDD')
+			,	TO_CHAR(SYSDATE, 'HHMMSS')
+			,	'Y'
+			,	(
+					SELECT 
+						NVL(MAX(DISP_ORDER),0) + 1 
+					FROM TASK
+					WHERE TASK_ID = #{sequenceId, jdbcType=VARCHAR}
+				)
+			,	NULL
+		)
+	</insert>
+	
+	<delete id="taskProcDao1020" parameterType="java.util.HashMap">
+		/* taskProcDao1020 : 업무일지 삭제 처리 */
+		DELETE FROM TASK
+			WHERE EMP_IDX = #{empIdx, jdbcType=VARCHAR}
+				AND TASK_DT = REPLACE(#{srchDt, jdbcType=VARCHAR},'-','')
+	</delete>
+	
+	<insert id="taskProcDao2010" parameterType="java.util.HashMap">
+		/* taskProcDao2010 : 업무 캘린더 등록 처리 */
+		INSERT INTO TASK_CALENDAR
+		(
+				TLDR_ID
+			,	TLDR_TITLE
+			,	TLDR_CONT
+			,	TLDR_SDT
+			,	TLDR_EDT
+			,	EMP_IDX
+			,	REG_DT
+			,	REG_TM
+			,	USE_YN
+			,	DISP_ORDER
+			,	REMARK
+		)
+		VALUES
+		(
+				(
+					SELECT 
+						'TLDR_' || LPAD(NVL(MAX(REPLACE(TLDR_ID,'TLDR_')),0) + 1,4,0) 
+					FROM TASK_CALENDAR
+				)
+			,	#{tldrTitle, jdbcType=VARCHAR}
+			,	#{tldrCont, jdbcType=VARCHAR}
+			,	REPLACE(#{tldrSdt, jdbcType=VARCHAR}, '-')
+			,	REPLACE(#{tldrEdt, jdbcType=VARCHAR}, '-')
+			,	#{empIdx, jdbcType=VARCHAR}
+			,	TO_CHAR(SYSDATE, 'YYYYMMDD')
+			,	TO_CHAR(SYSDATE, 'HHMMSS')
+			,	'Y'
+			,	(
+					SELECT 
+						NVL(MAX(DISP_ORDER),0) + 1 
+					FROM TASK_CALENDAR
+				)
+			,	NULL
+		)
+	</insert>
+	
+	<update id="taskProcDao2020" parameterType="java.util.HashMap">
+		/* taskProcDao2020 : 업무 캘린더 수정 처리 */
+		UPDATE TASK_CALENDAR
+			SET 		TLDR_TITLE = #{tldrTitle, jdbcType=VARCHAR}
+					,	TLDR_CONT = #{tldrCont, jdbcType=VARCHAR}
+					,	TLDR_SDT = REPLACE(#{tldrSdt, jdbcType=VARCHAR}, '-')
+					,	TLDR_EDT = REPLACE(#{tldrEdt, jdbcType=VARCHAR}, '-')
+			WHERE TLDR_ID = #{tldrId, jdbcType=VARCHAR}
+	</update>
+	
+	<delete id="taskProcDao2030" parameterType="java.util.HashMap">
+		/* taskProcDao2030 : 업무 캘린더 삭제 처리 */
+		DELETE FROM TASK_CALENDAR
+			WHERE TLDR_ID = #{tldrId, jdbcType=VARCHAR}
+	</delete>
+</mapper>
