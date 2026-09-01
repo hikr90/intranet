@@ -54,6 +54,7 @@ public class BanrController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 배너 관리 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_BANR + Const.INTR_BANR_LIST_1010;
@@ -61,7 +62,7 @@ public class BanrController {
 	
 	// 배너 사진 조회
 	@RequestMapping("/intrBanrInqy1099.do")
-	public void intrBanrInqy1099(Model model, @RequestParam HashMap<String, Object> paramMap, HttpServletResponse response){
+	public void intrBanrInqy1099(Model model, @RequestParam HashMap<String, Object> paramMap, HttpServletResponse response) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -84,6 +85,7 @@ public class BanrController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 배너 사진 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 	}
 	
@@ -103,6 +105,7 @@ public class BanrController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 배너 저장 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return defaultStr;
@@ -124,6 +127,7 @@ public class BanrController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 배너 삭제 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return defaultStr;

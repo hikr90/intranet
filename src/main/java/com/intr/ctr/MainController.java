@@ -104,6 +104,7 @@ public class MainController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 로그인 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_LOGIN + Const.INTR_LOGIN_INQY_1010;
@@ -174,6 +175,7 @@ public class MainController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 사용자 메인 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_MAIN + Const.INTR_MAIN_INQY_1010;
@@ -235,6 +237,7 @@ public class MainController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 관리자 메인 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_MAIN + Const.INTR_MAIN_INQY_2010;
@@ -263,6 +266,7 @@ public class MainController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 마이페이지 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_MYPAGE + Const.INTR_MYPAGE_INQY_1010;
@@ -284,6 +288,7 @@ public class MainController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 로그인 처리 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return defaultStr;
@@ -304,6 +309,7 @@ public class MainController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 로그아웃 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return "redirect:/";

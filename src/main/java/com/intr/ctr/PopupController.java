@@ -77,6 +77,7 @@ public class PopupController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 담당자 팝업 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_1011;
@@ -92,6 +93,7 @@ public class PopupController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 팝업(아이디 찾기) 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_1021;
@@ -106,6 +108,7 @@ public class PopupController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 팝업(비밀번호 찾기) 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_1022;
@@ -130,6 +133,7 @@ public class PopupController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 팝업(아이디 찾기) 사원 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return defaultStr;
@@ -151,6 +155,7 @@ public class PopupController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 프로젝트 목록 팝업 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_1031;
@@ -183,6 +188,7 @@ public class PopupController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 결재선 선택 팝업 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_1041;
@@ -204,6 +210,7 @@ public class PopupController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 결재선 팝업 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_1042;

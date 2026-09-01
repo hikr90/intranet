@@ -54,6 +54,7 @@ public class EmpController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 사원 정보 정정 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_EMP + Const.INTR_EMP_LIST_1010;
@@ -77,6 +78,7 @@ public class EmpController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 사원 등록 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_EMP + Const.INTR_EMP_DETL_1020;
@@ -100,6 +102,7 @@ public class EmpController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 사원 상세 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_EMP + Const.INTR_EMP_DETL_1010;
@@ -128,6 +131,7 @@ public class EmpController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 사원 수정 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_EMP + Const.INTR_EMP_DETL_1030;
@@ -135,7 +139,7 @@ public class EmpController {
 	
 	// 사원 프로필 사진 조회
 	@RequestMapping("/intrEmpInqy1099.do")
-	public void intrEmpInqy1099(Model model, @RequestParam HashMap<String, Object> paramMap, HttpServletResponse response){
+	public void intrEmpInqy1099(Model model, @RequestParam HashMap<String, Object> paramMap, HttpServletResponse response) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -158,6 +162,7 @@ public class EmpController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 사원 프로필 사진 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 	}
 	
@@ -179,6 +184,7 @@ public class EmpController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 사원 연락처 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_EMP + Const.INTR_EMP_LIST_2010;
@@ -200,6 +206,7 @@ public class EmpController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 사원 아이디 중복 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return defaultStr;
@@ -223,6 +230,7 @@ public class EmpController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 사원 상세 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_EMP + Const.INTR_EMP_DETL_2010;
@@ -246,6 +254,7 @@ public class EmpController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 사원 담당업무 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_EMP + Const.INTR_EMP_LIST_3010;
@@ -269,6 +278,7 @@ public class EmpController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 사원 담당업무 목록 (AJAX) 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_EMP + Const.INTR_EMP_LIST_3011;
@@ -292,6 +302,7 @@ public class EmpController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 사원 담당업무 등록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_EMP + Const.INTR_EMP_LIST_3012;
@@ -315,6 +326,7 @@ public class EmpController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 인사통계 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_EMP + Const.INTR_EMP_LIST_4010;
@@ -323,7 +335,7 @@ public class EmpController {
 	// 사원 등록 처리
 	@RequestMapping("/intrEmpProc1010.do")
 	@ResponseBody
-	public String intrEmpProc1010(Model model, @RequestParam HashMap<String, Object> paramMap, MultipartHttpServletRequest request) {
+	public String intrEmpProc1010(Model model, @RequestParam HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception {
 		//
 		String defaultStr = "";
 		//
@@ -336,6 +348,7 @@ public class EmpController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 사원 등록 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return defaultStr;
@@ -344,7 +357,7 @@ public class EmpController {
 	// 사원 수정 처리
 	@RequestMapping("/intrEmpProc1020.do")
 	@ResponseBody
-	public String intrEmpProc1020(Model model, @RequestParam HashMap<String, Object> paramMap, MultipartHttpServletRequest request) {
+	public String intrEmpProc1020(Model model, @RequestParam HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception {
 		//
 		String defaultStr = "";
 		//
@@ -357,6 +370,7 @@ public class EmpController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 사원 수정 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return defaultStr;
@@ -365,7 +379,7 @@ public class EmpController {
 	// 사원 복직, 퇴사 처리
 	@RequestMapping("/intrEmpProc1030.do")
 	@ResponseBody
-	public String intrEmpProc1030(Model model, @RequestParam HashMap<String, Object> paramMap) {
+	public String intrEmpProc1030(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		//
@@ -378,6 +392,7 @@ public class EmpController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 사원 복직, 퇴사 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return defaultStr;
@@ -386,7 +401,7 @@ public class EmpController {
 	// 사원 삭제 처리
 	@RequestMapping("/intrEmpProc1040.do")
 	@ResponseBody
-	public String intrEmpProc1040(Model model, @RequestParam HashMap<String, Object> paramMap) {
+	public String intrEmpProc1040(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		//
@@ -399,6 +414,7 @@ public class EmpController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 사원 삭제 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return defaultStr;
@@ -407,7 +423,7 @@ public class EmpController {
 	// 사원 비밀번호 수정 처리
 	@RequestMapping("/intrEmpProc1050.do")
 	@ResponseBody
-	public String intrEmpProc1050(Model model, @RequestParam HashMap<String, Object> paramMap) {
+	public String intrEmpProc1050(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		//
@@ -420,6 +436,7 @@ public class EmpController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 사원 비밀번호 수정 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return defaultStr;
@@ -428,7 +445,7 @@ public class EmpController {
 	// 담당업무 저장 처리
 	@RequestMapping("/intrEmpProc2010.do")
 	@ResponseBody
-	public String intrEmpProc2010(Model model, @RequestParam HashMap<String, Object> paramMap) {
+	public String intrEmpProc2010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		//
@@ -441,6 +458,7 @@ public class EmpController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 담당업무 저장 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return defaultStr;
@@ -449,7 +467,7 @@ public class EmpController {
 	// 담당업무 삭제 처리
 	@RequestMapping("/intrEmpProc2020.do")
 	@ResponseBody
-	public String intrEmpProc2020(Model model, @RequestParam HashMap<String, Object> paramMap) {
+	public String intrEmpProc2020(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		//
@@ -462,6 +480,7 @@ public class EmpController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 담당업무 삭제 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return defaultStr;

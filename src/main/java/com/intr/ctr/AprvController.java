@@ -49,6 +49,7 @@ public class AprvController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 기안 양식 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}	
 		//
 		return Const.VIEW_PATH_APRV + Const.INTR_APRV_LIST_1010;
@@ -72,6 +73,7 @@ public class AprvController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 기안 작성 조회 (LEAV) 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_APRV + Const.INTR_APRV_DETL_1010;
@@ -95,6 +97,7 @@ public class AprvController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 기안 작성 조회 (EXP) 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_APRV + Const.INTR_APRV_DETL_1011;
@@ -118,6 +121,7 @@ public class AprvController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 기안 작성 조회 (ITEM) 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_APRV + Const.INTR_APRV_DETL_1012;
@@ -141,6 +145,7 @@ public class AprvController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 기안 작성 조회 (CORP) 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_APRV + Const.INTR_APRV_DETL_1013;
@@ -164,6 +169,7 @@ public class AprvController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 결재 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_APRV + Const.INTR_APRV_LIST_2010;
@@ -187,6 +193,7 @@ public class AprvController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 기안 상세 (LEAV) 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_APRV + Const.INTR_APRV_DETL_2010;
@@ -210,6 +217,7 @@ public class AprvController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 기안 상세 (EXP) 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_APRV + Const.INTR_APRV_DETL_2011;
@@ -233,6 +241,7 @@ public class AprvController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 기안 상세 (ITEM) 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_APRV + Const.INTR_APRV_DETL_2012;
@@ -256,6 +265,7 @@ public class AprvController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 기안 상세 (CORP) 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_APRV + Const.INTR_APRV_DETL_2013;
@@ -279,6 +289,7 @@ public class AprvController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 일정 관리 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_APRV + Const.INTR_APRV_LIST_3010;
@@ -302,6 +313,7 @@ public class AprvController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 결재선 관리 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_APRV + Const.INTR_APRV_LIST_4010;
@@ -320,6 +332,7 @@ public class AprvController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 결재선 관리 (AJAX) 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_APRV + Const.INTR_APRV_LIST_4011;
@@ -338,6 +351,7 @@ public class AprvController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 결재선 등록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_APRV + Const.INTR_APRV_LIST_4012;
@@ -361,6 +375,7 @@ public class AprvController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 결재선 상세 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_APRV + Const.INTR_APRV_LIST_4013;
@@ -383,6 +398,7 @@ public class AprvController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 기안 등록 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return defaultStr;
@@ -404,6 +420,7 @@ public class AprvController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 결재 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return defaultStr;
@@ -425,6 +442,7 @@ public class AprvController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 결재선 저장 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return defaultStr;
@@ -446,6 +464,7 @@ public class AprvController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 결재선 삭제 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return defaultStr;

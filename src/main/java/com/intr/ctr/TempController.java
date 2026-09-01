@@ -44,6 +44,7 @@ public class TempController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 기안문 양식 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_TEMP + Const.INTR_TEMP_LIST_1010;
@@ -67,6 +68,7 @@ public class TempController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 기안문 양식 트리 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_TEMP + Const.INTR_TEMP_LIST_1011;
@@ -90,6 +92,7 @@ public class TempController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 기안문 양식 상세 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_TEMP + Const.INTR_TEMP_DETL_1010;
@@ -111,6 +114,7 @@ public class TempController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 기안문 양식 수정 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return defaultStr;

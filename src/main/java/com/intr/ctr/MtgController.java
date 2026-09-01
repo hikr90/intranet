@@ -63,6 +63,7 @@ public class MtgController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 회의 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_MTG + Const.INTR_MTG_LIST_1010;
@@ -91,6 +92,7 @@ public class MtgController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 회의 등록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_MTG + Const.INTR_MTG_DETL_1020;
@@ -114,6 +116,7 @@ public class MtgController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 회의 상세화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_MTG + Const.INTR_MTG_DETL_1010;
@@ -135,6 +138,7 @@ public class MtgController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 회의 상세화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return defaultList;
@@ -168,6 +172,7 @@ public class MtgController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 회의 수정화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_MTG + Const.INTR_MTG_DETL_1030;
@@ -191,6 +196,7 @@ public class MtgController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 캘린더 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_MTG + Const.INTR_MTG_DETL_2010;
@@ -212,6 +218,7 @@ public class MtgController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 회의 등록 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return defaultStr;
@@ -234,6 +241,7 @@ public class MtgController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 회의 삭제 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return defaultStr;
@@ -255,6 +263,7 @@ public class MtgController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 회의 수정 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return defaultStr;

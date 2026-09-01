@@ -33,7 +33,6 @@ public class LogController {
 	@RequestMapping("/intrLogInqy1010.do")
 	public String intrLogInqy1010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
-		System.out.println("kth11 : " + paramMap);
 		try {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
@@ -48,6 +47,7 @@ public class LogController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 로그 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_LOG + Const.INTR_LOG_LIST_1010;

@@ -48,6 +48,7 @@ public class TaskController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 업무 작성 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_TASK + Const.INTR_TASK_LIST_1010;
@@ -66,6 +67,7 @@ public class TaskController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 업무 작성 (AJAX) 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_TASK + Const.INTR_TASK_LIST_1011;
@@ -94,6 +96,7 @@ public class TaskController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 업무일지 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_TASK + Const.INTR_TASK_LIST_2010;
@@ -112,6 +115,7 @@ public class TaskController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 업무 일지 목록 (AJAX) 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_TASK + Const.INTR_TASK_LIST_2011;
@@ -135,6 +139,7 @@ public class TaskController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 업무 상세 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_TASK + Const.INTR_TASK_DETL_1010;
@@ -158,6 +163,7 @@ public class TaskController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 업무 캘린더 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		
 		//
@@ -180,6 +186,7 @@ public class TaskController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 업무일지 저장 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return defaultStr;
@@ -201,6 +208,7 @@ public class TaskController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 업무일지 삭제 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return defaultStr;
@@ -222,6 +230,7 @@ public class TaskController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 업무 캘린더 저장 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return defaultStr;
@@ -243,6 +252,7 @@ public class TaskController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 업무 캘린더 수정 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return defaultStr;
@@ -264,6 +274,7 @@ public class TaskController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 업무 캘린더 삭제 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return defaultStr;

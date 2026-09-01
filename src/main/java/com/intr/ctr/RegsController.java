@@ -49,6 +49,7 @@ public class RegsController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 내부규정 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 		//
 		return Const.VIEW_PATH_REGS + Const.INTR_REGS_DETL_1010;
@@ -68,6 +69,7 @@ public class RegsController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : PDF뷰어 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw e;
 		}
 	}
 }
