@@ -3,6 +3,9 @@
 > **업무 관리를 위한 Spring MVC & MyBatis 기반 사내 웹 인트라넷 시스템**  
 사용자별 권한에 따른 메뉴 제어, 공지사항, 사원·조직 관리, 업무일지, 회의실 예약, 전자결재 등 핵심 사내 업무 기능을 제공합니다.
 
+### 📑 Project Portfolio
+[프로젝트 포트폴리오 PDF 보기](./docs/intr_project.pdf)
+
 ---
 
 ## 🛠 1. 기술 스택 (Tech Stack)
