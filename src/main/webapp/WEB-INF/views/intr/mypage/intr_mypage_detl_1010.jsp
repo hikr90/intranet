@@ -4,7 +4,7 @@
 
 <%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1010.jsp" %>
 
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 	$(document).ready(function(){
 		$('.left_area').html('');
