@@ -20,6 +20,7 @@
 			,	F.FILE_ID
 			,	F.FILE_SNO
 			,	F.FILE_NM
+			,	F.SAVE_FILE_NM
 			,	F.FILETYPE_CD
 			,	F.FILE_PATH
 			,	F.FILE_EXT
@@ -53,6 +54,7 @@ SELECT
 			,	F.FILE_ID
 			,	F.FILE_SNO
 			,	F.FILE_NM
+			,	F.SAVE_FILE_NM
 			,	F.FILETYPE_CD
 			,	F.FILE_PATH
 			,	F.FILE_EXT

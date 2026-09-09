@@ -182,7 +182,7 @@
 											<dd>
 												<input type="text" id="width" name="width" class="width10" title="가로" value="${defaultInfo.width}" isRequired="Y">
 												x
-												<input type="text" id="height" name="height" class="width10" title="세로" value="${defaultInfo.width}" isRequired="Y">
+												<input type="text" id="height" name="height" class="width10" title="세로" value="${defaultInfo.height}" isRequired="Y">
 											</dd>
 										</dl>
 										
@@ -211,7 +211,7 @@
 											<dd class="post_text">
 												<c:choose>
 													<c:when test="${not empty defaultInfo}">
-														<img id="banrImg" class="banr_img" width="480" height="380" src="intrBanrInqy1099.do?fileNm=${defaultInfo.saveFileNm}&sequenceId=${defaultInfo.banrCd}">
+														<img id="banrImg" class="banr_img" width="480" height="380" src="intrBanrInqy1099.do?saveFileNm=${defaultInfo.saveFileNm}&sequenceId=${defaultInfo.banrCd}">
 													</c:when>
 													<c:otherwise>
 														등록된 배너가 없습니다.													

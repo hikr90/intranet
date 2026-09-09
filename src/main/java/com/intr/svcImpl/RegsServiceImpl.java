@@ -57,10 +57,10 @@ public class RegsServiceImpl implements RegsService {
 		// 파일명 설정
 		String tabCd = (String)paramMap.get("tabCd");
 		String fileNm = Const.TAB_WEL.equals(tabCd) ? Const.RULE_WEL : Const.TAB_HRM.equals(tabCd) ? Const.RULE_HRM : Const.RULE_CORP;
-        File pdfFile = new File(filePath + File.separator + fileNm);
+		File pdfFile = new File(filePath, fileNm);
         //
         if (!pdfFile.exists()) {
-        	throw new FileNotFoundException("[ERROR] file not found : " + pdfFile.getName());	
+        	throw new FileNotFoundException("[ERROR] file not found : " + pdfFile.getAbsolutePath());	
         }
 
         // 브라우저 이동 없도록 처리

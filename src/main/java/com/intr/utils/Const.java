@@ -45,9 +45,9 @@ public class Const {
 	public static final String TAB_HRM  = "hrm"; 			// 인사관리 (탭)
 	public static final String TAB_WEL  = "wel"; 			// 복리후생 (탭)
 	
-	public static final String RULE_CORP  = "rule_corp.pdf"; 	// 사규
-	public static final String RULE_HRM  = "rule_hrm.pdf";		// 인사관리
-	public static final String RULE_WEL  = "rule_wel.pdf"; 		// 복리후생
+	public static final String RULE_CORP  = "RULE_CORP.pdf"; 	// 사규
+	public static final String RULE_HRM  = "RULE_HRM.pdf";		// 인사관리
+	public static final String RULE_WEL  = "RULE_WEL.pdf"; 		// 복리후생
 	
 	//--------------------------------------------------------------------------------------------
 	// 페이징
@@ -79,10 +79,10 @@ public class Const {
 	//--------------------------------------------------------------------------------------------
 	// 파일 다운로드 경로
 	//--------------------------------------------------------------------------------------------
-	public static final String FILE_PATH = "Intr\\File"; 				// 파일
-	public static final String TEMP_PATH = "Intr\\Temp"; 			// 임시
-	public static final String MANU_PATH  = "Intr\\Manual"; 		// 매뉴얼
-	public static final String REGS_PATH  = "Intr\\Regs"; 			// 내부규정
+	public static final String FILE_PATH = "INTR\\FILE"; 				// 파일
+	public static final String TEMP_PATH = "INTR\\TEMP"; 				// 임시
+	public static final String MANU_PATH  = "INTR\\MANUAL"; 		// 매뉴얼
+	public static final String REGS_PATH  = "INTR\\REGS"; 			// 내부규정
 	
 	//--------------------------------------------------------------------------------------------
 	// 로그인
@@ -261,7 +261,7 @@ public class Const {
 	//--------------------------------------------------------------------------------------------
 	// 배너
 	//--------------------------------------------------------------------------------------------
-	public static final String INTR_BANR_LIST_1010 = "intr_banr_detl_1010.jsp"; 		// 배너 관리
+	public static final String INTR_BANR_DETL_1010 = "intr_banr_detl_1010.jsp"; 		// 배너 관리
 
 	//--------------------------------------------------------------------------------------------
 	// 내부규정

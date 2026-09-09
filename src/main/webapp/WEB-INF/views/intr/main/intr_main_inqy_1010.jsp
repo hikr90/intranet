@@ -197,7 +197,7 @@
 	<c:if test="${not empty banrInfo}">
         <div id="banrPop" class="banr_popup">
             <a href="${banrInfo.banrUrl}" target="_blank">
-                <img id="banrImg" class="banr_img" width="${banrInfo.width}" height="${banrInfo.height}" src="intrBanrInqy1099.do?fileNm=${banrInfo.fileNm}&sequenceId=${banrInfo.banrCd}">
+                <img id="banrImg" class="banr_img" width="${banrInfo.width}" height="${banrInfo.height}" src="intrBanrInqy1099.do?saveFileNm=${banrInfo.saveFileNm}&sequenceId=${banrInfo.banrCd}">
             </a>
             
             <div class="banr_close">

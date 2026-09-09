@@ -30,7 +30,7 @@ public class BanrController {
 
 	@Autowired
 	BanrService banrService;
-	
+
 	@Autowired
 	UtilDao utilDao;
 	//
@@ -41,67 +41,69 @@ public class BanrController {
 	public String intrBanrInqy1010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
 		try {
-			//--------------------------------------------------------------------------------------------
+			// --------------------------------------------------------------------------------------------
 			// 메뉴 조회
-			//--------------------------------------------------------------------------------------------
+			// --------------------------------------------------------------------------------------------
 			coreService.coreInqyService1010(model, paramMap);
-			
-			//--------------------------------------------------------------------------------------------
+
+			// --------------------------------------------------------------------------------------------
 			// 배너 관리 조회
-			//--------------------------------------------------------------------------------------------
+			// --------------------------------------------------------------------------------------------
 			banrService.banrInqyService1010(model, paramMap);
-			
+
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 배너 관리 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 			throw e;
 		}
 		//
-		return Const.VIEW_PATH_BANR + Const.INTR_BANR_LIST_1010;
+		return Const.VIEW_PATH_BANR + Const.INTR_BANR_DETL_1010;
 	}
-	
+
 	// 배너 사진 조회
 	@RequestMapping("/intrBanrInqy1099.do")
-	public void intrBanrInqy1099(Model model, @RequestParam HashMap<String, Object> paramMap, HttpServletResponse response) throws Exception {
+	public void intrBanrInqy1099(Model model, @RequestParam HashMap<String, Object> paramMap,
+			HttpServletResponse response) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
 		try {
-			//--------------------------------------------------------------------------------------------
+			// --------------------------------------------------------------------------------------------
 			// 사원 이미지 조회
-			//--------------------------------------------------------------------------------------------
+			// --------------------------------------------------------------------------------------------
 			defaultList = utilDao.fileInqyDao1010(paramMap);
-			
-			//--------------------------------------------------------------------------------------------
+
+			// --------------------------------------------------------------------------------------------
 			// URL객체 생성 (예외사항 추가)
-			//--------------------------------------------------------------------------------------------
-			URL fileUrl = new URL("file:" + (String)defaultList.get(0).get("filePath") + (String)defaultList.get(0).get("saveFileNm"));
-			
-			//--------------------------------------------------------------------------------------------
+			// --------------------------------------------------------------------------------------------
+			URL fileUrl = new URL("file:" + (String) defaultList.get(0).get("filePath") + (String) defaultList.get(0).get("saveFileNm"));
+					
+			// --------------------------------------------------------------------------------------------
 			// 파일 입출력 (응답객체로 뿌려진 파일 데이터 JSP로 전송)
-			//--------------------------------------------------------------------------------------------
+			// --------------------------------------------------------------------------------------------
 			IOUtils.copy(fileUrl.openStream(), response.getOutputStream());
-			
+
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 배너 사진 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 			throw e;
 		}
 	}
-	
+
 	// 배너 저장 처리
 	@RequestMapping("/intrBanrProc1010.do")
 	@ResponseBody
-	public String intrBanrProc1010(Model model, @RequestParam HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception {
+	public String intrBanrProc1010(Model model, @RequestParam HashMap<String, Object> paramMap,
+			MultipartHttpServletRequest request) throws Exception {
 		//
 		String defaultStr = "";
 		//
 		try {
-			//--------------------------------------------------------------------------------------------
+			// --------------------------------------------------------------------------------------------
 			// 배너 저장
-			//--------------------------------------------------------------------------------------------
+			// --------------------------------------------------------------------------------------------
 			defaultStr = banrService.banrProcService1010(model, paramMap, request);
-			
+
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 배너 저장 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
@@ -110,7 +112,7 @@ public class BanrController {
 		//
 		return defaultStr;
 	}
-	
+
 	// 배너 삭제 처리
 	@RequestMapping("/intrBanrProc1020.do")
 	@ResponseBody
@@ -119,11 +121,11 @@ public class BanrController {
 		String defaultStr = "";
 		//
 		try {
-			//--------------------------------------------------------------------------------------------
+			// --------------------------------------------------------------------------------------------
 			// 배너 삭제
-			//--------------------------------------------------------------------------------------------
+			// --------------------------------------------------------------------------------------------
 			defaultStr = banrService.banrProcService1020(model, paramMap);
-			
+
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 배너 삭제 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");

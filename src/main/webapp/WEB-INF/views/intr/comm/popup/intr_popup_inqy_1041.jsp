@@ -135,10 +135,10 @@
 	}
 </script>
 
-<div id="custom" class="inline_flex">
+<div id="custom" style="display: inline-flex;">
 	<!-- 부서 사용자 트리 -->
 	<div class="tree_wrap">
-		<div class="tree_area" id="tree_area" class="w300p h445p"> 
+		<div class="tree_area" id="tree_area" style="width: 300px; height: 445px;"> 
 			<div class="tree">
 				<ul class="ul_1">
 												

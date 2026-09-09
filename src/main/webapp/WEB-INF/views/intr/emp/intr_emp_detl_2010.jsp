@@ -56,7 +56,7 @@
 	                                        	<div class="emp_profile">
 	                                        		<c:choose>
 														<c:when test="${defaultInfo.profileYn eq 'Y'}">
-                                 							<img id="empImg" class="emp_img" width="200" height="200" src="intrEmpInqy1099.do?sequenceId=${empVO.empIdx}">
+                                 							<img id="empImg" class="emp_img" width="200" height="200" src="intrEmpInqy1099.do?sequenceId=${defaultInfo.empIdx}">
 	                                        			</c:when>
 	                                        			<c:otherwise>
 			                                        		<img class="emp_img" id="empImg" width="200" height="200" src="resources/images/icon/icon_profile.png">

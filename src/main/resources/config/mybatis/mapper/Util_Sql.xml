@@ -8,6 +8,7 @@
 		    FILE_ID,
 		    FILE_SNO, 
 		    FILE_NM, 
+		    SAVE_FILE_NM,
 		    FILETYPE_CD,
 		    FILE_PATH,
 		    FILE_EXT,
@@ -46,6 +47,7 @@
 				FILE_ID
 			,	FILE_SNO
 			,	FILE_NM
+			,	SAVE_FILE_NM
 			,	FILETYPE_CD
 			,	FILE_PATH
 			,	FILE_EXT
@@ -64,6 +66,7 @@
 					WHERE FILE_ID = #{fileId, jdbcType=VARCHAR}
 				)
 			,	#{fileNm, jdbcType=VARCHAR}
+			,	#{saveFileNm, jdbcType=VARCHAR}
 			,	#{filetypeCd, jdbcType=VARCHAR}
 			,	#{filePath, jdbcType=VARCHAR}
 			,	#{fileExt, jdbcType=VARCHAR}
