@@ -69,7 +69,7 @@
 								    </div>
 									
 									<div id="pdfCont" class="pdf_container mt10">
-									    <iframe id="pdfIframe width100" height="700px" src="/intr/pdfStream"></iframe>
+									    <iframe id="pdfIframe" class="width100" height="700px" src="/intr/pdfStream"></iframe>
 									</div>
 								</div><!-- End post_wrap -->
 							</div><!-- End form_area -->
