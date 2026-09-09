@@ -183,34 +183,34 @@ function delArea(area) {
 
 // 연락처 자동 입력
 function mobProc(num) {
-	try {
-	    // replace(/[^0-9]/g, '') : 숫자가 아닌 모든 문자 제거
-	    var input = num.value.replace(/[^0-9]/g, '');
-	    var len = input.length;
-	    var output = "";
-	    
-	    // 입력 길이에 따라 하이픈(-)을 추가하여 포맷팅
-	    if (len < 4) {
-	        // 3자리 이하 (예: 010)
-	        output = input;
-	    } else if (len < 7) {
-	        // 4~6자리 (예: 010-123)
-	        output = input.substr(0, 3) + "-" + input.substr(3);
-	    } else if (len < 11) {
-	        // 7~10자리 (일반적인 휴대폰 형식: 010-123-4567, 지역번호 포함: 02-123-4567)
-	        output = input.substr(0, 3) + "-" + input.substr(3, 3) + "-" + input.substr(6);
-	    } else {
-	        // 11자리 이상 (예: 010-1234-5678)
-	        // 최대 11자리까지만 사용하고 나머지 절삭
-	        var maxInput = input.substr(0, 11);
-	        output = maxInput.substr(0, 3) + "-" + maxInput.substr(3, 4) + "-" + maxInput.substr(7);
-	    }
+    try {
+        // 숫자가 아닌 문자 제거 + 최대 11자리
+        var input = num.value.replace(/[^0-9]/g, '').substr(0, 11);
+        var output = "";
 
-	} catch (error) {
+        if (input.length <= 3) {
+            output = input;
+
+        } else if (input.length <= 7) {
+            // 010-1234
+            output = input.substr(0, 3)
+                   + "-"
+                   + input.substr(3);
+
+        } else {
+            // 010-1234-5678
+            output = input.substr(0, 3)
+                   + "-"
+                   + input.substr(3, 4)
+                   + "-"
+                   + input.substr(7);
+        }
+
+        num.value = output;
+
+    } catch (error) {
         console.error("[Error] 연락처 자동 입력 : ", error.message);
-	}
-    // 포맷팅된 값을 입력 필드에 지정
-    num.value = output;
+    }
 }
 
 // 필수 입력값 유효성 검증

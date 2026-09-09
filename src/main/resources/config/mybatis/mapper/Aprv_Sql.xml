@@ -374,6 +374,7 @@
 			,	ALM.DISP_ORDER
 		FROM APRV_LINE_MAST ALM
 		WHERE 1=1
+			AND ALM.REG_IDX = #{empIdx, jdbcType=VARCHAR}
 			<if test="srchNm != null and srchNm != ''">
            		AND REGEXP_REPLACE(LOWER(AL.APRVLINE_NM),'[^0-9가-힣A-Za-z]','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]','')||'%'
        	 	</if>
@@ -415,7 +416,7 @@
 			,	COMMCODE_NM AS APRVTYPE_NM
 		FROM COMMCODE
 		WHERE 1=1
-			AND COMMCODE_GCD = 'TYPE'
+			AND COMMCODE_GCD = 'Type'
 			AND COMMCODE_CD IN ('TYPE_0020', 'TYPE_0030')
 	</select>
 

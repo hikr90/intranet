@@ -252,10 +252,11 @@
 					<div class="content">
 						<div id="sub_content">					
 							<div class="form_area">
-								<input type="hidden" id="aprvlineId" class="aprvlineId" name="aprvlineId" value="">
+								<input type="hidden" id="aprvlineId" name="aprvlineId" value="">
+								<input type="hidden" id="empIdx" name="empIdx" value="${empVO.empIdx}">
 							
 								<div class="post_wrap">
-									<h2>결재선 관리												
+									<h2>결재선 관리									
 										<span class="float_right">
 											<input type="button" id="regBtn" class="btn_blue_thin" value="등록" onclick="regCall();">
 										</span>

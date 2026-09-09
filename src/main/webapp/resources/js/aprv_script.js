@@ -79,7 +79,7 @@ function lineReg(){
 	//
 	try {
 		// 유효성 검증
-		if(!valProc()){return;};
+		if(!requiredProc()){return;};
 
 		// 물품 등록 검증
 		if($('#temptypeCd').val() == 'ITEM'){
@@ -100,6 +100,7 @@ function lineReg(){
 		var obj = new Object();
 
 		obj["mappingId"] = "intrPopupInqy1041.do";
+		obj["empIdx"] = $("#empIdx").val();
 		obj["areaType"] = "line";
 		obj["width"] = "1100";
 		obj["height"] = "670";

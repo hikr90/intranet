@@ -142,7 +142,7 @@
 				,	DISP_ORDER
 				,	REMARK
 		FROM RANK
-		ORDER BY DISP_ORDER ASC
+		ORDER BY TO_NUMBER(DISP_ORDER) ASC
 	</select>
 	
 	<select id="intrEmpInqy1023" resultType="CamelHashMap" parameterType="java.util.HashMap">
