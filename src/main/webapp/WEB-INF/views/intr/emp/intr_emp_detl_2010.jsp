@@ -24,11 +24,7 @@
 	
 	<div class="main_wrap">
 		<!-- 좌측 메뉴 -->
-		<div class="left_wrap">
-			<div class="left_area">
-				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
-			</div>
-		</div>
+		<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
 
 		<div class="content_wrap">
 			<div class="content_area">
@@ -47,11 +43,11 @@
 									<input type="hidden" id="empIdx" name="empIdx" value="${param.empIdx}">
 									<input type="hidden" id="sequenceId" name="sequenceId" value="${param.empIdx}">
 		
-		                            <h2>사원 상세</h2>
-	                                <div class="post_write">
-	                                    <dl>
-	                                        <dt><label>프로필</label></dt>
-	                                        <dd>
+                                    <h2 class="content_heading">사원 상세</h2>
+                                    <div class="form_panel">
+                                        <dl class="form_row">
+                                            <dt class="form_label"><label>프로필</label></dt>
+                                            <dd class="form_value">
 	                                        	<div>
 	                                        	<div class="emp_profile">
 	                                        		<c:choose>
@@ -66,62 +62,62 @@
 	                                        	</div>
 	                                        </dd>
 	                                    </dl>
-	                                    <dl>
-	                                        <dt><label>z사원명</label></dt>
-	                                        <dd class="sel_2part">
+                                        <dl class="form_row">
+                                            <dt class="form_label"><label>z사원명</label></dt>
+                                            <dd class="form_value form_pair">
 	                                            ${defaultInfo.empNm}
 	                                        </dd>
 	                                        
-	                                        <dt><label>성별</label></dt>
-	                                        <dd class="sel_2part">
+                                            <dt class="form_label"><label>성별</label></dt>
+                                            <dd class="form_value form_pair">
 	                                        	<c:choose>
 	                                        		<c:when test="${defaultInfo.isMale eq 'Y'}">남자</c:when>
 	                                        		<c:otherwise>여자</c:otherwise>
 	                                        	</c:choose>
 	                                        </dd>
 	                                    </dl>
-	                                    <dl>
-	                                    	<dt><label>부서</label></dt>
-	                                        <dd class="sel_2part">
+                                        <dl class="form_row">
+                                            <dt class="form_label"><label>부서</label></dt>
+                                            <dd class="form_value form_pair">
 												${defaultInfo.orgNm}
 	                                        </dd>
 	                                        
-	                                    	<dt><label>직급</label></dt>
-	                                        <dd class="sel_2part">
+                                            <dt class="form_label"><label>직급</label></dt>
+                                            <dd class="form_value form_pair">
 												${defaultInfo.rankNm}
 	                                        </dd>
 	                                    </dl>
-	                                    <dl>
-	                                        <dt><label>연락처</label></dt>
-	                                        <dd class="sel_2part">
+                                        <dl class="form_row">
+                                            <dt class="form_label"><label>연락처</label></dt>
+                                            <dd class="form_value form_pair">
 												${defaultInfo.mobNo}
 	                                        </dd>
 	                                    
-	                                        <dt><label>재직 여부</label></dt>
-	                                        <dd>${defaultInfo.leavYn}</dd>
+                                            <dt class="form_label"><label>재직 여부</label></dt>
+                                            <dd class="form_value">${defaultInfo.leavYn}</dd>
 	                                    </dl>
-	                                    <dl>
-	                                        <dt><label>주소</label></dt>
-	                                        <dd class="sel_2part">
+                                        <dl class="form_row">
+                                            <dt class="form_label"><label>주소</label></dt>
+                                            <dd class="form_value form_pair">
 	                                        	${defaultInfo.addr}
 	                                        </dd>
 	                                    </dl>
-	                                    <dl>
-	                                    	<dt><label>메일 주소</label></dt>
-	                                        <dd class="sel_2part">
+                                        <dl class="form_row">
+                                            <dt class="form_label"><label>메일 주소</label></dt>
+                                            <dd class="form_value form_pair">
 	                                        	${defaultInfo.email}
 	                                        </dd>
 	                                    </dl>
-	                                	<dl>
-	                                        <dt><label>아이디</label></dt>
-	                                        <dd class="sel_2part">
+                                        <dl class="form_row">
+                                            <dt class="form_label"><label>아이디</label></dt>
+                                            <dd class="form_value form_pair">
 	                                        	${defaultInfo.empId}
 	                                        </dd>
 	                                	</dl>    
 									</div>
 		                                
 	                                <div class="float_right">
-										<button type="button" class="btn_blue_thin" onclick="listCall();">목록으로</button>
+                                        <button type="button" class="btn_blue_thin btn_action action_compact" onclick="listCall();">목록으로</button>
 									</div>
 		                        </div><!-- End post_wrap -->
 							</div><!-- End content_area form_area -->

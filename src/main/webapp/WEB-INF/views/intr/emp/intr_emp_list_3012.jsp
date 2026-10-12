@@ -130,36 +130,36 @@
 <input type="hidden" id="empPcd" value="${defaultInfo.tpicIdx}">
 	
 <!-- 담당자 팝업 -->
-<div id="empArea" class="popupArea hidden">
+<div id="empArea" class="popupArea hide">
 	<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1010.jsp"></c:import>	
 </div>
 
 <div class="post_wrap">
-	<div class="post_view">
-		<dl>
-			<dt>&#10003; 업무 제목</dt>
-			<dd>
-				<input type="text" id="dutyTitle" title="업무 제목" name="dutyTitle" value="${defaultInfo.dutyTitle}">
+    <div class="post_view form_panel">
+        <dl class="form_row">
+            <dt class="form_label">&#10003; 업무 제목</dt>
+            <dd class="form_value">
+                <input class="form_input" type="text" id="dutyTitle" title="업무 제목" name="dutyTitle" value="${defaultInfo.dutyTitle}">
 			</dd>
-			<dt>대직자</dt>
-			<dd>
-				<input type="text" id="empPnm" class="width50" title="담당자" value="${defaultInfo.tpicNm}" disabled="disabled">
-				<input type="button" class="btn_blue align_top" value="선택" onclick="popCall();">
-				<input type="button" class="btn_gray align_top" value="초기화" onclick="initTpicCall();">
+            <dt class="form_label">대직자</dt>
+            <dd class="form_value">
+                <input type="text" id="empPnm" class="w50per form_input" title="담당자" value="${defaultInfo.tpicNm}" disabled="disabled">
+                <input type="button" class="btn_blue vertical_top btn_action" value="선택" onclick="popCall();">
+                <input type="button" class="btn_gray vertical_top btn_action" value="초기화" onclick="initTpicCall();">
 			</dd>
 		</dl>
-		<dl>
-			<dt>업무 상세</dt>
-			<dd class="post_text">
-				<textarea class="post_text" id="dutyCont" title="업무 상세">${defaultInfo.dutyCont}</textarea>
+        <dl class="form_row">
+            <dt class="form_label">업무 상세</dt>
+            <dd class="post_text form_value form_content">
+                <textarea class="post_text form_textarea" id="dutyCont" title="업무 상세">${defaultInfo.dutyCont}</textarea>
 			</dd>
 		</dl>
 	</div><!-- End post_view -->
 
-	<div class="btn_wrap align_right">
+    <div class="btn_right btn_wrap">
 		<div class="float_right">
-			<button type="button" class="btn_blue_thin" onclick="saveProc();">저장</button>
-			<button type="button" class="btn_gray_thin" onclick="deleteProc();">삭제</button>
+            <button type="button" class="btn_blue_thin btn_action action_compact" onclick="saveProc();">저장</button>
+            <button type="button" class="btn_gray_thin btn_action action_compact" onclick="deleteProc();">삭제</button>
 		</div>
 	</div>
 </div><!-- End post_wrap -->

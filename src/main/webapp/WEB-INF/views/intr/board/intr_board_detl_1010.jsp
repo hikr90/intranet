@@ -37,11 +37,7 @@
 	
 	<div class="main_wrap">
 		<!-- 좌측 메뉴 -->
-		<div class="left_wrap">
-			<div class="left_area">
-				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
-			</div>
-		</div>
+		<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
 
 		<div class="content_wrap">
 			<div class="content_area">
@@ -62,13 +58,13 @@
 								<input type="hidden" id="srchIdx" name="srchIdx" value="${param.srchIdx}">
 								
 								<div class="post_wrap">
-		                            <h2>공지사항 상세</h2>
-									<div class="post_view">
-										<dl>
-											<dt>제목</dt>
-											<dd>${defaultInfo.brdTitle}</dd>
-											<dt>작성일</dt>
-											<dd>
+                                    <h2 class="content_heading">공지사항 상세</h2>
+                                    <div class="post_view form_panel">
+                                        <dl class="form_row">
+                                            <dt class="form_label">제목</dt>
+                                            <dd class="form_value">${defaultInfo.brdTitle}</dd>
+                                            <dt class="form_label">작성일</dt>
+                                            <dd class="form_value">
 												<span class="date">
 													<fmt:parseDate value="${defaultInfo.regDt}" var="parseDt" pattern="yyyyMMdd"/>
 													<fmt:formatDate value="${parseDt}" var="fomatDt" pattern="yyyy-MM-dd"/>
@@ -76,21 +72,21 @@
 												</span>	
 											</dd>
 										</dl>
-										<dl class="post_info">
-											<dt>부서</dt>
-											<dd>${defaultInfo.orgNm}</dd>
-											<dt>작성자</dt>
-											<dd>${defaultInfo.empNm}</dd>
+                                        <dl class="post_info form_row">
+                                            <dt class="form_label">부서</dt>
+                                            <dd class="form_value">${defaultInfo.orgNm}</dd>
+                                            <dt class="form_label">작성자</dt>
+                                            <dd class="form_value">${defaultInfo.empNm}</dd>
 										</dl>
-										<dl>
-											<dt>내용</dt>
-											<dd class="post_text">
+                                        <dl class="form_row">
+                                            <dt class="form_label">내용</dt>
+                                            <dd class="post_text form_value form_content">
 												<pre>${defaultInfo.brdCont}</pre>
 											</dd>
 										</dl>
-										<dl class="post_file">
-											<dt>첨부파일</dt>
-											<dd class="post_file">
+                                        <dl class="post_file form_row">
+                                            <dt class="form_label">첨부파일</dt>
+                                            <dd class="post_file form_value form_attachments">
 												<div class="file_wrap">
 													<ul id="fileUl"> 
 													<c:forEach var="list" items="${fileList}" varStatus="status">
@@ -106,12 +102,12 @@
 										</dl>
 									</div><!-- End post_view -->
 		
-									<div class="btn_wrap align_right">
+                                    <div class="btn_right btn_wrap">
 										<div class="float_right">
 											<c:if test="${defaultInfo.empIdx eq empVO.empIdx}">
-												<button type="button" class="btn_navy_thin" onclick="modCall();">수정</button>
+                                                <button type="button" class="btn_navy_thin btn_action action_compact" onclick="modCall();">수정</button>
 											</c:if>
-											<button type="button" class="btn_gray_thin" onclick="listCall();">목록으로</button>
+                                            <button type="button" class="btn_gray_thin btn_action action_compact" onclick="listCall();">목록으로</button>
 										</div>
 									</div>
 								</div><!-- End post_wrap -->

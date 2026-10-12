@@ -1,26 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!-- 휴가 관리 -->
-<div class="pop_area height100">
-	<article class="sub_article height80">
+<div class="pop_area">
+	<article class="sub_article popup_body popup_panel h80per">
 		<div class="content">
 			<div id="sub_content">					
 				<div class="form_area">
-					<div class="pop_wrap">
+					<div class="pop_wrap leave_popup">
 	                	<div class="post_wrap">
-							<div class="srch_wrap">
-								<div class="srch_area">
-									<div class="right_srch_area">
-										<label class="srch_label">일정 상세</label>
-									</div>
-								</div>
-							</div>
+                            <div class="popup_header">
+                                <h3 class="popup_heading">일정 상세</h3>
+                            </div>
 	                        
 	                     	<!-- 일정 상세 -->
-	                     	<div id="leavCon" class="post_con inline_flex h300p"></div>
+                        <div id="leavCon" class="post_con popup_content inline_flex"></div>
 	                        
-							<div class="btn_right">
-	                      		<button type="button" class="btn_gray_thin" onclick="popClose('leav');">닫기</button>
+                            <div class="btn_right form_actions">
+                                  <button type="button" class="btn_gray_thin btn_action action_compact" onclick="popClose('leav');">닫기</button>
 	                 		</div>
 	                 	</div><!-- End post_wrap -->
 	               	</div> 

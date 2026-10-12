@@ -5,26 +5,22 @@
 
 <!-- 담당자 관리 -->
 <div id="popArea" class="pop_area">
-	<article class="sub_article">
+	<article class="sub_article popup_body popup_panel">
 		<div class="content">
 			<div id="sub_content">					
 				<div class="form_area">
 					<div class="find_owner_wrap">
 						<div class="post_wrap">
-							<div class="srch_wrap">
-								<div class="srch_area">
-									<div class="right_srch_area">
-										<label class="srch_label">담당자 조회</label>
-									</div>
-								</div>
-							</div>
+                            <div class="popup_header">
+                                <h3 class="popup_heading">담당자 조회</h3>
+                            </div>
 	                        
 	                        <!-- 담당자 목록 -->
-	                        <div id="empCon" class="post_con b_e8edf2"></div>
+	                        <div id="empCon" class="lookup_results post_con pop_con"></div>
 							
-							<div class="btn_center">
-								<button type="button" class="btn_navy_thin" onclick="popConfirm('emp');">확인</button>
-								<button type="button" class="btn_gray_thin" onclick="popClose('emp');">취소</button>
+                            <div class="btn_center form_actions">
+                                <button type="button" class="btn_navy_thin btn_action action_compact" onclick="popConfirm('emp');">확인</button>
+                                <button type="button" class="btn_gray_thin btn_action action_compact" onclick="popClose('emp');">취소</button>
 	   						</div>
 						</div>
 					</div><!-- End post_wrap -->

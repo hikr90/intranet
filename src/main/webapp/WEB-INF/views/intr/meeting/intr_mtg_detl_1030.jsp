@@ -217,18 +217,14 @@
 	
 	<div class="main_wrap">
 		<!-- 좌측 메뉴 -->
-		<div class="left_wrap">
-			<div class="left_area">
-				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
-			</div>
-		</div>
+		<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
 
 		<div class="content_wrap">
 			<div class="content_area">
 			<article class="sub_article">
 				<div class="content">
 					<div class="sub_content">					
-						<div class=" form_area">
+                        <div class="form_area">
 							<input type="hidden" id="empIdx" name="empIdx"  value="${empVO.empIdx}">
 							<input type="hidden" id="sequenceId" name="sequenceId" value="${defaultInfo.mtgCd}">
 							<input type="hidden" id="page" name="page" value="${param.page}">
@@ -243,40 +239,40 @@
 							<input type="hidden" id="mtgEtm" name="mtgEtm" value="">
 								
 							<div class="post_wrap">
-								<h2>회의 수정</h2>
-								<div class="post_view">
-									<dl>
-										<dt>
+                                <h2 class="content_heading">회의 수정</h2>
+                                <div class="post_view form_panel form_document">
+                                    <dl class="form_row">
+                                        <dt class="form_label">
 											<label for="post-title">&#10003; 회의명</label>
 										</dt>
-										<dd>
-											<input type="text" id="mtgTitle" title="회의명" name="mtgTitle" value="${defaultInfo.mtgTitle}" isRequired="Y">
+                                        <dd class="form_value">
+                                            <input class="form_input" type="text" id="mtgTitle" title="회의명" name="mtgTitle" value="${defaultInfo.mtgTitle}" isRequired="Y">
 										</dd>
-										<dt>&#10003; 회의 일자</dt>
-										<dd>
-											<input type="text" class="srch_cdt_date srchSdt" id="mtgDt" name="mtgDt" title="회의 일자" value="${fn:substring(defaultInfo.mtgDt, 0, 4)}-${fn:substring(defaultInfo.mtgDt, 4, 6)}-${fn:substring(defaultInfo.mtgDt, 6, 8)}" readonly="readonly" isRequired="Y" />
+                                        <dt class="form_label">&#10003; 회의 일자</dt>
+                                        <dd class="form_value">
+                                            <input type="text" class="srch_cdt_date srchSdt form_input" id="mtgDt" name="mtgDt" title="회의 일자" value="${fn:substring(defaultInfo.mtgDt, 0, 4)}-${fn:substring(defaultInfo.mtgDt, 4, 6)}-${fn:substring(defaultInfo.mtgDt, 6, 8)}" readonly="readonly" isRequired="Y" />
 										</dd>
-										<dt>&#10003; 회의장소</dt>
-										<dd class="sel_2part">
+                                        <dt class="form_label">&#10003; 회의장소</dt>
+                                        <dd class="form_value form_pair">
                                         	<div class="select_wrap">
-												<div id="locList" class="sList select_box">${empty defaultInfo.mtgLocNm ? '' : defaultInfo.mtgLocNm}</div>
+												<div id="locList" class="sList select_box choice_value">${empty defaultInfo.mtgLocNm ? '' : defaultInfo.mtgLocNm}</div>
 												<input type="hidden" id="mtgLoc" name="mtgLoc" value="${defaultInfo.mtgLoc}">
 												<input type="hidden" id="mtgLocNm" name="mtgLocNm" value="${defaultInfo.mtgLocNm}">
 											
-												<ul class="sUl select_ul scroll_wrap">
+												<ul class="sUl select_ul scroll_wrap choice_options">
 													<c:forEach var="list" items="${locList}">
 														<c:if test="${list.commcodeCd != null and  list.commcodeCd != ''}">
-															<li setNm="${list.commcodeNm}" setCd="${list.commcodeCd}">${list.commcodeNm}</li>
+															<li class="choice_item" setNm="${list.commcodeNm}" setCd="${list.commcodeCd}">${list.commcodeNm}</li>
 														</c:if>
 													</c:forEach>
 												</ul>
 											</div>
                                         </dd>
 									</dl>
-									<dl>
-										<dt>&#10003; 회의시간</dt>
-										<dd>
-											<div class="disp_flex fw_wrap gap10">
+                                    <dl class="form_row">
+                                        <dt class="form_label">&#10003; 회의시간</dt>
+                                        <dd class="form_value">
+											<div class="meeting_times">
 												<c:forEach var="mtgTm" begin="540" end="1080" step="30">
 												    <c:set var="hour" value="${(mtgTm / 60) - ((mtgTm / 60) % 1)}" />
 												    <c:set var="minute" value="${mtgTm % 60}" />
@@ -301,25 +297,25 @@
 											</div>
 										</dd>
 									</dl>
-									<dl>
-										<dt><label for="post_text">&#10003; 회의 개요</label></dt>
-										<dd class="post_text h310p">
-											<textarea id="projCont" title="회의 개요" name="mtgCont" isRequired="Y">${defaultInfo.mtgCont}</textarea>
+                                    <dl class="form_row">
+                                        <dt class="form_label"><label for="post_text">&#10003; 회의 개요</label></dt>
+                                        <dd class="post_text form_value form_content">
+                                            <textarea class="form_textarea" id="projCont" title="회의 개요" name="mtgCont" isRequired="Y">${defaultInfo.mtgCont}</textarea>
 										</dd>
 									</dl>
-									<dl class="post_info">
-										<dt>회의자료</dt>
-										<dd>
-											<div class="file_box">
-												<label for="fileUpd">업로드</label>
+                                    <dl class="post_info form_row">
+                                        <dt class="form_label">회의자료</dt>
+                                        <dd class="form_value">
+                                            <div class="file_box form_upload">
+                                                <label class="upload_label" for="fileUpd">업로드</label>
 												<h4 class="file_text">업로드할 파일을 선택해주세요.</h4>
-												<input type="file" id="fileUpd" name="fileUpd" class="btn_blue" multiple="multiple">
+                                                <input type="file" id="fileUpd" name="fileUpd" class="btn_blue btn_action upload_input" multiple="multiple">
 											</div>
 										</dd>
 									</dl>
-									<dl class="post_info">
-										<dt></dt>
-										<dd class="post_file">
+                                    <dl class="post_info form_row">
+                                        <dt class="form_label"></dt>
+                                        <dd class="post_file form_value form_attachments">
 											<div class="file_wrap">
 												<!-- 파일 목록 -->
 												<c:import url="/WEB-INF/views/intr/comm/include/intr_include_1040.jsp">
@@ -329,10 +325,10 @@
 										</dd>
 									</dl>
 								</div><!-- End post_write -->
-								<div class="btn_wrap align_right">
+                                <div class="btn_right btn_wrap">
 									<c:if test="${empVO.empIdx eq defaultInfo.mtgIdx}">
-										<button type="button" class="btn_navy_thin" onclick="modProc(this.form);">수정완료</button>
-										<button type="button" class="btn_gray_thin" onclick="detCall();">취소</button>
+                                        <button type="button" class="btn_navy_thin btn_action action_compact" onclick="modProc(this.form);">수정완료</button>
+                                        <button type="button" class="btn_gray_thin btn_action action_compact" onclick="detCall();">취소</button>
 									</c:if>
 								</div>
 							</div><!-- End post_wrap -->

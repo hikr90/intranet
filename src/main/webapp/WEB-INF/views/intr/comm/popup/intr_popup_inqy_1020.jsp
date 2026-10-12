@@ -222,7 +222,7 @@
 			$("#findCon").html(html);
 			
 			// 버튼 제어
-			$("#findBtn").addClass('hidden');
+			$("#findBtn").addClass('hide');
 			
 		} catch (error) {
 	        console.error("[Error] 아이디 출력 : ", error.message);
@@ -236,20 +236,20 @@
 			var html = `
 				<div id="chagePwd" class="chagePwd">
 					<input type="hidden" id="chngPwdId" name="chngPwdId" value="` + findId + `">
-					<div class="post_write">
-						<dl>
-							<dt>
+                    <div class="form_panel">
+                        <dl class="form_row">
+                            <dt class="form_label">
 								<label>신규 비밀번호</label>
 							</dt>
-							<dd class="sel_2part">
+                            <dd class="form_value form_pair">
 								<input type="password" title="이메일" id="newPwd" name="newPwd"> 
 							</dd>
 						</dl>
-						<dl>
-							<dt>
+                        <dl class="form_row">
+                            <dt class="form_label">
 								<label>비밀번호 확인</label>
 							</dt>
-							<dd class="sel_2part">
+                            <dd class="form_value form_pair">
 								<input type="password" title="비밀번호 확인" id="newPwdConf" name="newPwdConf" oninput="checkPwd(this);">
 							</dd>
 							<span id="checkPwd" style="color:red; font-size:14px; text-align:right; margin-top:20px; float:right;"></span>
@@ -261,8 +261,8 @@
 			$("#findCon").html(html);
 			
 			// 버튼 제어
-			$("#findBtn").addClass('hidden');
-			$("#updateBtn").removeClass('hidden');
+			$("#findBtn").addClass('hide');
+			$("#updateBtn").removeClass('hide');
 			
 		} catch (error) {
 	        console.error("[Error] 비밀번호 찾기 팝업 : ", error.message);
@@ -344,7 +344,7 @@
 
 <form id="popForm">
 <div class="pop_area">
-	<article class="sub_article">
+	<article class="sub_article popup_body popup_panel">
 		<div class="content">
 			<div id="sub_content">					
 				<div class="form_area">
@@ -352,17 +352,17 @@
                            <div class="post_wrap">
                            		<input type="hidden" id="joinCode" name="joinCode" value="">
 								
-								<h3>
+                                <h3 class="section_heading">
 									<a class="find_id list_bg" onclick="javascript:chgPopup('intrPopupInqy1021.do');">아이디 찾기</a>
 									<a class="find_pwd" onclick="javascript:chgPopup('intrPopupInqy1022.do');">비밀번호 찾기</a>
 								</h3>
 								
                                	<div id="findCon" class="post_con"></div>
                                
-                               <div class="btn_center">
-                               		<input type="button" id="findBtn" class="btn_blue_thin" value="찾기" onclick="popConfirm();">
-                               		<input type="button" id="updateBtn" class="btn_blue_thin hidden" value="변경" onclick="popUpdate();">
-                                   	<input type="button" class="btn_gray_thin" value="닫기" onclick="popClose('find');">
+                               <div class="btn_center form_actions">
+                                       <input type="button" id="findBtn" class="btn_blue_thin btn_action action_compact" value="찾기" onclick="popConfirm();">
+                                       <input type="button" id="updateBtn" class="btn_blue_thin hide btn_action action_compact" value="변경" onclick="popUpdate();">
+                                       <input type="button" class="btn_gray_thin btn_action action_compact" value="닫기" onclick="popClose('find');">
                                </div>
                            </div><!-- End post_wrap -->
                          </div> 

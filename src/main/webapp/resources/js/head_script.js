@@ -74,11 +74,11 @@ function goMenu(element) {
 
     for (var key in params) {
         if (params.hasOwnProperty(key)) {
-            var hiddenField = document.createElement("input");
-            hiddenField.setAttribute("type", "hidden");
-            hiddenField.setAttribute("name", key);
-            hiddenField.setAttribute("value", params[key]);
-            form.appendChild(hiddenField);
+            var hideField = document.createElement("input");
+            hideField.setAttribute("type", "hide");
+            hideField.setAttribute("name", key);
+            hideField.setAttribute("value", params[key]);
+            form.appendChild(hideField);
         }
     }
 	//

@@ -17,26 +17,26 @@
 	});
 </script>
 
-<div class="post_view mg0 mt20">
-	<dl>
-		<dt>&#10003; 업무 제목</dt>
-		<dd>
-			<input type="text" id="tldrTitle" name="tldrTitle" title="업무 제목" value="${defaultInfo.tldrTitle}" isRequired="Y">
+<div class="post_view mg0 mt20 form_panel calendar_entry_form">
+    <dl class="form_row">
+        <dt class="form_label">&#10003; 업무 제목</dt>
+        <dd class="form_value">
+            <input class="form_input" type="text" id="tldrTitle" name="tldrTitle" title="업무 제목" value="${defaultInfo.tldrTitle}" isRequired="Y">
 			<input type="hidden" id="tldrId" name="tldrId" value="${defaultInfo.tldrId}">
 		</dd>
 	</dl>
-	<dl class="post_info">
-		<dt>&#10003; 업무 기간</dt>
-		<dd>
-			<input type="text" class="srch_cdt_date srchSdt" id="tldrSdt" name="tldrSdt" title="업무 기간 (시작)" value="${defaultInfo.tldrSdt}" readonly="readonly" isRequired="Y" />
+    <dl class="post_info form_row">
+        <dt class="form_label">&#10003; 업무 기간</dt>
+        <dd class="form_value">
+            <input type="text" class="srch_cdt_date srchSdt form_input" id="tldrSdt" name="tldrSdt" title="업무 기간 (시작)" value="${defaultInfo.tldrSdt}" readonly="readonly" isRequired="Y" />
 				~
-			<input type="text" class="srch_cdt_date srchEdt" id="tldrEdt" name="tldrEdt" title="업무 기간 (종료)" value="${defaultInfo.tldrEdt}" readonly="readonly" isRequired="Y" />
+            <input type="text" class="srch_cdt_date srchEdt form_input" id="tldrEdt" name="tldrEdt" title="업무 기간 (종료)" value="${defaultInfo.tldrEdt}" readonly="readonly" isRequired="Y" />
 		</dd>
 	</dl>
-	<dl>
-		<dt>&#10003; 업무 내용</dt>
-		<dd class="post_text h160p">
-			<textarea id="tldrCont" name="tldrCont" title="업무 내용" isRequired="Y">${defaultInfo.tldrTitle}</textarea>
+    <dl class="form_row">
+        <dt class="form_label">&#10003; 업무 내용</dt>
+        <dd class="post_text form_value form_content">
+            <textarea class="form_textarea" id="tldrCont" name="tldrCont" title="업무 내용" isRequired="Y">${defaultInfo.tldrTitle}</textarea>
 		</dd>
 	</dl>
 </div><!-- End post_view -->

@@ -80,11 +80,7 @@
 	
 	<div class="main_wrap">
 		<!-- 좌측 메뉴 -->
-		<div class="left_wrap">
-			<div class="left_area">
-				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
-			</div>
-		</div>
+		<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
 		
 		<div class="content_wrap">
 			<div class="content_area"> 
@@ -95,7 +91,7 @@
 								<div class="post_wrap">
 									<input type="hidden" id="roleCd" class="roleCd" name="roleCd" value="">
 								
-									<h2>메뉴 권한 부여</h2>
+                                    <h2 class="content_heading">메뉴 권한 부여</h2>
 	                                <div class="srch_wrap">
 										<div class="right_srch_area">
 											<!-- 제목 -->
@@ -103,29 +99,29 @@
 												<label class="srch_label">제목</label>		
 												<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="enterListCall(this.form);">
 											
-												<input type="button" class="btn_blue" value="조회" onclick="listCall(this.form);">
-												<input type="button" class="btn_gray" value="초기화" onclick="initCall();">
+                                                <input type="button" class="btn_blue btn_action" value="조회" onclick="listCall(this.form);">
+                                                <input type="button" class="btn_gray btn_action" value="초기화" onclick="initCall();">
 											</div>
 	                                	</div>
 	                                </div>
 										
-									<div class="tree_wrap">
-										<div id="tree_area" class="tree_area w400p h525p">
+									<div class="tree_wrap tree_workspace">
+										<div id="tree_area" class="scroll_wrap tree_area tree_navigation">
 											<div id="roleTree" class="tree">
 												<c:if test="${not empty defaultList}">
 													<ul class="ul_1">
 													<c:forEach var="list" items="${defaultList}" varStatus="status">
 					           						   	<c:set var="spanIcon" 	value="icon_list"/> 
 			
-														<li class="li_1 ml15">
-														<span class="${spanIcon}"></span>
+                                                        <li class="tree_item li_1">
+														<span class="tree_icon ${spanIcon}"></span>
 														<a class="a_btn" id="${list.roleCd}" href="#" onclick="detCall('${list.roleCd}');">${list.roleNm}</a>
 													</c:forEach>
 													</ul>
 												</c:if>
 												<c:if test="${empty defaultList}">
 													<ul class="ul_1">
-														<li class="li_1 ml15">
+                                                        <li class="tree_item li_1">
 															등록된 권한이 없습니다.
 														</li>
 													</ul>
@@ -133,38 +129,38 @@
 											</div>	
 										</div>
 											
-										<div id="menuArea" class="menu_area" style="display: none;">
+                                        <div id="menuArea" class="menu_area menu_assignment">
 											<!-- 권한 메뉴 목록 -->
-											<div id="menuInfo" class="tree_info ml20 w500p h525p">
-												<div class="post_wrap">
-													<div class="scroll_wrap h525p">
-														<table class="post_table menuTbl">
+											<div id="menuInfo" class="tree_info tree_choices ml20">
+												<div class="list_panel list_panel_fill">
+													<div class="scroll_wrap list_body">
+														<table class="post_table data_table menuTbl">
 															<caption>권한 목록 테이블</caption>
 															<colgroup>
-																<col class="w7per">
+																<col class="w5per">
 																<col class="w30per">
 															</colgroup>
 															<thead>
 																<tr>
-																	<th scope="col">
+                                                                    <th class="table_header" scope="col">
 																		<span class="check_box">
-																			<input type="checkbox" class="check_box menuChk"> 
-																			<label for="chk-yes"><span></span></label>
+                                                                            <input type="checkbox" class="checkbox_input check_box menuChk">
+                                                                            <label class="checkbox_label_lead checkbox_label" for="chk-yes"><span class="checkbox_mark"></span></label>
 																		</span>
 																	</th>
-																	<th scope="col">전체 메뉴</th>
+                                                                    <th class="table_header" scope="col">전체 메뉴</th>
 																</tr>
 															</thead>
 															<tbody>
 										                       	<c:forEach var="list" items="${tMenuList}" varStatus="status"> 
 																<tr>
-																	<td class="first_td">
+                                                                    <td class="table_cell">
 								                                       <span class="check_box">
-																			<input type="checkbox" class="check_box" id="menuCd" name="menuCd" value="${list.menuCd}" menuNm="${list.menuNm}" menutypeCd="${list.menutypeCd}" menuLv="${list.lv}"> 
-																			<label for="chk-yes"><span></span></label>
+                                                                            <input type="checkbox" class="checkbox_input check_box" id="menuCd" name="menuCd" value="${list.menuCd}" menuNm="${list.menuNm}" menutypeCd="${list.menutypeCd}" menuLv="${list.lv}">
+                                                                            <label class="checkbox_label_lead checkbox_label" for="chk-yes"><span class="checkbox_mark"></span></label>
 																		</span>
 																	</td>
-																	<td class="align_left">
+                                                                    <td class="align_left table_cell">
 																		<c:if test="${list.lv ne '1'}">
 																			&nbsp; <img class="mr5" src='resources/images/icon/icon_tree_arrow.png' width="13" height="13" />
 																		</c:if>
@@ -182,7 +178,7 @@
 											<div id="treeArrow" class="tree_arrow" onclick="moveBtn(this.form);"></div>
 											
 											<!-- 권한 목록 -->
-											<div id="roleInfo" class="tree_info w550p h525p"></div>
+											<div id="roleInfo" class="tree_info tree_detail"></div>
 										</div> <!-- End menu_area -->
 									</div>
 								</div><!-- End post_wrap -->

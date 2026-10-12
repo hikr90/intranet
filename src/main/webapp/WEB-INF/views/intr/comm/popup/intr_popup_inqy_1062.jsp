@@ -7,7 +7,7 @@
 
 <!-- 물품 조회 -->
 <div class="post_table_wrap scroll_wrap">
-	<table class="post_table">
+	<table class="post_table data_table entry_table">
 		<caption>물품 등록 목록</caption>
 		<colgroup>
 			<col class="w15per">
@@ -16,20 +16,20 @@
 			<col class="wAutoper">
 		</colgroup>
 		<thead>
-			<tr class="lh10">
-				<th scope="col">관리번호</th>
-				<th scope="col">제품명</th>
-				<th scope="col">수량</th>
-				<th scope="col">사유</th>
+			<tr>
+                <th class="table_header" scope="col">관리번호</th>
+                <th class="table_header" scope="col">제품명</th>
+                <th class="table_header" scope="col">수량</th>
+                <th class="table_header" scope="col">사유</th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach var="list" items="${itemList}" varStatus="status"> 
 				<tr>
-					<td class='first_td'>${list.mgtNo}</td>
-		 			<td>${list.itemNm}</td>
-		 			<td>${list.itemCnt}</td>
-		 			<td class="text_left">${list.reqRsn}</td>
+                    <td class='table_cell'>${list.mgtNo}</td>
+                     <td class="table_cell">${list.itemNm}</td>
+                     <td class="table_cell">${list.itemCnt}</td>
+                     <td class="align_left table_cell">${list.reqRsn}</td>
 			    </tr>
 			</c:forEach>
 		</tbody>

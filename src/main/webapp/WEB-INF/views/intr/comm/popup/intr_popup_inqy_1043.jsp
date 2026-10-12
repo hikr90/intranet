@@ -4,9 +4,9 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <!-- 결재선 상세 -->
-<div class="post_wrap">
-	<div class="scroll_wrap h390p">
-		<table class="post_table aprvTbl">
+<div class="list_panel approval_readonly">
+	<div class="scroll_wrap list_body">
+		<table class="post_table data_table aprvTbl">
 			<caption>결재선 목록</caption>
 			<colgroup>
 				<col class="w30per">
@@ -15,18 +15,18 @@
 			</colgroup>
 			<thead>
 				<tr>
-					<th scope="col">부서</th>
-					<th scope="col">이름</th>
-					<th scope="col">결재유형</th>
+                    <th class="table_header" scope="col">부서</th>
+                    <th class="table_header" scope="col">이름</th>
+                    <th class="table_header" scope="col">결재유형</th>
 				</tr>
 			</thead>
 			<tbody>
 				<!-- 결재선 추가 -->
 				<c:forEach var="list" items="${aprvlineList}" varStatus="status">
 					<tr class="setListTr">
-						<td>${list.orgNm}</td>
-						<td>${list.aprvNm} ${list.rankNm}</td>
-						<td class="pd0">
+                        <td class="table_cell">${list.orgNm}</td>
+                        <td class="table_cell">${list.aprvNm} ${list.rankNm}</td>
+                        <td class="pd0 table_cell">
 							<input type="hidden" id="aprvtypeCd" name="aprvtypeCd" value="${list.aprvtypeCd}">
 							<input type="hidden" id="aprvIdx" name="aprvIdx" value="${list.aprvIdx}">
 							${list.aprvtypeNm}

@@ -17,22 +17,22 @@
 	});
 </script>
 
-<div class="post_view mg0 mt20">
-	<dl>
-		<dt>업무 제목</dt>
-		<dd>
+<div class="post_view mg0 mt20 form_panel calendar_record_form">
+    <dl class="form_row">
+        <dt class="form_label">업무 제목</dt>
+        <dd class="form_value">
 			${defaultInfo.tldrTitle}
 		</dd>
 	</dl>
-	<dl class="post_info">
-		<dt>업무 기간</dt>
-		<dd>
+    <dl class="post_info form_row">
+        <dt class="form_label">업무 기간</dt>
+        <dd class="form_value">
 			${defaultInfo.tldrSdt} ~ ${defaultInfo.tldrEdt}
 		</dd>
 	</dl>
-	<dl>
-		<dt>업무 내용</dt>
-		<dd class="post_text h165p">
+    <dl class="form_row">
+        <dt class="form_label">업무 내용</dt>
+        <dd class="post_text form_value form_content">
 			<pre>${defaultInfo.tldrTitle}</pre>
 		</dd>
 	</dl>

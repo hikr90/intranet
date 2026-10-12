@@ -42,17 +42,13 @@
 	<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1030.jsp" %>
 	
 	<!-- 메세지 조회 팝업 -->
- 	<div id="logArea" class="popupArea hidden">
+ 	<div id="logArea" class="popupArea hide">
 		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_2020.jsp"></c:import>	
 	</div>
 	
 	<div class="main_wrap">
 		<!-- 좌측 메뉴 -->
-		<div class="left_wrap">
-			<div class="left_area">
-				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
-			</div>
-		</div>
+		<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
 		
 		<div class="content_wrap">
 			<div class="content_area">
@@ -65,7 +61,7 @@
 										<input type="hidden" id="page" name="page" value="${param.page}">
 										<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
 			
-										<h2>로그 관리</h2>
+                                        <h2 class="content_heading">로그 관리</h2>
 										<div class="srch_wrap">
 											<div class="right_srch_area">
 												<!-- 요청일자 -->
@@ -80,13 +76,13 @@
 												<div class="srch_area">
 													<label class="srch_label">유형</label>
 													<div class="select_wrap">
-														<div id="procList" class="sList select_box">${empty param.srchLogNm ? '전체' : param.srchLogNm}</div>
+														<div id="procList" class="sList select_box choice_value">${empty param.srchLogNm ? '전체' : param.srchLogNm}</div>
 														<input type="hidden" name="srchLogCd" value="${param.srchLogCd}">
 														<input type="hidden" name="srchLogNm" value="${param.srchLogNm}">
 													
-														<ul class="sUl select_ul scroll_wrap">
+														<ul class="sUl select_ul scroll_wrap choice_options">
 															<c:forEach var="list" items="${procList}">
-																<li setNm="${list.commcodeNm}" setCd="${list.commcodeCd}">${list.commcodeNm}</li>
+																<li class="choice_item" setNm="${list.commcodeNm}" setCd="${list.commcodeCd}">${list.commcodeNm}</li>
 															</c:forEach>
 														</ul>
 													</div>
@@ -98,45 +94,45 @@
 														<label class="srch_label">요청자</label>
 														<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="enterListCall(this.form);">
 													
-														<input type="button" class="btn_blue" value="조회" onclick="listCall(this.form);">
-														<input type="button" class="btn_gray" value="초기화" onclick="initCall();">
+                                                        <input type="button" class="btn_blue btn_action" value="조회" onclick="listCall(this.form);">
+                                                        <input type="button" class="btn_gray btn_action" value="초기화" onclick="initCall();">
 													</div>
 			                                	</div>
 											</div>
 										</div>
 										
 										<div class="post_table_wrap">
-											<table class="post_table">
+											<table class="post_table data_table">
 												<caption>로그 목록 조회</caption>
 												<colgroup>
 													<col class="w10per">
 													<col class="w20per">
-													<col class="w12per">
-													<col class="w12per">
-													<col class="w12per">
-													<col class="w12per">
+													<col class="w15per">
+													<col class="w15per">
+													<col class="w15per">
+													<col class="w15per">
 												</colgroup>
 												<thead>
 													<tr>
-														<th scope="col">처리</th>
-														<th scope="col">요청 URL</th>
-														<th scope="col">유형</th>
-														<th scope="col">부서</th>
-														<th scope="col">요청자</th>
-														<th scope="col">요청일자</th>
+                                                        <th class="table_header" scope="col">처리</th>
+                                                        <th class="table_header" scope="col">요청 URL</th>
+                                                        <th class="table_header" scope="col">유형</th>
+                                                        <th class="table_header" scope="col">부서</th>
+                                                        <th class="table_header" scope="col">요청자</th>
+                                                        <th class="table_header" scope="col">요청일자</th>
 													</tr>
 												</thead>
 												<tbody>
 			                                       <c:forEach var="list" items="${defaultList}" varStatus="status"> 
 													<tr>
-														<td>
+                                                        <td class="table_cell">
 															<a class="show_view a_title" onclick="popCall('${list.logId}');">${list.isSucc eq 'Y' ? '성공' : '실패'}</a>
 														</td>
-														<td>${list.mappingId}</td>
-														<td>${list.logtypeNm}</td>
-														<td>${list.orgNm}</td>
-														<td>${list.empNm} ${list.rankNm}</td>
-														<td>
+                                                        <td class="table_cell">${list.mappingId}</td>
+                                                        <td class="table_cell">${list.logtypeNm}</td>
+                                                        <td class="table_cell">${list.orgNm}</td>
+                                                        <td class="table_cell">${list.empNm} ${list.rankNm}</td>
+                                                        <td class="table_cell">
 															<span class="date">
 																<fmt:parseDate value="${list.regDt}" var="parseDt" pattern="yyyyMMdd"/>
 																<fmt:formatDate value="${parseDt}" var="formatDt" pattern="yyyy-MM-dd"/>
@@ -152,7 +148,7 @@
 			                                        <!-- 글이 없는 경우 -->
 			                                        <c:if test="${empty defaultList}">
 			                                            <tr>
-			                                                <td align="center" colspan="6">
+                                                            <td class="table_cell" align="center" colspan="6">
 			                                              	      등록된 이력이 없습니다.
 			                                                </td>
 			                                            </tr>

@@ -1,0 +1,39 @@
+@charset "UTF-8";
+
+/* ========================================== Sementic ========================================== */
+.overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; display: none; background-color: rgba(0, 0, 0, 0.5); z-index: 9990; }
+.hide { display: none !important; }
+.inline_flex { display: inline-flex; }
+
+.float_left  { float: left !important; }
+.float_right { float: right !important; }
+
+.clear  { clear: both; }
+.cursor { cursor: pointer; }
+
+/* ========================================== Alignment ========================================== */
+.align_center { text-align: center !important; }
+.align_left   { text-align: left !important; }
+.align_right  { text-align: right !important; }
+
+.vertical_top { vertical-align: top; }
+.vertical_middle { vertical-align: middle; }
+.vertical_bottom { vertical-align: bottom; }
+
+
+/* ========================================== Typography ========================================== */
+.bold   { font-weight: bold !important; }
+
+.fs_13 { font-size: 13px !important; }
+.fs_14 { font-size: 14px !important; }
+.fs_15 { font-size: 15px !important; }
+.fs_16 { font-size: 16px !important; }
+
+
+/* ========================================== Color ========================================== */
+.c_000000 { color: #000000 !important; }
+.c_214b97 { color: #214b97 !important; }
+.c_ff0000 { color: #ff0000 !important; }
+.c_0000ff { color: #0000ff !important; }
+
+.bc_f3f6f8 { background-color: #f3f6f8 !important; }

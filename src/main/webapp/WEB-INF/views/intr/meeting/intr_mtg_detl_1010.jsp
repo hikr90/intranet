@@ -73,11 +73,7 @@
 	
 	<div class="main_wrap">
 		<!-- 좌측 메뉴 -->
-		<div class="left_wrap">
-			<div class="left_area">
-				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
-			</div>
-		</div>
+		<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
 
 		<div class="content_wrap">
 			<div class="content_area">
@@ -96,17 +92,17 @@
 								<input type="hidden" id="srchIdx" name="srchIdx" value="${param.srchIdx}">
 								
 								<div class="post_wrap">
-		                            <h2>회의 상세
+                                    <h2 class="content_heading">회의 상세
 		                       			<span class="float_right">
-			                            	<button type="button" class="btn_blue_thin" onclick="listCall();">목록으로</button>
+                                            <button type="button" class="btn_blue_thin btn_action action_compact" onclick="listCall();">목록으로</button>
 		                            	</span>
 		                            </h2>
-									<div class="post_view">
-										<dl>
-											<dt>회의명</dt>
-											<dd>${defaultInfo.mtgTitle}</dd>
-											<dt>회의 일자</dt>
-											<dd>
+                                    <div class="post_view form_panel form_document">
+                                        <dl class="form_row">
+                                            <dt class="form_label">회의명</dt>
+                                            <dd class="form_value">${defaultInfo.mtgTitle}</dd>
+                                            <dt class="form_label">회의 일자</dt>
+                                            <dd class="form_value">
 												<span class="date">
 													<fmt:parseDate value="${defaultInfo.mtgDt}" var="parseDt" pattern="yyyyMMdd"/>
 													<fmt:formatDate value="${parseDt}" var="fomatDt" pattern="yyyy-MM-dd"/>
@@ -114,12 +110,12 @@
 												</span>	
 											</dd>
 										</dl>
-										<dl>
-											<dt>회의장소</dt>
-											<dd>${defaultInfo.mtgLocNm}</dd>
+                                        <dl class="form_row">
+                                            <dt class="form_label">회의장소</dt>
+                                            <dd class="form_value">${defaultInfo.mtgLocNm}</dd>
 											
-											<dt>회의시간</dt>
-											<dd>
+                                            <dt class="form_label">회의시간</dt>
+                                            <dd class="form_value">
 												<fmt:parseDate value="${defaultInfo.mtgStm}" var="parseStm" pattern="HHmm"/>
 												<fmt:formatDate value="${parseStm}" var="formatStm" pattern="HH:mm"/>
 
@@ -128,15 +124,15 @@
 												${formatStm} ~ ${formatEtm}
 											</dd>
 										</dl>
-										<dl>
-											<dt>설명/개요</dt>
-											<dd class="post_text h310p">
+                                        <dl class="form_row">
+                                            <dt class="form_label">설명/개요</dt>
+                                            <dd class="post_text form_value form_content">
 												<pre>${defaultInfo.mtgCont}</pre>
 											</dd>
 										</dl>
-										<dl class="post_file">
-											<dt>회의자료</dt>
-											<dd class="post_file">
+                                        <dl class="post_file form_row">
+                                            <dt class="form_label">회의자료</dt>
+                                            <dd class="post_file form_value form_attachments">
 												<div class="file_wrap">
 													<ul id="fileUl"> 
 													<c:forEach var="list" items="${fileList}" varStatus="status">
@@ -152,11 +148,11 @@
 										</dl>
 									</div><!-- End post_view -->
 		
-									<div class="btn_wrap align_right">
+                                    <div class="btn_right btn_wrap">
 										<div class="float_right">
 											<c:if test="${empVO.empIdx eq defaultInfo.mtgIdx}">
-												<button type="button" class="btn_navy_thin" onclick="modCall();">수정</button>
-												<button type="button" class="btn_gray_thin" onclick="delProc('${defaultInfo.mtgCd}');">삭제</button>
+                                                <button type="button" class="btn_navy_thin btn_action action_compact" onclick="modCall();">수정</button>
+                                                <button type="button" class="btn_gray_thin btn_action action_compact" onclick="delProc('${defaultInfo.mtgCd}');">삭제</button>
 											</c:if>
 										</div>
 									</div>

@@ -57,17 +57,17 @@
 					var str = "";
 					//
 					str += "<tr>"
-					str += "	<td class='first_td'>";
+                    str += "	<td class='table_cell'>";
 					str += "		<span class='check_box'>";
-					str += "		<input type='checkbox' class='checkbox' id='roleMenuCd' value='" + menuCd + "'/>"
-					str += "		<label for='chk_local'><span></span></label></span>";
+                    str += "		<input type='checkbox' class='checkbox_input checkbox' id='roleMenuCd' value='" + menuCd + "'/>"
+                    str += "		<label class='checkbox_label' for='chk_local'><span class='checkbox_mark'></span></label></span>";
 					str += "		<input type='hidden' name='roleMenuCd' value='" + menuCd + "'/>"
 					str += "	</td>";
 					//
 					if(menuLv!=1){
-						str += "	<td style='text-align: left;'>&nbsp; <img src='resources/images/icon/icon_tree_arrow.png' width='13' height='13' style='margin-right: 5px;'/> " + menuNm + "</td>";
+                        str += "	<td class='table_cell' style='text-align: left;'>&nbsp; <img src='resources/images/icon/icon_tree_arrow.png' width='13' height='13' style='margin-right: 5px;'/> " + menuNm + "</td>";
 					} else {
-						str += "	<td style='text-align: left;'>" + menuNm + "</td>";
+                        str += "	<td class='table_cell' style='text-align: left;'>" + menuNm + "</td>";
 					}
 					//
 					str += "</tr>";
@@ -152,34 +152,34 @@
 		}
 	}
 </script>
-<div class="post_wrap pd0 h490p">
-	<div class="scroll_wrap h490p">
-		<table class="post_table roleMenuTbl">
+<div class="list_panel list_panel_fill role_editor">
+	<div class="scroll_wrap list_body">
+		<table class="post_table data_table roleMenuTbl">
 			<caption>권한 목록 테이블</caption>
 			<colgroup>
-				<col class="w7per">
+				<col class="w5per">
 				<col class="w30per">
 			</colgroup>
 			<thead>
 				<tr>
-					<th scope="col">
+                    <th class="table_header" scope="col">
 						<span class="check_box"> 
-						<input type="checkbox" class="check_box roleChk"> 
-						<label for="chk-yes"><span></span></label></span>
+                        <input type="checkbox" class="checkbox_input check_box roleChk">
+                        <label class="checkbox_label_lead checkbox_label" for="chk-yes"><span class="checkbox_mark"></span></label></span>
 					</th>
-					<th scope="col">메뉴 부여</th>
+                    <th class="table_header" scope="col">메뉴 부여</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach var="list" items="${roleMenuList}" varStatus="status">
 					<tr>
-						<td class="first_td">
+                        <td class="table_cell">
 							<span class="check_box"> 
-							<input type="checkbox" class="check_box" id="roleMenuCd" value="${list.menuCd}"> 
-							<label for="chk-yes"><span></span></label></span>
+                            <input type="checkbox" class="checkbox_input check_box" id="roleMenuCd" value="${list.menuCd}">
+                            <label class="checkbox_label_lead checkbox_label" for="chk-yes"><span class="checkbox_mark"></span></label></span>
 							<input type="hidden" name="roleMenuCd" value="${list.menuCd}">
 						</td>
-						<td class="align_left">
+                        <td class="align_left table_cell">
 							<c:if test="${list.lv ne '1'}">
 								&nbsp; <img class="mr5" src='resources/images/icon/icon_tree_arrow.png' width="13" height="13" />
 							</c:if>
@@ -192,9 +192,9 @@
 	</div>
 </div> <!-- End post_wrap -->
 
-<div class="btn_center">
-	<button type="button" class="btn_gray_thin float_left" onclick="delCall();">삭제</button>
+<div class="btn_center form_actions">
+    <button type="button" class="btn_gray_thin float_left btn_action action_compact" onclick="delCall();">삭제</button>
 	
-	<button type="button" class="btn_navy_thin float_right ml5" onclick="regProc(this.form);">저장</button> 
-	<button type="button" class="btn_blue_thin float_right" onclick="setListCall();">새로고침</button>
+    <button type="button" class="btn_navy_thin float_right ml5 btn_action action_compact" onclick="regProc(this.form);">저장</button>
+    <button type="button" class="btn_blue_thin float_right btn_action action_compact" onclick="setListCall();">새로고침</button>
 </div>

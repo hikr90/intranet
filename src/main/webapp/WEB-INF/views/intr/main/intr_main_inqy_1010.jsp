@@ -184,12 +184,12 @@
 	<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1030.jsp" %>
 
 	<!-- 회의 팝업 -->
- 	<div id="mtgArea" class="popupArea hidden">
+ 	<div id="mtgArea" class="popupArea hide">
 		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1090.jsp"></c:import>	
 	</div>
 	
 	<!-- 업무 캘린더 팝업 -->
- 	<div id="tldrArea" class="popupArea hidden">
+ 	<div id="tldrArea" class="popupArea hide">
 		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1120.jsp"></c:import>	
 	</div>
 
@@ -215,9 +215,9 @@
 					<input type="hidden" id="aprvId" name="aprvId" value="">
 				
 					<div class="top_box">
-						<div class="wrap w1630p">
-							<div class="top_wrap">
-								<div class="top_area">
+						<div class="wrap dashboard_canvas">
+                            <div class="top_wrap dashboard_row">
+                                <div class="top_area dashboard_card dashboard_primary">
 									<!-- full calendar -->
 									<div id="calendar">
 												
@@ -225,19 +225,19 @@
 								</div>
 								
 								<!-- 회의 관리 -->
-								<div class="top_area">
+                                <div class="top_area dashboard_card dashboard_primary">
 									<div class="area_title">
-										<h3>
+                                        <h3 class="dashboard_heading">
 											<img src='resources/images/icon/icon_srch.png' width="20" height="20"/>
 											회의 관리
 										</h3>
 									</div>
 									
 									<div id="calInfo" class="area_content">
-										<ul class="area_ul scroll_wrap h360p">
+                                        <ul class="dashboard_feed scroll_wrap meeting_agenda">
 											<c:forEach var="list" items="${calInfo}">
-												<li class="main_li mr20 bb_f6f6f6">
-													<a href="javascript:mtgCall('${list.mtgCd}');" class="main_a bold">
+                                                <li class="dashboard_item meeting_agenda_item">
+                                                    <a href="javascript:mtgCall('${list.mtgCd}');" class="bold dashboard_link">
 														<fmt:parseDate value="${list.mtgStm}" var="parseStm" pattern="HHmm"/>
 														<fmt:formatDate value="${parseStm}" var="formatStm" pattern="HH:mm"/>
 														
@@ -246,14 +246,14 @@
 														[${formatStm} ~ ${formatEtm}] ${list.mtgTitle}
 													</a><br>
 													<span class="ellipsis">${list.mtgCont}</span>
-													<span class="main_ie">
+													<span class="dashboard_date">
 														${list.orgNm} ${list.empNm}
 													</span>
 												</li>
 											</c:forEach>
 											
 											<c:if test="${empty calInfo}">
-												<li class="main_li pl20">
+                                                <li class="pl20 dashboard_item">
 													등록된 회의가 없습니다.
 												</li>												
 											</c:if>
@@ -263,11 +263,11 @@
 								<!-- 회의 관리 -->
 								
 								<!-- 마이페이지 -->
-								<div class="top_area">
+                                <div class="top_area dashboard_card dashboard_primary dashboard_profile">
 									<div class="emp_profile">
                                        	<c:choose>
                                        		<c:when test="${empInfo.profileYn eq 'Y'}">
-                                 				<img id="empImg" class="emp_img br_100 b_214b97" width="250" height="250" src="intrEmpInqy1099.do?sequenceId=${empVO.empIdx}">
+                                        <img id="empImg" class="emp_img profile_photo" width="250" height="250" src="intrEmpInqy1099.do?sequenceId=${empVO.empIdx}">
                                        		</c:when>
                                        		<c:otherwise>
 	                                        	<img id="empImg" class="emp_img" width="250" height="250" src="resources/images/icon/icon_profile.png">
@@ -275,17 +275,17 @@
                                        	</c:choose>
 									</div>
                                     
-                                    <div class="profile_area">
-	                                    <ul class="main_ul">
-	                                   		<li>${empVO.empNm}</li>
-	                                    	<li>${empVO.orgNm}</li>
-	                                    	<li>${empVO.rankNm}</li>
+
+                                        <ul class="profile_summary">
+                                               <li class="profile_detail">${empVO.empNm}</li>
+                                            <li class="profile_detail">${empVO.orgNm}</li>
+                                            <li class="profile_detail">${empVO.rankNm}</li>
 	                                    </ul>
 	                                    
-	                                    <ul class="main_ul">
-	                                    	<li><span>${not empty empInfo.dutyTitle ? empInfo.dutyTitle : '등록된 담당업무가 없습니다.'}</span></li>
+                                        <ul class="profile_summary">
+                                            <li class="profile_detail"><span class="profile_label">${not empty empInfo.dutyTitle ? empInfo.dutyTitle : '등록된 담당업무가 없습니다.'}</span></li>
 	                                    </ul>
-                                    </div>
+
 								</div>
 								<!-- 마이페이지 -->
 							</div>
@@ -299,26 +299,26 @@
 			<article class="main_article">
 				<div class="content">
 					<div class="bottom_box">
-						<div class="wrap w1630p">
-							<div class="bottom_wrap">
+						<div class="wrap dashboard_canvas">
+                            <div class="bottom_wrap dashboard_row">
 								<!-- 공지사항 -->	
-								<div class="bottom_area">
+                                <div class="bottom_area dashboard_card dashboard_secondary">
 							    	<div class="area_title">
-							    		<h3>
+                                        <h3 class="dashboard_heading">
 							    			<img src='resources/images/icon/icon_fcheck.png' width="20" height="20"/>
 							    			공지사항
-							    		</h3><a href="intrBoardInqy2010.do?pageUrl=Board" class="main_ie fs_15">전체보기</a>
+                                        </h3><a href="intrBoardInqy2010.do?pageUrl=Board" class="dashboard_heading_action">전체보기</a>
 									</div>
 									
 									<div class="area_content">
-										<ul class="area_ul">
+                                        <ul class="dashboard_feed">
 											<c:forEach var="list" items="${boardList}" begin="0" end="2">
-												<li class="main_li pl20">
-													<a class="main_a" href="intrBoardInqy2020.do?sequenceId=${list.brdId}&pageUrl=Board">
+                                                <li class="pl20 dashboard_item">
+                                                    <a class="dashboard_link" href="intrBoardInqy2020.do?sequenceId=${list.brdId}&pageUrl=Board">
 														<script>document.write(isNew('${list.regDt}'))</script>
 														${list.brdTitle}
 													</a>
-													<span class="date main_ie">
+													<span class="date dashboard_date">
 														<fmt:parseDate value="${list.regDt}" var="parseDt" pattern="yyyyMMdd"/>
 														<fmt:formatDate value="${parseDt}" var="formatDt" pattern="yyyy-MM-dd"/>
 														${formatDt} 
@@ -327,7 +327,7 @@
 											</c:forEach>
 											
 											<c:if test="${empty boardList}">
-												<li class="main_li pl20">
+                                                <li class="pl20 dashboard_item">
 													등록된 글이 없습니다.
 												</li>												
 											</c:if>
@@ -337,23 +337,23 @@
 								<!-- 공지사항 -->	
 								
 								<!-- 결재 조회 -->	
-								<div class="bottom_area">
+                                <div class="bottom_area dashboard_card dashboard_secondary">
 						    		<div class="area_title">
-							    		<h3>
+                                        <h3 class="dashboard_heading">
 							    			<img src='resources/images/icon/icon_auth.png' width="20" height="20"/>
 							    			결재 조회
-							    		</h3><a href="intrAprvInqy2010.do?pageUrl=Aprv" class="main_ie fs_15">전체보기</a>
+                                        </h3><a href="intrAprvInqy2010.do?pageUrl=Aprv" class="dashboard_heading_action">전체보기</a>
 									</div>
 
 									<div class="area_content">
-										<ul class="area_ul">
+                                        <ul class="dashboard_feed">
 											<c:forEach var="list" items="${aprvList}" begin="0" end="2">
-												<li class="main_li pl20">
-													<a class="main_a" href="intrAprvInqy2020.do?sequenceId=${list.aprvId}&temptypeCd=${list.temptypeCd}&returnUrl=${list.returnUrl}&pageUrl=Aprv">
+                                                <li class="pl20 dashboard_item">
+                                                    <a class="dashboard_link" href="intrAprvInqy2020.do?sequenceId=${list.aprvId}&temptypeCd=${list.temptypeCd}&returnUrl=${list.returnUrl}&pageUrl=Aprv">
 														<script>document.write(isNew('${list.regDt}'))</script>	
 														${list.aprvTitle}
 													</a>
-													<span class="date main_ie">
+													<span class="date dashboard_date">
 														<fmt:parseDate value="${list.regDt}" var="parseDt" pattern="yyyyMMdd"/>
 														<fmt:formatDate value="${parseDt}" var="formatDt" pattern="yyyy-MM-dd"/>
 														${formatDt} 
@@ -362,7 +362,7 @@
 											</c:forEach>
 											
 											<c:if test="${empty aprvList}">
-												<li class="main_li pl20">
+                                                <li class="pl20 dashboard_item">
 													등록된 결재가 없습니다.
 												</li>												
 											</c:if>
@@ -372,29 +372,29 @@
 								<!-- 결재 조회 -->
 								
 								<!-- 오늘의 일정 -->	
-								<div class="bottom_area">
+                                <div class="bottom_area dashboard_card dashboard_secondary">
 						    		<div class="area_title">
-							    		<h3>
+                                        <h3 class="dashboard_heading">
 							    			<img src='resources/images/icon/icon_note.png' width="20" height="20"/>
 							    			오늘의 일정
-							    		</h3><a href="intrTaskInqy3010.do?empIdx=${empVO.empIdx}" class="main_ie fs_15">전체보기</a>
+                                        </h3><a href="intrTaskInqy3010.do?empIdx=${empVO.empIdx}" class="dashboard_heading_action">전체보기</a>
 									</div>
 
 									<div class="area_content">
-										<ul class="area_ul">
+                                        <ul class="dashboard_feed">
 											<c:forEach var="list" items="${tldrList}" begin="0" end="2">
-												<li class="main_li pl20">
-													<a class="main_a" href="javascript:void(0);" onclick="tldrCall('${list.tldrId}');">
+                                                <li class="pl20 dashboard_item">
+                                                    <a class="dashboard_link" href="javascript:void(0);" onclick="tldrCall('${list.tldrId}');">
 														${list.tldrTitle}
 													</a>
-													<span class="date main_ie">
+													<span class="date dashboard_date">
 														${list.tldrSdt} ~ ${list.tldrEdt} 
 													</span>
 												</li>
 											</c:forEach>
 											
 											<c:if test="${empty tldrList}">
-												<li class="main_li pl20">
+                                                <li class="pl20 dashboard_item">
 													등록된 일정이 없습니다.
 												</li>	
 											</c:if>

@@ -89,11 +89,7 @@
 	
 	<div class="main_wrap">
 		<!-- 좌측 메뉴 -->
-		<div class="left_wrap">
-			<div class="left_area">
-				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
-			</div>
-		</div>
+		<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
 		
 		<div class="content_wrap">
 			<div class="content_area"> 
@@ -104,7 +100,7 @@
 								<input type="hidden" id="roleCd" class="roleCd" name="roleCd" value="">
 							
 								<div class="post_wrap">
-									<h2>사용자 권한 부여</h2>
+                                    <h2 class="content_heading">사용자 권한 부여</h2>
 		                                <div class="srch_wrap">
 											<div class="right_srch_area">
 												<!-- 제목 -->
@@ -112,22 +108,22 @@
 													<label class="srch_label">제목</label>		
 													<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="enterListCall(this.form);">
 												
-													<input type="button" class="btn_blue" value="조회" onclick="listCall(this.form);">
-													<input type="button" class="btn_gray" value="초기화" onclick="initCall();">
+                                                    <input type="button" class="btn_blue btn_action" value="조회" onclick="listCall(this.form);">
+                                                    <input type="button" class="btn_gray btn_action" value="초기화" onclick="initCall();">
 												</div>
 		                                	</div>
 		                                </div>
 		                                <!-- end Form srch_wrap  -->
 										
-										<div class="tree_wrap">
-											<div id="treeArea" class="tree_area w400p h525p">
+										<div class="tree_wrap tree_workspace">
+											<div id="treeArea" class="scroll_wrap tree_area tree_navigation">
 												<div id="roleTree" class="tree">
 													<ul class="ul_1">
 														<c:forEach var="list" items="${defaultList}" varStatus="status">
 					           						   		<c:set var="spanIcon" 	value="icon_list"/> 
 			
-															<li class="li_1 ml15">
-																<span class="${spanIcon}"></span>
+                                                            <li class="tree_item li_1">
+																<span class="tree_icon ${spanIcon}"></span>
 																<a class="a_btn" id="${list.roleCd}" href="#" onclick="detCall('${list.roleCd}');">${list.roleNm}</a>
 															</li>
 														</c:forEach>
@@ -135,13 +131,13 @@
 												</div>	
 											</div>
 											
-											<div id="empArea" class="emp_area" style="display: none;">
+                                            <div id="empArea" class="emp_area member_assignment">
 												<!-- 사용자 목록 -->
-												<div id="empInfo" class="tree_area ml20 w400p h525p">
+												<div id="empInfo" class="scroll_wrap tree_area tree_navigation ml20">
 													<div class="tree">
-														<li class="li_1 ml15">
-															<input type="checkbox" id="totalIdx" class="checkbox totalIdx" name="totalIdx">
-															<span class="icon_total"></span>
+                                                        <li class="tree_item li_1">
+															<input type="checkbox" id="totalIdx" class="tree_input checkbox totalIdx" name="totalIdx">
+															<span class="tree_icon icon_total"></span>
 															전체 선택
 														</li>
 																						
@@ -167,21 +163,21 @@
 															<!-- 태그 열기 -->
 															<c:choose>
 																<c:when test="${list.lv gt prevLv}">
-																	<li class="li_${list.lv}">
+																	<li class="tree_item li_${list.lv}">
 																		<c:if test="${list.isleaf eq 'Y'}">
 																			&nbsp; <img class="mr5" src='resources/images/icon/icon_tree_arrow.png' width="13" height="13" />
-																			<input type="checkbox" id="empIdx${status.index}" class="${list.isleaf eq 'N' ? 'orgCd' : 'empIdx'}" name="empIdx" value="${list.empIdx}" empNm="${list.empNm}" orgCd="${list.isleaf eq 'N' ? list.orgCd : list.upprorgCd}" orgNm="${list.orgNm}">
+																			<input type="checkbox" id="empIdx${status.index}" class="tree_input ${list.isleaf eq 'N' ? 'orgCd' : 'empIdx'}" name="empIdx" value="${list.empIdx}" empNm="${list.empNm}" orgCd="${list.isleaf eq 'N' ? list.orgCd : list.upprorgCd}" orgNm="${list.orgNm}">
 																		</c:if>
-																		<span class="${spanIcon}"></span>
+																		<span class="tree_icon ${spanIcon}"></span>
 																		<label for="empIdx${status.index}">${listNm}</label>
 																</c:when>
 																<c:when test="${list.lv eq prevLv}">
-																	<li class="li_${list.lv}">
+																	<li class="tree_item li_${list.lv}">
 																		<c:if test="${list.isleaf eq 'Y'}">
 																			&nbsp; <img class="mr5" src='resources/images/icon/icon_tree_arrow.png' width="13" height="13" />
-																			<input type="checkbox" id="empIdx${status.index}" class="${list.isleaf eq 'N' ? 'orgCd' : 'empIdx'}" name="empIdx" value="${list.empIdx}" empNm="${list.empNm}" orgCd="${list.isleaf eq 'N' ? list.orgCd : list.upprorgCd}" orgNm="${list.orgNm}">
+																			<input type="checkbox" id="empIdx${status.index}" class="tree_input ${list.isleaf eq 'N' ? 'orgCd' : 'empIdx'}" name="empIdx" value="${list.empIdx}" empNm="${list.empNm}" orgCd="${list.isleaf eq 'N' ? list.orgCd : list.upprorgCd}" orgNm="${list.orgNm}">
 																		</c:if>
-																		<span class="${spanIcon}"></span>
+																		<span class="tree_icon ${spanIcon}"></span>
 																		<label for="empIdx${status.index}">${listNm}</label>
 																</c:when>
 															</c:choose>
@@ -214,7 +210,7 @@
 												<div id="treeArrow" class="tree_arrow" onclick="moveBtn(this.form);"></div>
 												
 												<!-- 사용자 트리 -->
-												<div id="empTree" class="tree_info w646p"></div>
+												<div id="empTree" class="tree_info tree_detail"></div>
 											</div><!-- End emp_area -->
 										</div><!-- End tree_wrap -->
 								</div><!-- End post_wrap -->

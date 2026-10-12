@@ -7,7 +7,7 @@
 
 <!-- 정산내역 조회 -->
 <div class="post_table_wrap scroll_wrap">
-	<table class="post_table">
+	<table class="post_table data_table entry_table">
 		<caption>정산내역 등록 목록</caption>
 		<colgroup>
 			<col class="w25per">
@@ -15,20 +15,20 @@
 			<col class="wAutoper">
 		</colgroup>
 		<thead>
-			<tr class="lh10">
-				<th scope="col">사용 일자</th>
-				<th scope="col">사용처</th>
-				<th scope="col">사용 금액</th>
-				<th scope="col">용도</th>
+			<tr>
+                <th class="table_header" scope="col">사용 일자</th>
+                <th class="table_header" scope="col">사용처</th>
+                <th class="table_header" scope="col">사용 금액</th>
+                <th class="table_header" scope="col">용도</th>
 			</tr>
 		</thead>
 		<tbody>
 			 <c:forEach var="list" items="${corpList}" varStatus="status"> 
 				<tr>
-					<td class='first_td'>${list.useDt}</td>
-		 			<td>${list.useLoc}</td>
-		 			<td>${list.useAmt}</td>
-		 			<td>${list.useRsn}</td>
+                    <td class='table_cell'>${list.useDt}</td>
+                     <td class="table_cell">${list.useLoc}</td>
+                     <td class="table_cell">${list.useAmt}</td>
+                     <td class="table_cell">${list.useRsn}</td>
 			    </tr>
 			</c:forEach>
 		</tbody>

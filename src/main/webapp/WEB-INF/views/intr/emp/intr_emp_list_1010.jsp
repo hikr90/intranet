@@ -49,11 +49,7 @@
 
 	<div class="main_wrap">
 		<!-- 좌측 메뉴 -->
-		<div class="left_wrap">
-			<div class="left_area">
-				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
-			</div>
-		</div>
+		<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
 		
 		<div class="content_wrap">
 			<div class="content_area">
@@ -68,9 +64,9 @@
 									<input type="hidden" id="sequenceId" name="sequenceId" value="">
 									<input type="hidden" id="empIdx" name="empIdx" value="">
 
-									<h2>사원 조회
+                                    <h2 class="content_heading">사원 조회
 										<span class="float_right">
-											<input type="button" class="btn_navy_thin" value="등록" onclick="regCall();">
+                                            <input type="button" class="btn_navy_thin btn_action action_compact" value="등록" onclick="regCall();">
 										</span>
 									</h2>
 									
@@ -100,13 +96,13 @@
 											<div class="srch_area">
 												<label class="srch_label">재직여부</label>
 												<div class="select_wrap">
-													<div id="hireList" class="sList select_box">${empty param.hireNm ? '전체' : param.hireNm}</div>
+													<div id="hireList" class="sList select_box choice_value">${empty param.hireNm ? '전체' : param.hireNm}</div>
 													<input type="hidden" name="hireCd" value="${param.hireCd}">
 													<input type="hidden" name="hireNm" value="${param.hireNm}">
 												
-													<ul class="sUl select_ul scroll_wrap">
+													<ul class="sUl select_ul scroll_wrap choice_options">
 														<c:forEach var="list" items="${hireList}">
-															<li setNm="${list.commcodeNm}" setCd="${list.commcodeCd}">${list.commcodeNm}</li>
+															<li class="choice_item" setNm="${list.commcodeNm}" setCd="${list.commcodeCd}">${list.commcodeNm}</li>
 														</c:forEach>
 													</ul>
 												</div>
@@ -118,58 +114,58 @@
 													<label class="srch_label">사원명</label>
 													<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="enterListCall(this.form);">
 												
-													<input type="button" class="btn_blue" value="조회" onclick="listCall(this.form);">
-													<input type="button" class="btn_gray" value="초기화" onclick="initCall();">
+                                                    <input type="button" class="btn_blue btn_action" value="조회" onclick="listCall(this.form);">
+                                                    <input type="button" class="btn_gray btn_action" value="초기화" onclick="initCall();">
 												</div>
 		                                	</div>
 		                                </div>
 									</div>
 									
 									<div class="post_table_wrap">
-										<table class="post_table">
+										<table class="post_table data_table">
 											<caption>사원 목록페이지 입니다.</caption>
 											<colgroup>
-												<col class="w12per">
-												<col class="w12per">
-												<col class="w12per">
-												<col class="w12per">
-												<col class="w8per">
-												<col class="w8per">
+												<col class="w15per">
+												<col class="w15per">
+												<col class="w15per">
+												<col class="w15per">
+												<col class="w10per">
+												<col class="w10per">
 											</colgroup>
 											<thead>
 												<tr>
-													<th scope="col">입사일</th>
-													<th scope="col">부서</th>
-													<th scope="col">직급</th>
-													<th scope="col">사원명</th>
-													<th scope="col">연락처</th>
-													<th scope="col">재직여부</th>
+                                                    <th class="table_header" scope="col">입사일</th>
+                                                    <th class="table_header" scope="col">부서</th>
+                                                    <th class="table_header" scope="col">직급</th>
+                                                    <th class="table_header" scope="col">사원명</th>
+                                                    <th class="table_header" scope="col">연락처</th>
+                                                    <th class="table_header" scope="col">재직여부</th>
 												</tr>
 											</thead>
 											<tbody>
 		                                    	<c:forEach var="list" items="${defaultList}"> 
 													<tr>
-														<td class="first_td">
+                                                        <td class="table_cell">
 															<span class="date">
 																<fmt:parseDate value="${list.hireDt}" var="parseDt" pattern="yyyyMMdd"/>
 																<fmt:formatDate value="${parseDt}" var="fomatDt" pattern="yyyy-MM-dd"/>
 																${fomatDt} 
 															</span>
 														</td>
-														<td>${list.orgNm}</td>
-														<td>${list.rankNm}</td>
-														<td>
+                                                        <td class="table_cell">${list.orgNm}</td>
+                                                        <td class="table_cell">${list.rankNm}</td>
+                                                        <td class="table_cell">
 															<a class="show_view a_title" onclick="detCall('${list.empIdx}');">${list.empNm}</a>
 														</td>
-														<td>${list.mobNo}</td>
-														<td>${list.leavYn}</td>
+                                                        <td class="table_cell">${list.mobNo}</td>
+                                                        <td class="table_cell">${list.leavYn}</td>
 			                                        </tr>
 		                                        </c:forEach>
 		                                        
 		                                        <!-- 글이 없는 경우 -->
 		                                        <c:if test="${empty defaultList}">
 		                                            <tr>
-		                                                <td align="center" colspan="6">
+                                                        <td class="table_cell" align="center" colspan="6">
 		                                              	      등록된 사원이 없습니다.
 		                                                </td>
 		                                            </tr>

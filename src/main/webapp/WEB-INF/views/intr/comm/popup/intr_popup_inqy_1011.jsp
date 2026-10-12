@@ -5,7 +5,7 @@
 <%@ taglib prefix="spring" 	uri="http://www.springframework.org/tags" %>
 
 <!-- 담당자 트리 -->
-<div class="scroll_wrap h260p">
+<div class="scroll_wrap owner_list">
 	<div class="pop_tree">
 		<div class="tree">
 			<c:forEach var="list" items="${empList}" varStatus="status">
@@ -30,21 +30,21 @@
 				<!-- 태그 열기 -->
 				<c:choose>
 					<c:when test="${list.lv gt prevLv}">
-						<li class="li_${list.lv}">
+						<li class="tree_item li_${list.lv}">
 							<c:if test="${list.isleaf eq 'Y'}">
 								&nbsp; <img class="mr5" src='resources/images/icon/icon_tree_arrow.png' width="13" height="13" /> 
-								<input type="radio" id="empPcd${status.index}" class="${list.isleaf eq 'N' ? 'orgCd' : 'empIdx'}" name="empPcd" value="${list.empIdx}" empPnm="${list.empNm}" empPcd="${list.empIdx}" >
+								<input type="radio" id="empPcd${status.index}" class="tree_radio tree_input ${list.isleaf eq 'N' ? 'orgCd' : 'empIdx'}" name="empPcd" value="${list.empIdx}" empPnm="${list.empNm}" empPcd="${list.empIdx}" >
 							</c:if>
-							<span class="${spanIcon}"></span>
+							<span class="tree_icon ${spanIcon}"></span>
 							<label for="empPcd${status.index}">${listNm}</label>
 					</c:when>
 					<c:when test="${list.lv eq prevLv}">
-						<li class="li_${list.lv}">
+						<li class="tree_item li_${list.lv}">
 							<c:if test="${list.isleaf eq 'Y'}">
 								&nbsp; <img class="mr5" src='resources/images/icon/icon_tree_arrow.png' width="13" height="13" />
-								<input type="radio" id="empPcd${status.index}" class="${list.isleaf eq 'N' ? 'orgCd' : 'empIdx'}" name="empPcd" value="${list.empIdx}" empPnm="${list.empNm}" empPcd="${list.empIdx}">
+								<input type="radio" id="empPcd${status.index}" class="tree_radio tree_input ${list.isleaf eq 'N' ? 'orgCd' : 'empIdx'}" name="empPcd" value="${list.empIdx}" empPnm="${list.empNm}" empPcd="${list.empIdx}">
 							</c:if>
-							<span class="${spanIcon}"></span>
+							<span class="tree_icon ${spanIcon}"></span>
 							<label for="empPcd${status.index}">${listNm}</label>
 					</c:when>
 				</c:choose>

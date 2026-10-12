@@ -18,7 +18,7 @@ $(function() {
 			
 			// 화면 내 파일 추가
 			fileStr += "<li id='fileLi" + fileIdx + "'>";
-		    fileStr += "    <input type='hidden' id='fileId" + fileIdx + "' name='insert" + fileIdx + "' />";
+		    fileStr += "    <input type='hide' id='fileId" + fileIdx + "' name='insert" + fileIdx + "' />";
 		    fileStr += "    <img src='resources/images/icon/icon_file.png' width='20' height='20' />";
 		    fileStr += "    <a href='javascript:void(0);' onclick=\"fileDel('insert', '" + fileIdx + "');\"><span>" + thisFiles[i].name + "</span></a>";
 		    fileStr += "</li>";

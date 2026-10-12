@@ -12,8 +12,8 @@
 		CKEDITOR.replace('editor',{height: 710});
 		
 		// 추가, 저장 감춤
-		$(".procBtn").addClass('hidden');
-		$(".viewBtn").removeClass('hidden');
+		$(".procBtn").addClass('hide');
+		$(".viewBtn").removeClass('hide');
 	});
 
 	// 목록으로
@@ -34,32 +34,28 @@
 	<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1030.jsp" %>
 
 	<!-- 담당자 팝업 -->
- 	<div id="empArea" class="popupArea hidden">
+ 	<div id="empArea" class="popupArea hide">
 		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1010.jsp"></c:import>	
 	</div>
 
 	<!-- 프로젝트 팝업 -->
- 	<div id="projArea" class="popupArea hidden">
+ 	<div id="projArea" class="popupArea hide">
 		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1030.jsp"></c:import>	
 	</div>
 	
 	<!-- 결재선 팝업 -->
- 	<div id="lineArea" class="popupArea hidden">
+ 	<div id="lineArea" class="popupArea hide">
 		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1040.jsp"></c:import>	
 	</div>
 	
 	<!-- 결재의견 팝업 -->
-	<div id="opinArea" class="popupArea hidden">
+	<div id="opinArea" class="popupArea hide">
 		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1050.jsp"></c:import>	
 	</div>
 	
 	<div class="main_wrap">
 		<!-- 좌측 메뉴 -->
-		<div class="left_wrap">
-			<div class="left_area">
-				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
-			</div>
-		</div>
+		<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
 		
 		<div class="content_wrap">
 			<div class="content_area">
@@ -82,46 +78,46 @@
 								<input type="hidden" id="srchStepCd" name="srchStepCd" value="${param.srchStepCd}">								
 										
 								<div class="post_wrap">
-		                        	<h2>휴가 신청서
-											<button type="button" class="btn_blue_thin main_ie" onclick="listCall();">목록으로</button>											
+                                    <h2 class="content_heading document_heading">휴가 신청서
+                                            <button type="button" class="btn_blue_thin btn_action action_compact" onclick="listCall();">목록으로</button>
 		                        	</h2>
-									<div class="post_view">
-										<dl>
-											<dt>
+                                    <div class="post_view form_panel">
+                                        <dl class="form_row">
+                                            <dt class="form_label">
 												<label for="post-title">기안명</label>
 											</dt>
-											<dd>
+                                            <dd class="form_value">
 												${defaultInfo.aprvTitle}
 											</dd>
 										</dl>
-										<dl>
-											<dt>
+                                        <dl class="form_row">
+                                            <dt class="form_label">
 												<label for="post-title">프로젝트명</label>
 											</dt>
-											<dd>
+                                            <dd class="form_value">
 												${defaultInfo.projTitle}
 											</dd>
-											<dt>
+                                            <dt class="form_label">
 												<label for="post-title">결재 단계</label>
 											</dt>
-											<dd>
+                                            <dd class="form_value">
 												${defaultInfo.aprvstepNm}
 											</dd>
 										</dl>
-										<dl>
-											<dt>결재선</dt>
-											<dd>
-												<input type="button" class="btn_gray align_top mb5" value="조회" onclick="lineCall('${defaultInfo.aprvId}');">
+                                        <dl class="form_row">
+                                            <dt class="form_label">결재선</dt>
+                                            <dd class="form_value">
+                                                <input type="button" class="btn_gray vertical_top mb5 btn_action" value="조회" onclick="lineCall('${defaultInfo.aprvId}');">
 											</dd>
 											
-											<dt>휴가 타입</dt>
-											<dd class="sel_2part">
+                                            <dt class="form_label">휴가 타입</dt>
+                                            <dd class="form_value form_pair">
 									        	${defaultInfo.leavtypeNm}
 									    	</dd>
 										</dl>
-								        <dl>
-								        	<dt>휴가 기간</dt>
-											<dd>
+                                        <dl class="form_row">
+                                            <dt class="form_label">휴가 기간</dt>
+                                            <dd class="form_value">
 												<span class="date">
 													<fmt:parseDate value="${defaultInfo.leavSdt}" var="parseSdt" pattern="yyyyMMdd"/>
 													<fmt:formatDate value="${parseSdt}" var="fomatSdt" pattern="yyyy-MM-dd"/>
@@ -133,26 +129,26 @@
 												</span>	
 											</dd>
 											
-											<dt>대직자</dt>
-											<dd>
+                                            <dt class="form_label">대직자</dt>
+                                            <dd class="form_value">
 												${defaultInfo.leavSubst}
 											</dd>
 								        </dl>
-								        <dl>
-								        	<dt>사유</dt>
-											<dd>
+                                        <dl class="form_row">
+                                            <dt class="form_label">사유</dt>
+                                            <dd class="form_value">
 												${defaultInfo.leavRsn}
 											</dd>
 								        </dl>
-								        <dl>
-											<dt><label for="post_text">양식 내용</label></dt>
-											<dd class="post_text">
-												<textarea id="editor" name="aprvCont" title="양식 내용">${defaultInfo.aprvCont}</textarea>
+                                        <dl class="form_row">
+                                            <dt class="form_label"><label for="post_text">양식 내용</label></dt>
+                                            <dd class="post_text form_value form_content">
+                                                <textarea class="form_textarea" id="editor" name="aprvCont" title="양식 내용">${defaultInfo.aprvCont}</textarea>
 											</dd>
 										</dl>
-										<dl class="post_info">
-											<dt>첨부파일</dt>
-											<dd class="post_file">
+                                        <dl class="post_info form_row">
+                                            <dt class="form_label">첨부파일</dt>
+                                            <dd class="post_file form_value form_attachments">
 												<div class="file_wrap">
 													<!-- 파일 목록 -->
 													<c:import url="/WEB-INF/views/intr/comm/include/intr_include_1040.jsp">
@@ -163,10 +159,10 @@
 										</dl>
 									</div><!-- End post_write -->
 									
-									<div class="btn_wrap align_right">
+                                    <div class="btn_right btn_wrap">
 										<div class="float_left">
 											<c:if test="${not empty fileList and fileList ne '' and fileList.size() > 1}">
-												<button type="button" class="btn_navy_thin" onclick="zipProc();">전체 다운로드</button>
+                                                <button type="button" class="btn_navy_thin btn_action action_compact" onclick="zipProc();">전체 다운로드</button>
 											</c:if>
 										</div>
 										

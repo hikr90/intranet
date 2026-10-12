@@ -133,43 +133,39 @@
 	}
 </script>
 
-<div class="pop_area height100">
+<div class="pop_area">
 	<input type="hidden" id="aprvlineList" name="aprvlineList" value="">
 	<input type="hidden" id="itemlineList" name="itemlineList" value="">
 	<input type="hidden" id="corplineList" name="corplineList" value="">
 
-	<article class="sub_article height85 border_none">
+	<article class="sub_article popup_body h85per">
 		<div class="content">
 			<div id="sub_content">					
 				<div class="form_area">
-					<div class="pop_wrap h650p">
+					<div class="pop_wrap selection_popup">
 	                	<div class="post_wrap">
-							<div class="srch_wrap">
-								<div class="srch_area">
-									<div class="right_srch_area">
-										<label class="srch_label">결재선 관리</label>
-									</div>
-								</div>
-							</div>
+                            <div class="popup_header">
+                                <h3 class="popup_heading">결재선 관리</h3>
+                            </div>
 	                        
 	                        <!-- 탭 목록 -->
 						    <c:if test="${empty defaultInfo}">
 							    <div class="tab_container">
 								    <div class="tab_wrapper">
 									    <ul class="tab_list">
-							    			<li class="tab_item ${list.tabCd eq param.tabCd or empty list.tabCd ? 'active' : ''}" tabCd="custom"><a href="javascript:void(0);" onclick="tabCall(this);">직접 지정</a></li>
-							    			<li class="tab_item ${list.tabCd eq param.tabCd and not empty list.tabCd ? 'active' : ''}" tabCd="selected"><a href="javascript:void(0);" onclick="tabCall(this);">결재선 선택</a></li>
+                                            <li class="tab_item ${list.tabCd eq param.tabCd or empty list.tabCd ? 'active' : ''}" tabCd="custom"><a class="tab_link" href="javascript:void(0);" onclick="tabCall(this);">직접 지정</a></li>
+                                            <li class="tab_item ${list.tabCd eq param.tabCd and not empty list.tabCd ? 'active' : ''}" tabCd="selected"><a class="tab_link" href="javascript:void(0);" onclick="tabCall(this);">결재선 선택</a></li>
 									    </ul>
 								    </div>
 							    </div>
 						    </c:if>
 	                        
 	                     	<!-- 결재선 목록 -->
-	                     	<div id="lineCon" class="post_con inline_flex pt20 h425p"></div>
+                        <div id="lineCon" class="post_con popup_content inline_flex pt20"></div>
 	                        
-							<div class="btn_right mt40">
-	                      		<button type="button" class="btn_blue_thin procBtn" onclick="aprvProc()">등록</button>
-	                      		<button type="button" class="btn_gray_thin viewBtn" onclick="popClose('line');">닫기</button>
+                            <div class="btn_right mt40 form_actions">
+                                  <button type="button" class="btn_blue_thin procBtn btn_action action_compact" onclick="aprvProc()">등록</button>
+                                  <button type="button" class="btn_gray_thin viewBtn btn_action action_compact" onclick="popClose('line');">닫기</button>
 	                 		</div>
 	                 	</div><!-- End post_wrap -->
 	               	</div> 

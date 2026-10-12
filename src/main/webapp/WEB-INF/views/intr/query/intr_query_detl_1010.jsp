@@ -203,7 +203,7 @@
 
 <form id="form" method="POST">
 	<!-- API 팝업 -->
-	<div id="qryArea" class="popupArea hidden">
+	<div id="qryArea" class="popupArea hide">
 		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1110.jsp"></c:import>	
 	</div>
 
@@ -212,11 +212,7 @@
 	
 	<div class="main_wrap">
 		<!-- 좌측 메뉴 -->
-		<div class="left_wrap">
-			<div class="left_area">
-				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
-			</div>
-		</div>
+		<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
 
 		<div class="content_wrap">
 			<div class="content_area">
@@ -227,15 +223,15 @@
 								<div class="post_wrap">
 									<input type="hidden" id="headTit" name="headTit" value="쿼리 조회 목록">
 		                            
-		                            <h2>쿼리 조회
+                                    <h2 class="content_heading">쿼리 조회
 										<span class="float_right">
-											<input type="button" class="btn_navy_thin" value="API 조회" onclick="apiCall();">
-											<input type="button" class="btn_green_thin" value="Excel" onclick="excelDown();">
-											<input type="button" class="btn_blue_thin listCall" value="조회" onclick="listCall();">
+                                            <input type="button" class="btn_navy_thin btn_action action_compact" value="API 조회" onclick="apiCall();">
+                                            <input type="button" class="btn_green_thin btn_action action_compact" value="Excel" onclick="excelDown();">
+                                            <input type="button" class="btn_blue_thin listCall btn_action action_compact" value="조회" onclick="listCall();">
 										</span>
 									</h2>
-									<span class="fs_15 float_right bold mg10">
-										<label for="dmlProc" class="cursor"><input type="checkbox" id="dmlProc" class="dmlProc va_middle w16p h16p" name="dmlProc">DML 처리</label>
+                                    <span class="float_right bold">
+										<label for="dmlProc" class="form_option"><input type="checkbox" id="dmlProc" class="dmlProc form_option_input" name="dmlProc">DML 처리</label>
 									</span><br>
 									
 									<!-- 쿼리 입력 -->

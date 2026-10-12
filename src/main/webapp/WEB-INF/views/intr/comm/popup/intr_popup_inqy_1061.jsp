@@ -56,30 +56,24 @@
 			var str = "";
 
 			str += "<tr class='setItemTr'>";
-			str += 		"<td class='first_td'>";
-			str += 			"<input type='text' id='mgtNo' class='add_height' name='mgtNo' style='width:140px; text-align:center;' value='" + obj["mgtNo"] + "'>"
+            str += 		"<td class='table_cell'>";
+			str += 			"<input type='text' id='mgtNo' class='table_input entry_identifier' name='mgtNo' style='width:140px;' value='" + obj["mgtNo"] + "'>"
 			str += 		"</td>";
-			str += 		"<td>";
-			str += 			"<input type='text' id='itemNm' class='add_height' name='itemNm' style='width:240px;' value='" + obj["itemNm"] + "'>"
+            str += 		"<td class='table_cell'>";
+			str += 			"<input type='text' id='itemNm' class='table_input' name='itemNm' style='width:240px;' value='" + obj["itemNm"] + "'>"
 			str += 		"</td>";
-			str += 		"<td>";
-			str += 			"<input type='text' id='itemCnt' class='add_height' name='itemCnt' style='width:85px; text-align:center;' value='" + obj["itemCnt"] + "' oninput='numProc(this);'>";
+            str += 		"<td class='table_cell'>";
+			str += 			"<input type='text' id='itemCnt' class='table_input entry_number' name='itemCnt' style='width:85px;' value='" + obj["itemCnt"] + "' oninput='numProc(this);'>";
 			str += 		"</td>";
-			str += 		"<td>";
-			str += 			"<input type='text' id='reqRsn' class='add_height' name='reqRsn' style='width:420px;' value='" + obj["reqRsn"] + "'>";
+            str += 		"<td class='table_cell'>";
+			str += 			"<input type='text' id='reqRsn' class='table_input' name='reqRsn' style='width:420px;' value='" + obj["reqRsn"] + "'>";
 			str += 		"</td>";
-			str += 		"<td>";
+            str += 		"<td class='table_cell'>";
 			str += 			"<span id='item_del' class='task_del' onclick=\"delCall(this);\"></span>";
 			str += 		"</td>";
 			str += "</tr>";
 			//
 			$(".itemTbl").append(str);
-
-			// 목록 높이 지정
-			$(".add_height").css({
-					'height':'35px'
-				,	'line-height':'35px'
-			});
 			
 		} catch (error) {
 	        console.error("[Error] 물품 등록 생성 : ", error.message);
@@ -200,22 +194,22 @@
 </script>
 
 <div class="post_table_wrap scroll_wrap">
-	<table class="post_table itemTbl">
+	<table class="post_table data_table entry_table itemTbl">
 		<caption>물품 등록 목록</caption>
 		<colgroup>
 			<col class="w15per">
 			<col class="w25per">
 			<col class="w10per">
 			<col class="wAutoper">
-			<col class="w8per">
+			<col class="w10per">
 		</colgroup>
 		<thead>
-			<tr class="lh10">
-				<th scope="col">관리번호</th>
-				<th scope="col">제품명</th>
-				<th scope="col">수량</th>
-				<th scope="col">사유</th>
-				<th scope="col">삭제</th>
+			<tr>
+                <th class="table_header" scope="col">관리번호</th>
+                <th class="table_header" scope="col">제품명</th>
+                <th class="table_header" scope="col">수량</th>
+                <th class="table_header" scope="col">사유</th>
+                <th class="table_header" scope="col">삭제</th>
 			</tr>
 		</thead>
 		<tbody></tbody>

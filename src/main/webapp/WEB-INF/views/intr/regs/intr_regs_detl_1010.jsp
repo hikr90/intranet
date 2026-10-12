@@ -42,11 +42,7 @@
 	
 	<div class="main_wrap">
 		<!-- 좌측 메뉴 -->
-		<div class="left_wrap">
-			<div class="left_area">
-				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
-			</div>
-		</div>
+		<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
 
 		<div class="content_wrap">
 			<div class="content_area">
@@ -55,21 +51,21 @@
 						<div id="sub_content">					
 							<div class="form_area">
 								<div class="post_wrap">
-		                            <h2>내부규정</h2>
+                                    <h2 class="content_heading">내부규정</h2>
 		                            
 		                            <!-- 탭 목록 -->
 								    <div class="tab_container">
 									    <div class="tab_wrapper">
 										    <ul class="tab_list">
-								    			<li class="tab_item ${list.tabCd eq param.tabCd or empty list.tabCd ? 'active' : ''}"><a href="javascript:void(0);" onclick="tabCall(this);" tabCd="corp">사규관리 규정</a></li>
-								    			<li class="tab_item ${list.tabCd eq param.tabCd and not empty list.tabCd ? 'active' : ''}"><a href="javascript:void(0);" onclick="tabCall(this);" tabCd="hrm">인사관리 규정</a></li>
-								    			<li class="tab_item ${list.tabCd eq param.tabCd and not empty list.tabCd ? 'active' : ''}"><a href="javascript:void(0);" onclick="tabCall(this);" tabCd="wel">복리후생 규정</a></li>
+                                                <li class="tab_item ${list.tabCd eq param.tabCd or empty list.tabCd ? 'active' : ''}"><a class="tab_link" href="javascript:void(0);" onclick="tabCall(this);" tabCd="corp">사규관리 규정</a></li>
+                                                <li class="tab_item ${list.tabCd eq param.tabCd and not empty list.tabCd ? 'active' : ''}"><a class="tab_link" href="javascript:void(0);" onclick="tabCall(this);" tabCd="hrm">인사관리 규정</a></li>
+                                                <li class="tab_item ${list.tabCd eq param.tabCd and not empty list.tabCd ? 'active' : ''}"><a class="tab_link" href="javascript:void(0);" onclick="tabCall(this);" tabCd="wel">복리후생 규정</a></li>
 										    </ul>
 									    </div>
 								    </div>
 									
 									<div id="pdfCont" class="pdf_container mt10">
-									    <iframe id="pdfIframe" class="width100" height="700px" src="/intr/pdfStream"></iframe>
+									    <iframe id="pdfIframe" class="w100per" height="700px" src="/intr/pdfStream"></iframe>
 									</div>
 								</div><!-- End post_wrap -->
 							</div><!-- End form_area -->

@@ -29,19 +29,19 @@
 		<!-- 태그 열기 -->
 		<c:choose>
 			<c:when test="${list.lv gt prevLv}">
-				<li class="li_${list.lv}">
+				<li class="tree_item li_${list.lv}">
 					<c:if test="${list.isleaf eq 'Y'}">
 						&nbsp; <img class="mr5" src='resources/images/icon/icon_tree_arrow.png' width="13" height="13" />
 					</c:if>
-					<span class="${spanIcon}"></span>
+					<span class="tree_icon ${spanIcon}"></span>
 					<a href="javascript:void(0);" class="pop_a_btn" empIdx="${list.empIdx}">${listNm}</a>
 			</c:when>
 			<c:when test="${list.lv eq prevLv}">
-				<li class="li_${list.lv}">
+				<li class="tree_item li_${list.lv}">
 					<c:if test="${list.isleaf eq 'Y'}">
 						&nbsp; <img class="mr5" src='resources/images/icon/icon_tree_arrow.png' width="13" height="13" />
 					</c:if>
-					<span class="${spanIcon}"></span>
+					<span class="tree_icon ${spanIcon}"></span>
 					<a href="javascript:void(0);" class="pop_a_btn" empIdx="${list.empIdx}">${listNm}</a>
 			</c:when>
 		</c:choose>

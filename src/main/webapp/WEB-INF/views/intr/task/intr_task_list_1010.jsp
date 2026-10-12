@@ -32,32 +32,32 @@
 				html = `
 						<div class="taskArea">
 							<div>
-								<input type="button" class="btn_gray_thin" value="행 삭제" onclick="removeCall(this);">
+                                <input type="button" class="btn_gray_thin btn_action action_compact" value="행 삭제" onclick="removeCall(this);">
 							</div>
 
-							<div class="post_view">
-								<dl>
-									<dt>&#10003; 업무 제목</dt>
-									<dd>
-										<input type="text" class="taskTitle" title="업무 제목" isRequired="Y">
+                            <div class="post_view form_panel">
+                                <dl class="form_row">
+                                    <dt class="form_label">&#10003; 업무 제목</dt>
+                                    <dd class="form_value">
+                                        <input type="text" class="taskTitle form_input" title="업무 제목" isRequired="Y">
 									</dd>
-									<dt>등록 일자</dt>
-									<dd>` + today + `</dd>
+                                    <dt class="form_label">등록 일자</dt>
+                                    <dd class="form_value">` + today + `</dd>
 								</dl>
-								<dl class="post_info">
-									<dt>&#10003; 업무 시간</dt>
-									<dd>
-										<input type="text" class="width20 taskHh" title="업무(시간)" placeholder="HH" oninput="numProc(this);" isRequired="Y">
-										<input type="text" class="width20 taskMm" title="업무(분)" placeholder="MM" oninput="numProc(this);" isRequired="Y">
+                                <dl class="post_info form_row">
+                                    <dt class="form_label">&#10003; 업무 시간</dt>
+                                    <dd class="form_value">
+                                        <input type="text" class="w20per taskHh form_input" title="업무(시간)" placeholder="HH" oninput="numProc(this);" isRequired="Y">
+                                        <input type="text" class="w20per taskMm form_input" title="업무(분)" placeholder="MM" oninput="numProc(this);" isRequired="Y">
 									</dd>
-									<dt>등록자</dt>
-									<dd>` + "${empVO.orgNm}" + " " + "${empVO.empNm}" + `</dd>
+                                    <dt class="form_label">등록자</dt>
+                                    <dd class="form_value">` + "${empVO.orgNm}" + " " + "${empVO.empNm}" + `</dd>
 								</dl>
 	
-								<dl>
-									<dt>&#10003; 업무 내용</dt>
-									<dd class="post_text" style="height: 300px;">
-										<textarea name="taskCont" class="taskCont" title="업무 내용" isRequired="Y"></textarea>
+                                <dl class="form_row">
+                                    <dt class="form_label">&#10003; 업무 내용</dt>
+                                    <dd class="post_text form_value form_content form_content_short">
+                                        <textarea name="taskCont" class="taskCont form_textarea" title="업무 내용" isRequired="Y"></textarea>
 									</dd>
 								</dl>
 							</div>
@@ -283,11 +283,7 @@
 	
 	<div class="main_wrap">
 		<!-- 좌측 메뉴 -->
-		<div class="left_wrap">
-			<div class="left_area">
-				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
-			</div>
-		</div>
+		<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
 	
 		<div class="content_wrap">
 			<div class="content_area">	
@@ -299,22 +295,22 @@
 									<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
 									<input type="hidden" id="empIdx" name="empIdx" value="${empVO.empIdx}">
 											
-									<h2>업무일지
+                                    <h2 class="content_heading">업무일지
 										<span class="float_right">
-											<button type="button" class="btn_blue_thin" onclick="regProc(this.form);">저장</button>
-											<button type="button" class="btn_gray_thin" onclick="delProc(this.form);">삭제</button>
+                                            <button type="button" class="btn_blue_thin btn_action action_compact" onclick="regProc(this.form);">저장</button>
+                                            <button type="button" class="btn_gray_thin btn_action action_compact" onclick="delProc(this.form);">삭제</button>
 										</span>
 									</h2>
 									<div class="srch_wrap">
 										<div class="srch_area">
 											<label class="srch_label">작성일자</label>
 											<input type="text" class="srch_cdt_date srchDt" id="srchDt" name="srchDt" value="${param.srchDt}" readonly="readonly" />
-											<input type="button" id="srchBtn" class="btn_blue" value="조회" onclick="listCall(this.form);">
+                                            <input type="button" id="srchBtn" class="btn_blue btn_action" value="조회" onclick="listCall(this.form);">
 										</div>
 										
-										<div class="srch_area float_right mt27">
-											<button type="button" class="btn_navy" onclick="addTask(true);">추가</button>
-											<button type="button" class="btn_gray" onclick="initTask();">초기화</button>
+										<div class="srch_area float_right mt25">
+                                            <button type="button" class="btn_navy btn_action" onclick="addTask(true);">추가</button>
+                                            <button type="button" class="btn_gray btn_action" onclick="initTask();">초기화</button>
 										</div>
 									</div>
 									
@@ -323,36 +319,36 @@
 										<c:forEach var="list" items="${defaultList}" varStatus="status"> 
 											<div class="taskArea">
 												<div>
-													<input type="button" class="btn_gray_thin" value="행 삭제" onclick="removeCall(this);">
+                                                    <input type="button" class="btn_gray_thin btn_action action_compact" value="행 삭제" onclick="removeCall(this);">
 												</div>
 												
-												<div class="post_view">
-													<dl>
-														<dt>&#10003; 업무 제목</dt>
-														<dd>
-															<input type="text" class="taskTitle" title="업무 제목" value="${list.taskTitle}" isRequired="Y">
+                                                <div class="post_view form_panel">
+                                                    <dl class="form_row">
+                                                        <dt class="form_label">&#10003; 업무 제목</dt>
+                                                        <dd class="form_value">
+                                                            <input type="text" class="taskTitle form_input" title="업무 제목" value="${list.taskTitle}" isRequired="Y">
 														</dd>
-														<dt>등록 일자</dt>
-														<dd>
+                                                        <dt class="form_label">등록 일자</dt>
+                                                        <dd class="form_value">
 															<fmt:parseDate value="${list.taskDt}" var="parseDt" pattern="yyyyMMdd"/>
 															<fmt:formatDate value="${parseDt}" var="fomatDt" pattern="yyyy-MM-dd"/>
 															${fomatDt}
 														</dd>
 													</dl>
-													<dl class="post_info">
-														<dt>&#10003; 업무 시간</dt>
-														<dd>
-															<input type="text" class="width20 taskHh" title="업무(시간)" value="${list.taskHh}" placeholder="HH" oninput="numProc(this);" isRequired="Y">
-															<input type="text" class="width20 taskMm" title="업무(분)" value="${list.taskMm}" placeholder="MM" oninput="numProc(this);" isRequired="Y">
+                                                    <dl class="post_info form_row">
+                                                        <dt class="form_label">&#10003; 업무 시간</dt>
+                                                        <dd class="form_value">
+                                                            <input type="text" class="w20per taskHh form_input" title="업무(시간)" value="${list.taskHh}" placeholder="HH" oninput="numProc(this);" isRequired="Y">
+                                                            <input type="text" class="w20per taskMm form_input" title="업무(분)" value="${list.taskMm}" placeholder="MM" oninput="numProc(this);" isRequired="Y">
 														</dd>
-														<dt>등록자</dt>
-														<dd>${empVO.orgNm} ${empVO.empNm}</dd>
+                                                        <dt class="form_label">등록자</dt>
+                                                        <dd class="form_value">${empVO.orgNm} ${empVO.empNm}</dd>
 													</dl>
 													
-													<dl>
-														<dt>&#10003; 업무 내용</dt>
-														<dd class="post_text h300p">
-															<textarea class="taskCont" title="업무 내용" isRequired="Y">${list.taskCont}</textarea>
+                                                    <dl class="form_row">
+                                                        <dt class="form_label">&#10003; 업무 내용</dt>
+                                                        <dd class="post_text form_value form_content form_content_short">
+                                                            <textarea class="taskCont form_textarea" title="업무 내용" isRequired="Y">${list.taskCont}</textarea>
 														</dd>
 													</dl>
 												</div><!-- End post_view -->

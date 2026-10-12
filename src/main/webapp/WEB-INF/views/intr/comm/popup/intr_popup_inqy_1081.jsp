@@ -6,16 +6,16 @@
 <%@ taglib prefix="spring" 	uri="http://www.springframework.org/tags" %>
 
 <!-- 휴가 조회 -->
-<div class="post_view mg0 mt20">
-	<dl>
-		<dt>휴가자</dt>
-		<dd>${defaultInfo.orgNm} ${defaultInfo.empNm} ${defaultInfo.rankNm}</dd>
-		<dt>휴가 유형</dt>
-		<dd>${defaultInfo.leavtypeNm}</dd>
+<div class="post_view mg0 mt20 form_panel leave_form">
+    <dl class="form_row">
+        <dt class="form_label">휴가자</dt>
+        <dd class="form_value">${defaultInfo.orgNm} ${defaultInfo.empNm} ${defaultInfo.rankNm}</dd>
+        <dt class="form_label">휴가 유형</dt>
+        <dd class="form_value">${defaultInfo.leavtypeNm}</dd>
 	</dl>
-	<dl class="post_info">
-		<dt>휴가 기간</dt>
-		<dd>
+    <dl class="post_info form_row">
+        <dt class="form_label">휴가 기간</dt>
+        <dd class="form_value">
 			<span class="date">
 				<fmt:parseDate value="${defaultInfo.leavSdt}" var="parseSdt" pattern="yyyyMMdd"/>
 				<fmt:formatDate value="${parseSdt}" var="formatSdt" pattern="yyyy-MM-dd"/>
@@ -26,9 +26,9 @@
 			</span>
 		</dd>
 	</dl>
-	<dl>
-		<dt>적요</dt>
-		<dd class="post_text h160p">
+    <dl class="form_row">
+        <dt class="form_label">적요</dt>
+        <dd class="post_text form_value form_content">
 			<pre>${defaultInfo.leavRsn}</pre>
 		</dd>
 	</dl>

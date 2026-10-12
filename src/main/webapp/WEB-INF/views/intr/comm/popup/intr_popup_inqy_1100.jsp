@@ -76,31 +76,27 @@
 	});
 </script>
 
-<div class="pop_area height100">
-	<article class="sub_article height85">
+<div class="pop_area">
+	<article class="sub_article popup_body popup_panel h85per">
 		<div class="content">
 			<div id="sub_content">					
 				<div class="form_area">
-					<div class="pop_wrap">
+					<div class="pop_wrap organization_popup">
 	                	<div class="post_wrap">
-							<div class="srch_wrap">
-								<div class="srch_area">
-									<div class="right_srch_area">
-										<label class="srch_label">조직도</label>
-									</div>
-								</div>
-							</div>
+                            <div class="popup_header">
+                                <h3 class="popup_heading">조직도</h3>
+                            </div>
 							
-							<div id="popSrchArea" class="pt10">
-								<input type="text" id="srchPnm" class="srch_cdt_text width30" value="" onkeydown="popListCall(event);">
-								<input type="button" class="btn_blue" value="조회" onclick="popListCall();">
+							<div class="pt10">
+								<input type="text" id="srchPnm" class="srch_cdt_text w30per" value="" onkeydown="popListCall(event);">
+                                <input type="button" class="btn_blue btn_action" value="조회" onclick="popListCall();">
 							</div>
 	                        
 	                     	<!-- 조직도 상세 -->
-	                     	<div id="orgCon" class="post_con inline_flex h325p"></div>
+                        <div id="orgCon" class="post_con popup_content inline_flex"></div>
 	                        
-							<div class="btn_right mt40">
-	                      		<button type="button" class="btn_gray_thin" onclick="popClose('org');">닫기</button>
+                            <div class="btn_right mt40 form_actions">
+                                  <button type="button" class="btn_gray_thin btn_action action_compact" onclick="popClose('org');">닫기</button>
 	                 		</div>
 	                 	</div><!-- End post_wrap -->
 	               	</div> 

@@ -8,12 +8,12 @@
 		<span>${resMsg}</span>
 	</c:when>
 	<c:otherwise>
-		<table class="post_table">
+		<table class="post_table data_table">
 			<caption>쿼리 결과 조회</caption>
 			<thead>
 				<tr>
 					<c:forEach var="col" items="${colList}">
-						<th scope="col" class="w15per">${col}</th>
+                        <th scope="col" class="w15per table_header">${col}</th>
 					</c:forEach>
 				</tr>
 			</thead>
@@ -21,7 +21,7 @@
 				<c:forEach var="data" items="${dataList}">
 					<tr>
 						<c:forEach var="col" items="${colList}">
-							<td>${data[col]}</td>
+                            <td class="table_cell">${data[col]}</td>
 						</c:forEach>
 					</tr>
 				</c:forEach>

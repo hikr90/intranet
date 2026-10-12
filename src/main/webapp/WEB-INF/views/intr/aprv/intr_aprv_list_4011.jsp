@@ -7,7 +7,7 @@
 		<c:forEach var="list" items="${defaultList}" varStatus="status">
     		<c:set var="spanIcon" 	value="icon_list"/> 
 
-			<li class="li_1 ml15">
+            <li class="li_1">
 				<span class="${spanIcon}"></span>
 				<a class="a_btn" id="${list.aprvlineId}" href="#" onclick="detCall('${list.aprvlineId}');">${list.aprvlineNm}</a>
 			</li>
@@ -16,7 +16,7 @@
 </c:if>
 <c:if test="${empty defaultList}">
 	<ul class="ul_1">
-		<li class="li_1 ml15">
+        <li class="li_1">
 			등록된 결재선이 없습니다.
 		</li>
 	</ul>

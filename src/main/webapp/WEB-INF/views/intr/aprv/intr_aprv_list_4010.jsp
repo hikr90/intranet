@@ -240,11 +240,7 @@
 	
 	<div class="main_wrap">
 		<!-- 좌측 메뉴 -->
-		<div class="left_wrap">
-			<div class="left_area">
-				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
-			</div>
-		</div>
+		<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
 		
 		<div class="content_wrap">
 			<div class="content_area"> 
@@ -256,9 +252,9 @@
 								<input type="hidden" id="empIdx" name="empIdx" value="${empVO.empIdx}">
 							
 								<div class="post_wrap">
-									<h2>결재선 관리									
+                                    <h2 class="content_heading">결재선 관리
 										<span class="float_right">
-											<input type="button" id="regBtn" class="btn_blue_thin" value="등록" onclick="regCall();">
+                                            <input type="button" id="regBtn" class="btn_blue_thin btn_action action_compact" value="등록" onclick="regCall();">
 										</span>
 									</h2>
 	                                <div class="srch_wrap">
@@ -268,23 +264,23 @@
 												<label class="srch_label">제목</label>		
 												<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="enterListCall(this.form);">
 											
-												<input type="button" id="srchLine" class="btn_blue" value="조회" onclick="listCall(this.form);">
-												<input type="button" class="btn_gray" value="초기화" onclick="initCall();">
+                                                <input type="button" id="srchLine" class="btn_blue btn_action" value="조회" onclick="listCall(this.form);">
+                                                <input type="button" class="btn_gray btn_action" value="초기화" onclick="initCall();">
 											</div>
 	                                	</div>
 	                                </div>
 	                                <!-- end Form srch_wrap  -->
 										
-									<div class="tree_wrap">
-										<div id="treeArea" class="tree_area w400p h475p">
+									<div class="tree_wrap tree_workspace approval_workspace">
+										<div id="treeArea" class="scroll_wrap tree_area tree_navigation">
 											<div id="lineTree" class="tree">
 												<c:if test="${not empty defaultList}">
 													<ul class="ul_1">
 														<c:forEach var="list" items="${defaultList}" varStatus="status">
 					           						   		<c:set var="spanIcon" 	value="icon_list"/> 
 			
-															<li class="li_1 ml15">
-																<span class="${spanIcon}"></span>
+                                                            <li class="tree_item li_1">
+																<span class="tree_icon ${spanIcon}"></span>
 																<a class="a_btn" id="${list.aprvlineId}" href="#" onclick="detCall('${list.aprvlineId}');">${list.aprvlineNm}</a>
 															</li>
 														</c:forEach>
@@ -292,7 +288,7 @@
 												</c:if>
 												<c:if test="${empty defaultList}">
 													<ul class="ul_1">
-														<li class="li_1 ml15">
+                                                        <li class="tree_item li_1">
 															등록된 결재선이 없습니다.
 														</li>
 													</ul>
@@ -300,9 +296,9 @@
 											</div>	
 										</div>
 										
-										<div id="empArea" class="emp_area" style="display: none;">
+                                        <div id="empArea" class="emp_area member_assignment">
 											<!-- 사용자 목록 -->
-											<div id="empInfo" class="tree_area ml20 w400p h475p">
+											<div id="empInfo" class="scroll_wrap tree_area tree_navigation ml20">
 												<div class="tree">
 													<ul class="ul_1">
 																					
@@ -326,22 +322,22 @@
 														<c:choose>
 															<c:when test="${list.lv gt prevLv}">
 																<ul class="ul_${list.lv}">
-																	<li class="li_${list.lv}">
+																	<li class="tree_item li_${list.lv}">
 																		<c:if test="${list.isleaf eq 'N'}">
-																			<span class="${spanIcon}"></span>
+																			<span class="tree_icon ${spanIcon}"></span>
 																		</c:if>
 																		<c:if test="${list.isleaf eq 'Y'}">
 																			<img class="mr5" src='resources/images/icon/icon_tree_arrow.png' width="13" height="13" />
-																			<span class="${spanIcon}"></span>
-																			<input type="radio" id="radio${status.index}" name="radioIdx" value="${list.empIdx}" orgNm="${list.orgNm}" empNm="${list.empNm}" rankNm="${list.rankNm}">
+																			<span class="tree_icon ${spanIcon}"></span>
+																			<input class="tree_radio tree_input" type="radio" id="radio${status.index}" name="radioIdx" value="${list.empIdx}" orgNm="${list.orgNm}" empNm="${list.empNm}" rankNm="${list.rankNm}">
 																		</c:if>
 																		<label for="radio${status.index}">${spanNm}</label>
 															</c:when>
 															<c:when test="${list.lv eq prevLv}">
 																<c:if test="${list.isleaf eq 'Y'}">
 																	<img class="mr5" src='resources/images/icon/icon_tree_arrow.png' width="13" height="13" />
-																	<span class="${spanIcon}"></span>
-																	<input type="radio" id="radio${status.index}" name="radioIdx" value="${list.empIdx}" orgNm="${list.orgNm}" empNm="${list.empNm}" rankNm="${list.rankNm}">
+																	<span class="tree_icon ${spanIcon}"></span>
+																	<input class="tree_radio tree_input" type="radio" id="radio${status.index}" name="radioIdx" value="${list.empIdx}" orgNm="${list.orgNm}" empNm="${list.empNm}" rankNm="${list.rankNm}">
 																</c:if>
 																<label for="radio${status.index}">${spanNm}</label>
 															</c:when>
@@ -374,7 +370,7 @@
 											<div id="treeArrow" class="tree_arrow" onclick="moveBtn(this.form);"></div>
 											
 											<!-- 사용자 목록 -->
-											<div id="aprvlineTb" class="tree_info w646p"></div>
+											<div id="aprvlineTb" class="tree_info tree_detail"></div>
 										</div><!-- End emp_area -->
 									</div><!-- End tree_wrap -->
 								</div><!-- End post_wrap -->

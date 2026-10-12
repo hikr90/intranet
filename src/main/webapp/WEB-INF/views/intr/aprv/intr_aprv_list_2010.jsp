@@ -37,11 +37,7 @@
 
 	<div class="main_wrap">
 		<!-- 좌측 메뉴 -->
-		<div class="left_wrap">
-			<div class="left_area">
-				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
-			</div>
-		</div>
+		<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
 		
 		<div class="content_wrap">
 			<div class="content_area">
@@ -55,7 +51,7 @@
 									<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
 									<input type="hidden" id="temptypeCd" name="temptypeCd" value="">
 									
-									<h2>결재 조회</h2>
+                                    <h2 class="content_heading">결재 조회</h2>
 									<div class="srch_wrap">
 										<div class="right_srch_area">
 											<!-- 기안일자 -->
@@ -70,13 +66,13 @@
 											<div class="srch_area">
 												<label class="srch_label">결재단계</label>
 												<div class="select_wrap">
-													<div id="workList" class="sList select_box">${empty param.srchStepNm ? '전체' : param.srchStepNm}</div>
+													<div id="workList" class="sList select_box choice_value">${empty param.srchStepNm ? '전체' : param.srchStepNm}</div>
 													<input type="hidden" name="srchStepCd" value="${param.srchStepCd}">
 													<input type="hidden" name="srchStepNm" value="${param.srchStepNm}">
 												
-													<ul class="sUl select_ul scroll_wrap">
+													<ul class="sUl select_ul scroll_wrap choice_options">
 														<c:forEach var="list" items="${stepList}">
-															<li setNm="${list.commcodeNm}" setCd="${list.commcodeCd}">${list.commcodeNm}</li>
+															<li class="choice_item" setNm="${list.commcodeNm}" setCd="${list.commcodeCd}">${list.commcodeNm}</li>
 														</c:forEach>
 													</ul>
 												</div>
@@ -86,13 +82,13 @@
 											<div class="srch_area">
 												<label class="srch_label">기안문 양식</label>
 												<div class="select_wrap">
-													<div id="tempList" class="sList select_box">${empty param.srchTempNm ? '전체' : param.srchTempNm}</div>
+													<div id="tempList" class="sList select_box choice_value">${empty param.srchTempNm ? '전체' : param.srchTempNm}</div>
 													<input type="hidden" name="srchTempCd" value="${param.srchTempCd}">
 													<input type="hidden" name="srchTempNm" value="${param.srchTempNm}">
 												
-													<ul class="sUl select_ul scroll_wrap">
+													<ul class="sUl select_ul scroll_wrap choice_options">
 														<c:forEach var="list" items="${tempList}">
-															<li setNm="${list.commcodeNm}" setCd="${list.commcodeCd}">${list.commcodeNm}</li>
+															<li class="choice_item" setNm="${list.commcodeNm}" setCd="${list.commcodeCd}">${list.commcodeNm}</li>
 														</c:forEach>
 													</ul>
 												</div>
@@ -104,18 +100,18 @@
 													<label class="srch_label">제목</label>
 													<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="enterListCall(this.form);">
 												
-													<input type="button" class="btn_blue" value="조회" onclick="listCall(this.form);">
-													<input type="button" class="btn_gray" value="초기화" onclick="initCall();">
+                                                    <input type="button" class="btn_blue btn_action" value="조회" onclick="listCall(this.form);">
+                                                    <input type="button" class="btn_gray btn_action" value="초기화" onclick="initCall();">
 												</div>
 		                                	</div>
 		                                </div>
 									</div>
 									
 									<div class="post_table_wrap">
-										<table class="post_table">
+										<table class="post_table data_table">
 											<caption>결재내역 목록 조회</caption>
 											<colgroup>
-												<col class="w7per">
+												<col class="w5per">
 												<col class="w15per">
 												<col class="w15per">
 												<col class="auto">
@@ -124,21 +120,21 @@
 											</colgroup>
 											<thead>
 												<tr>
-													<th scope="col">순번</th>
-													<th scope="col">기안문 양식</th>
-													<th scope="col">결재단계</th>
-													<th scope="col">제목</th>
-													<th scope="col">기안자</th>
-													<th scope="col">기안일자</th>
+                                                    <th class="table_header" scope="col">순번</th>
+                                                    <th class="table_header" scope="col">기안문 양식</th>
+                                                    <th class="table_header" scope="col">결재단계</th>
+                                                    <th class="table_header" scope="col">제목</th>
+                                                    <th class="table_header" scope="col">기안자</th>
+                                                    <th class="table_header" scope="col">기안일자</th>
 												</tr>
 											</thead>
 											<tbody>
 		                                    	<c:forEach var="list" items="${defaultList}"> 
 													<tr>
-														<td class="first_td">${list.num}</td>
-														<td>${list.tempNm}</td>
-														<td>${list.aprvstepNm}</td>
-														<td class="_title">
+                                                        <td class="table_cell">${list.num}</td>
+                                                        <td class="table_cell">${list.tempNm}</td>
+                                                        <td class="table_cell">${list.aprvstepNm}</td>
+                                                        <td class="_title table_cell">
 															<a class="show_view a_title" onclick="detCall('${list.temptypeCd}', '${list.detMappingId}', '${list.aprvId}');">
 																<script>document.write(isNew('${list.regDt}'))</script>
 																${list.aprvTitle}
@@ -147,8 +143,8 @@
 																<img id="fileImg" src='resources/images/icon/icon_file.png' width="15" height="15" />
 															</c:if>
 														</td>
-														<td>${list.orgNm} ${list.empNm} ${list.rankNm}</td>
-														<td>
+                                                        <td class="table_cell">${list.orgNm} ${list.empNm} ${list.rankNm}</td>
+                                                        <td class="table_cell">
 															<span class="date">
 																<fmt:parseDate value="${list.regDt}" var="parseDt" pattern="yyyyMMdd"/>
 																<fmt:formatDate value="${parseDt}" var="formatDt" pattern="yyyy-MM-dd"/>
@@ -164,7 +160,7 @@
 		                                        <!-- 글이 없는 경우 -->
 		                                        <c:if test="${empty defaultList}">
 		                                            <tr>
-		                                                <td align="center" colspan="6">
+                                                        <td class="table_cell" align="center" colspan="6">
 		                                              	      등록된 글이 없습니다.
 		                                                </td>
 		                                            </tr>

@@ -48,14 +48,14 @@
 					var str = "";
 					//
 					str += "<tr>"
-					str += "	<td class='first_td'>";
+                    str += "	<td class='table_cell'>";
 					str += "		<span class='check_box'>";
-					str += "		<input type='checkbox' class='checkbox' id='roleEmpIdx' value='" + empIdx + "'/>"
-					str += "		<label for='chk_local'><span></span></label></span>";
+                    str += "		<input type='checkbox' class='checkbox_input checkbox' id='roleEmpIdx' value='" + empIdx + "'/>"
+                    str += "		<label class='checkbox_label' for='chk_local'><span class='checkbox_mark'></span></label></span>";
 					str += "		<input type='hidden' name='roleEmpIdx' value='" + empIdx + "'/>"
 					str += "	</td>";
-					str += "	<td>" + orgNm + "</td>";
-					str += "	<td>" + empNm + "</td>";
+                    str += "	<td class='table_cell'>" + orgNm + "</td>";
+                    str += "	<td class='table_cell'>" + empNm + "</td>";
 					str += "</tr>";
 					
 					$(".roleEmpTbl").append(str);
@@ -142,39 +142,39 @@
 	}
 </script>
 
-<div class="post_wrap h_auto pd0">
+<div class="list_panel role_members">
 	<input type="hidden" id="roleCd" name="roleCd" value="">
 	
-	<div class="scroll_wrap h_auto max_h480">
-		<table class="post_table roleEmpTbl">
+	<div class="scroll_wrap list_body">
+		<table class="post_table data_table roleEmpTbl">
 			<caption>사용자 목록 테이블</caption>
 			<colgroup>
-				<col class="w7per">
+				<col class="w5per">
 				<col class="w10per">
 				<col class="w20per">
 			</colgroup>
 			<thead>
 				<tr>
-					<th scope="col">
+                    <th class="table_header" scope="col">
 						<span class="check_box"> 
-						<input type="checkbox" class="check_box empChk"> 
-						<label for="chk-yes"><span></span></label></span>
+                        <input type="checkbox" class="checkbox_input check_box empChk">
+                        <label class="checkbox_label_lead checkbox_label" for="chk-yes"><span class="checkbox_mark"></span></label></span>
 					</th>
-					<th scope="col">부서</th>
-					<th scope="col">사용자</th>
+                    <th class="table_header" scope="col">부서</th>
+                    <th class="table_header" scope="col">사용자</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach var="list" items="${roleEmpList}" varStatus="status">
 					<tr>
-						<td class="first_td">
+                        <td class="table_cell">
 							<span class="check_box"> 
-							<input type="checkbox" class="check_box" id="roleEmpIdx" value="${list.empIdx}"> 
-							<label for="chk-yes"><span></span></label></span>
+                            <input type="checkbox" class="checkbox_input check_box" id="roleEmpIdx" value="${list.empIdx}">
+                            <label class="checkbox_label_lead checkbox_label" for="chk-yes"><span class="checkbox_mark"></span></label></span>
 							<input type="hidden" name="roleEmpIdx" value="${list.empIdx}">
 						</td>
-						<td>${list.orgNm}</td>
-						<td>${list.empNm}</td>
+                        <td class="table_cell">${list.orgNm}</td>
+                        <td class="table_cell">${list.empNm}</td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -182,9 +182,9 @@
 	</div>
 </div> <!-- End post_wrap -->
 
-<div class="btn_center">
-	<button type="button" class="btn_gray_thin float_left" onclick="delCall();">삭제</button>
+<div class="btn_center form_actions">
+    <button type="button" class="btn_gray_thin float_left btn_action action_compact" onclick="delCall();">삭제</button>
 
-	<button type="button" class="btn_navy_thin float_right ml5" onclick="regProc(this.form);">저장</button> 
-	<button type="button" class="btn_blue_thin float_right" onclick="setListCall();">새로고침</button>
+    <button type="button" class="btn_navy_thin float_right ml5 btn_action action_compact" onclick="regProc(this.form);">저장</button>
+    <button type="button" class="btn_blue_thin float_right btn_action action_compact" onclick="setListCall();">새로고침</button>
 </div>

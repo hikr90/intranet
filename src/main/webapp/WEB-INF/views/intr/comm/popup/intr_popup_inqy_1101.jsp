@@ -6,8 +6,8 @@
 <%@ taglib prefix="spring" 	uri="http://www.springframework.org/tags" %>
 
 <!-- 조직도 트리 -->
-<div class="post_view mt20 mr10 mg0 b_d7d7d7">
-	<div id="empTree" class="tree_area ml20 scroll_wrap w300p h300p">
+<div class="post_view organization_panel">
+	<div id="empTree" class="tree_area tree_navigation ml20 scroll_wrap">
 		<div class="tree">
 			<c:forEach var="list" items="${empList}" varStatus="status">
 				<c:set var="spanIcon"	value="icon_folder"/>
@@ -31,11 +31,11 @@
 				<!-- 태그 열기 -->
 				<c:choose>
 					<c:when test="${list.lv gt prevLv}">
-						<li class="li_${list.lv}">
+						<li class="tree_item li_${list.lv}">
 							<c:if test="${list.isleaf eq 'Y'}">
 								&nbsp; <img class="mr5" src='resources/images/icon/icon_tree_arrow.png' width="13" height="13" />
 							</c:if>
-							<span class="${spanIcon}"></span>
+							<span class="tree_icon ${spanIcon}"></span>
 							<c:if test="${not empty list.empIdx}">
 								<a href="javascript:void(0);" class="pop_a_btn" empIdx="${list.empIdx}">${listNm}</a>
 							</c:if>
@@ -45,11 +45,11 @@
 							
 					</c:when>
 					<c:when test="${list.lv eq prevLv}">
-						<li class="li_${list.lv}">
+						<li class="tree_item li_${list.lv}">
 							<c:if test="${list.isleaf eq 'Y'}">
 								&nbsp; <img class="mr5" src='resources/images/icon/icon_tree_arrow.png' width="13" height="13" />
 							</c:if>
-							<span class="${spanIcon}"></span>
+							<span class="tree_icon ${spanIcon}"></span>
 							<c:if test="${not empty list.empIdx}">
 								<a href="javascript:void(0);" class="pop_a_btn" empIdx="${list.empIdx}">${listNm}</a>
 							</c:if>
@@ -83,29 +83,29 @@
 </div><!-- End post_view -->
 
 <!-- 조직도 상세 -->
-<div class="post_write h305p">
-	<dl>
-		<dt><label for="post-title">부서</label></dt>
-		<dd><span id="orgNm"></span></dd>
+<div class="form_panel organization_details">
+    <dl class="form_row">
+        <dt class="form_label"><label for="post-title">부서</label></dt>
+        <dd class="form_value"><span id="orgNm"></span></dd>
 	</dl>
 	
-	<dl>
-		<dt><label for="post-title">직급</label></dt>
-		<dd><span id="rankNm"></span></dd>
+    <dl class="form_row">
+        <dt class="form_label"><label for="post-title">직급</label></dt>
+        <dd class="form_value"><span id="rankNm"></span></dd>
 	</dl>
 	
-		<dl>
-		<dt><label for="post-title">사원명</label></dt>
-		<dd><span id="empNm"></span></dd>
+        <dl class="form_row">
+        <dt class="form_label"><label for="post-title">사원명</label></dt>
+        <dd class="form_value"><span id="empNm"></span></dd>
 	</dl>
 	
-	<dl>
-		<dt><label for="post-title">연락처</label></dt>
-		<dd><span id="mobNo"></span></dd>
+    <dl class="form_row">
+        <dt class="form_label"><label for="post-title">연락처</label></dt>
+        <dd class="form_value"><span id="mobNo"></span></dd>
 	</dl>
 	
-	<dl>
-		<dt><label for="post-title">메일 주소</label></dt>
-		<dd><span id="email"></span></dd>
+    <dl class="form_row">
+        <dt class="form_label"><label for="post-title">메일 주소</label></dt>
+        <dd class="form_value"><span id="email"></span></dd>
 	</dl>
 </div><!-- End post_view -->

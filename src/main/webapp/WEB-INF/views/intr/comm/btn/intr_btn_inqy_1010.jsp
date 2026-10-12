@@ -13,7 +13,7 @@
 		- 기안자와 접속 유저가 같은 경우
 -->
 <c:if test="${empty aprvInfo.rslttypeCd and aprvInfo.regIdx eq empVO.empIdx}">
-	<button type="button" class="btn_navy_thin" onclick="cnlProc('RSLT_0030');">결재 취소</button>
+    <button type="button" class="btn_navy_thin btn_action action_compact" onclick="cnlProc('RSLT_0030');">결재 취소</button>
 </c:if>
 
 <!-- 결재 승인 & 반송
@@ -22,6 +22,6 @@
 		- 결재 유형이 결재인 경우
 -->
 <c:if test="${defaultInfo.aprvstepCd eq 'STEP_0010' and defaultInfo.aprvtypeCd eq 'TYPE_0020' and defaultInfo.aprvIdx eq empVO.empIdx}">
-	<button type="button" class="btn_blue_thin" onclick="opinCall('RSLT_0010');">승인</button>
-	<button type="button" class="btn_gray_thin" onclick="opinCall('RSLT_0020');">반송</button>
+    <button type="button" class="btn_blue_thin btn_action action_compact" onclick="opinCall('RSLT_0010');">승인</button>
+    <button type="button" class="btn_gray_thin btn_action action_compact" onclick="opinCall('RSLT_0020');">반송</button>
 </c:if>

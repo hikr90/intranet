@@ -82,11 +82,7 @@
 
 	<div class="main_wrap">
 		<!-- 좌측 메뉴 -->
-		<div class="left_wrap">
-			<div class="left_area">
-				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
-			</div>
-		</div>
+		<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
 
 		<div class="content_wrap">
 			<div class="content_area">
@@ -105,13 +101,13 @@
 									<input type="hidden" id="hireNm" name="hireNm" value="${param.hireNm}">
 									<input type="hidden" id="filetypeCd" name="filetypeCd" value="EMP">
 								
-		                            <h2>사원 상세</h2>
-	                                <div class="post_write">
-	                                    <dl>
-	                                        <dt><label>프로필</label></dt>
-	                                        <dd>
+                                    <h2 class="content_heading">사원 상세</h2>
+                                    <div class="form_panel">
+                                        <dl class="form_row">
+                                            <dt class="form_label"><label>프로필</label></dt>
+                                            <dd class="form_value">
 	                                        	<div class="profile_wrap inline_flex">
-		                                        	<div class="profile_area">
+
 		                                        		<c:choose>
 															<c:when test="${defaultInfo.profileYn eq 'Y'}">
                                  								<img id="empImg" class="emp_img" width="200" height="200" src="intrEmpInqy1099.do?sequenceId=${empVO.empIdx}">
@@ -120,9 +116,9 @@
 				                                        		<img class="emp_img" id="empImg" width="200" height="200" src="resources/images/icon/icon_profile.png">
 		                                        			</c:otherwise>
 		                                        		</c:choose>
-		                                        	</div>
+
 	                                        	
-		                                        	<div class="profile_box ml20">
+                                                    <div class="profile_box ml20 form_profile">
 		                                        		<br>
 		                                        		<c:choose>
 		                                        			<c:when test="${empty fileList}">
@@ -133,111 +129,111 @@
 		                                        			</c:otherwise>
 		                                        		</c:choose>
 			                                        	<div class="mt5">
-			                                        		<label for="profBtn" class="btn_blue">등록</label> 
-															<input type="file" id="profBtn">
+                                                            <label for="profBtn" class="btn_blue btn_action upload_label">등록</label>
+                                                            <input class="upload_input" type="file" id="profBtn">
 															<input type="hidden" id="isUploadImg" name="isUploadImg" value="">
-		                                        			<input type="button" class="btn_gray" id="profDel" value="삭제"> 
+                                                            <input type="button" class="btn_gray btn_action" id="profDel" value="삭제">
 		                                        		</div>
 		                                        	</div>
 	                                        	</div>
 	                                        </dd>
 	                                    </dl>
-	                                    <dl>
-	                                        <dt><label>&#10003; 사원명</label></dt>
-	                                        <dd class="sel_2part">
-	                                            <input type="text" title="사원명" id="empNm" name="empNm" value="${defaultInfo.empNm}" isRequired="Y">
+                                        <dl class="form_row">
+                                            <dt class="form_label"><label>&#10003; 사원명</label></dt>
+                                            <dd class="form_value form_pair">
+                                                <input class="form_input" type="text" title="사원명" id="empNm" name="empNm" value="${defaultInfo.empNm}" isRequired="Y">
 	                                        </dd>
 	                                        
-	                                        <dt></dt>
-	                                        <dd></dd>
+                                            <dt class="form_label"></dt>
+                                            <dd class="form_value"></dd>
 	                                    </dl>
-	                                    <dl>
-	                                    	<dt><label>&#10003; 부서</label></dt>
-	                                        <dd class="sel_2part">
+                                        <dl class="form_row">
+                                            <dt class="form_label"><label>&#10003; 부서</label></dt>
+                                            <dd class="form_value form_pair">
 												<div class="select_wrap">
-													<div id="orgList" class="sList select_box">${defaultInfo.orgNm}</div>
+													<div id="orgList" class="sList select_box choice_value">${defaultInfo.orgNm}</div>
 													<input type="hidden" name="setOrgCd" value="${defaultInfo.orgCd}">
 													<input type="hidden" name="setOrgNm" value="${defaultInfo.orgNm}">
 												
-													<ul class="sUl select_ul scroll_wrap">
+													<ul class="sUl select_ul scroll_wrap choice_options">
 														<c:forEach var="list" items="${orgList}">
-															<c:if test="${not empty list.orgCd}"><li setNm="${list.orgNm}" setCd="${list.orgCd}">${list.orgNm}</li></c:if>
+															<c:if test="${not empty list.orgCd}"><li class="choice_item" setNm="${list.orgNm}" setCd="${list.orgCd}">${list.orgNm}</li></c:if>
 														</c:forEach>
 													</ul>
 												</div>
 	                                        </dd>
 	                                        
-	                                        <dt><label>&#10003; 직급</label></dt>
-	                                        <dd class="sel_2part">
+                                            <dt class="form_label"><label>&#10003; 직급</label></dt>
+                                            <dd class="form_value form_pair">
 												<div class="select_wrap">
-													<div id="rankList" class="sList select_box">${defaultInfo.rankNm}</div>
+													<div id="rankList" class="sList select_box choice_value">${defaultInfo.rankNm}</div>
 													<input type="hidden" name="setRankCd" value="${defaultInfo.rankCd}">
 													<input type="hidden" name="setRankNm" value="${defaultInfo.rankNm}">
 												
-													<ul class="sUl select_ul scroll_wrap">
+													<ul class="sUl select_ul scroll_wrap choice_options">
 														<c:forEach var="list" items="${rankList}">
-															<c:if test="${not empty list.rankCd}"><li setNm="${list.rankNm}" setCd="${list.rankCd}">${list.rankNm}</li></c:if>
+															<c:if test="${not empty list.rankCd}"><li class="choice_item" setNm="${list.rankNm}" setCd="${list.rankCd}">${list.rankNm}</li></c:if>
 														</c:forEach>
 													</ul>
 												</div>
 	                                        </dd>
 	                                    </dl>
-	                                    <dl>
-	                                        <dt><label>&#10003; 연락처</label></dt>
-	                                        <dd class="sel_2part">
-	                                            <input type="text" title="연락처" id="mobNo" name="mobNo" maxlength="13" value="${defaultInfo.mobNo}" onkeyup="mobProc(this);" isRequired="Y">
+                                        <dl class="form_row">
+                                            <dt class="form_label"><label>&#10003; 연락처</label></dt>
+                                            <dd class="form_value form_pair">
+                                                <input class="form_input" type="text" title="연락처" id="mobNo" name="mobNo" maxlength="13" value="${defaultInfo.mobNo}" onkeyup="mobProc(this);" isRequired="Y">
 	                                        </dd>
 	
-	                                        <dt><label>성별</label></dt>
-	                                        <dd class="sel_2part">
+                                            <dt class="form_label"><label>성별</label></dt>
+                                            <dd class="form_value form_pair">
 	                                        	<div class="radio_box enter-check_box">
 	                                            	<span class="radio-area">
-	                                                	<input type="radio" id="chk-yes" class="isMale" name="isMale" value="Y" <c:if test="${defaultInfo.isMale eq 'Y'}">checked="checked"</c:if>>
-	                                                	<label for="chk-yes">남자<span></span></label>
+                                                        <input type="radio" id="chk-yes" class="radio_input isMale" name="isMale" value="Y" <c:if test="${defaultInfo.isMale eq 'Y'}">checked="checked"</c:if>>
+                                                        <label class="radio_label_lead radio_label" for="chk-yes">남자<span class="radio_mark"></span></label>
 	                                            	</span>
 	                                            	<span class="radio-area">
-	                                                	<input type="radio" id="chk-no" class="isMale" name="isMale" value="N" <c:if test="${defaultInfo.isMale eq 'N'}">checked="checked"</c:if>>
-	                                                	<label for="chk-no">여자<span></span></label>
+                                                        <input type="radio" id="chk-no" class="radio_input isMale" name="isMale" value="N" <c:if test="${defaultInfo.isMale eq 'N'}">checked="checked"</c:if>>
+                                                        <label class="radio_label" for="chk-no">여자<span class="radio_mark"></span></label>
 	                                            	</span>
 	                                            </div>
 	                                        </dd>
 	                                    </dl>
-	                                    <dl>
-	                                        <dt><label>&#10003; 주소</label></dt>
-	                                        <dd class="sel_2part">
-	                                            <input type="text" title="주소" readonly="readonly" id="addr" name="addr" value="${defaultInfo.addr}" isRequired="Y">
-	                                            <input type="button" class="btn_blue align_top" value="주소 검색" onclick="addrProc();">
+                                        <dl class="form_row">
+                                            <dt class="form_label"><label>&#10003; 주소</label></dt>
+                                            <dd class="form_value form_pair">
+                                                <input class="form_input" type="text" title="주소" readonly="readonly" id="addr" name="addr" value="${defaultInfo.addr}" isRequired="Y">
+                                                <input type="button" class="btn_blue vertical_top btn_action" value="주소 검색" onclick="addrProc();">
 	                                        </dd>
 	                                        
-	                                        <dt><label>&#10003; 상세 주소</label></dt>
-	                                        <dd class="sel_2part">
-	                                            <input type="text" title="상세주소" id="addrInfo" name="addrInfo" value="${defaultInfo.addrInfo}" isRequired="Y">
+                                            <dt class="form_label"><label>&#10003; 상세 주소</label></dt>
+                                            <dd class="form_value form_pair">
+                                                <input class="form_input" type="text" title="상세주소" id="addrInfo" name="addrInfo" value="${defaultInfo.addrInfo}" isRequired="Y">
 	                                        </dd>
 	                                    </dl>
-	                                    <dl>
-											<dt><label>&#10003; 메일 주소</label></dt>
-	                                        <dd class="sel_2part">
-	                                            <input type="text" title="메일 주소" id="email" name="email" value="${defaultInfo.email}" isRequired="Y">
+                                        <dl class="form_row">
+                                            <dt class="form_label"><label>&#10003; 메일 주소</label></dt>
+                                            <dd class="form_value form_pair">
+                                                <input class="form_input" type="text" title="메일 주소" id="email" name="email" value="${defaultInfo.email}" isRequired="Y">
 	                                        </dd>
 	                                        
-	                                        <dt></dt>
-	                                        <dd></dd>
+                                            <dt class="form_label"></dt>
+                                            <dd class="form_value"></dd>
 	                                    </dl>
-										<dl>
-	                                        <dt><label>&#10003; 아이디</label></dt>
-	                                        <dd class="sel_2part">
-	                                            <input type="text" title="아이디" id="empId" name="empId" value="${defaultInfo.empId}" readonly="readonly" isRequired="Y">
+                                        <dl class="form_row">
+                                            <dt class="form_label"><label>&#10003; 아이디</label></dt>
+                                            <dd class="form_value form_pair">
+                                                <input class="form_input" type="text" title="아이디" id="empId" name="empId" value="${defaultInfo.empId}" readonly="readonly" isRequired="Y">
 	                                        </dd>
 	                                        
-	                                        <dt></dt>
-	                                        <dd></dd>
+                                            <dt class="form_label"></dt>
+                                            <dd class="form_value"></dd>
 										</dl>	                                    
 									</div>
 		                                
-	                                <div class="btn_wrap align_right">
+                                    <div class="btn_right btn_wrap">
 										<div class="float_right">
-											<button type="button" class="btn_navy_thin" onclick="modProc('${empInfo.empIdx}')">수정완료</button>
-											<button type="button" class="btn_gray_thin" onclick="detCall();">취소</button>
+                                            <button type="button" class="btn_navy_thin btn_action action_compact" onclick="modProc('${empInfo.empIdx}')">수정완료</button>
+                                            <button type="button" class="btn_gray_thin btn_action action_compact" onclick="detCall();">취소</button>
 										</div>
 									</div>
 		                            </div><!-- End post_wrap -->

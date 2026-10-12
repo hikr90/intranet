@@ -69,11 +69,7 @@
 
 	<div class="main_wrap">
 		<!-- 좌측 메뉴 -->
-		<div class="left_wrap">
-			<div class="left_area">
-				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
-			</div>
-		</div>
+		<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
 		
 		<div class="content_wrap">
 			<div class="content_area">
@@ -83,9 +79,9 @@
 							<div class="form_area">
 								<div class="post_wrap">
 									<input type="hidden" id="sequenceId" name="sequenceId" value="">
-									<h2>회의 관리
+                                    <h2 class="content_heading">회의 관리
 										<span class="float_right">
-											<input type="button" class="btn_blue_thin" value="등록" onclick="regCall();">
+                                            <input type="button" class="btn_blue_thin btn_action action_compact" value="등록" onclick="regCall();">
 										</span>
 									</h2>
 									
@@ -95,13 +91,13 @@
 											<div class="srch_area">
 												<label class="srch_label">회의실 종류</label>
 												<div class="select_wrap">
-													<div id="locList" class="sList select_box">${empty param.srchLocNm ? '전체' : param.srchLocNm}</div>
+													<div id="locList" class="sList select_box choice_value">${empty param.srchLocNm ? '전체' : param.srchLocNm}</div>
 													<input type="hidden" name="srchLocCd" value="${param.srchLocCd}">
 													<input type="hidden" name="srchLocNm" value="${param.srchLocNm}">
 												
-													<ul class="sUl select_ul scroll_wrap">
+													<ul class="sUl select_ul scroll_wrap choice_options">
 														<c:forEach var="list" items="${locList}">
-															<li setNm="${list.commcodeNm}" setCd="${list.commcodeCd}">${list.commcodeNm}</li>
+															<li class="choice_item" setNm="${list.commcodeNm}" setCd="${list.commcodeCd}">${list.commcodeNm}</li>
 														</c:forEach>
 													</ul>
 												</div>
@@ -131,8 +127,8 @@
 													<label class="srch_label">제목</label>
 													<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="enterListCall(this.form);">
 												
-													<input type="button" class="btn_blue" value="조회" onclick="listCall(this.form);">
-													<input type="button" class="btn_gray" value="초기화" onclick="initCall();">
+                                                    <input type="button" class="btn_blue btn_action" value="조회" onclick="listCall(this.form);">
+                                                    <input type="button" class="btn_gray btn_action" value="초기화" onclick="initCall();">
 												</div>
 		                                	</div>
 										</div>

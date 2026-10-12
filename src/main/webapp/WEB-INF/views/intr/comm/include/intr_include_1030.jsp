@@ -2,24 +2,24 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 
-<header>
-	<div class="wrap mh_100p">
+<header class="site_header">
+	<div class="wrap header_canvas">
 		<div class="header_wrap">
 			<div class="header_state">
 				<ul class="header_list">
-					<li>
-						<a href="javascript:void(0);" onclick="orgCall();"><img src='resources/images/icon/icon_org.png' width="30" height="30" title="조직도 이동" /></a>
+                    <li class="header_item">
+                        <a class="header_link" href="javascript:void(0);" onclick="orgCall();"><img src='resources/images/icon/icon_org.png' width="30" height="30" title="조직도 이동" /></a>
 					</li>
-					<li>
-						<a href="javascript:void(0);" onclick="userCall();"><img src='resources/images/icon/icon_user.png' width="35" height="35" title="사용자 이동" /></a>
+                    <li class="header_item">
+                        <a class="header_link" href="javascript:void(0);" onclick="userCall();"><img src='resources/images/icon/icon_user.png' width="35" height="35" title="사용자 이동" /></a>
 					</li>
 					<c:if test="${empVO.roleYn eq 'Y'}">
-						<li>
-							<a href="javascript:void(0);" onclick="adminCall();"><img src='resources/images/icon/icon_admin.png' width="35" height="35" title="관리자 이동" /></a>
+                        <li class="header_item">
+                            <a class="header_link" href="javascript:void(0);" onclick="adminCall();"><img src='resources/images/icon/icon_admin.png' width="35" height="35" title="관리자 이동" /></a>
 						</li>
 					</c:if>
-					<li>
-						<a href="javascript:void(0);" onclick="logoutProc();"><img src='resources/images/icon/icon_logout.png' width="32" height="32" title="로그아웃" /></a>
+                    <li class="header_item">
+                        <a class="header_link" href="javascript:void(0);" onclick="logoutProc();"><img src='resources/images/icon/icon_logout.png' width="32" height="32" title="로그아웃" /></a>
 					</li>
 				</ul><br><br>
 				
@@ -40,8 +40,8 @@
 				<ul class="ul_1">
 					<c:forEach var="list" items="${menuList}" varStatus="status">
 						<c:if test="${list.lv eq 1}">
-							<li class="li_1">
-								<a class="a_1" onclick="goMenu(this);"
+                            <li class="nav_item li_1">
+                                <a class="nav_link a_1" onclick="goMenu(this);"
 								   data-mapping-id="${list.mappingId}"
 								   data-menu-pos="top"
 								   data-menu-cd="${list.menuCd}"
@@ -78,6 +78,6 @@
 </script>
 
 <!-- 조직도 팝업 -->
-<div id="orgArea" class="popupArea hidden">
+<div id="orgArea" class="popupArea hide">
 	<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1100.jsp"></c:import>	
 </div>

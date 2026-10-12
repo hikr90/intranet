@@ -37,11 +37,7 @@
 	
 	<div class="main_wrap">
 		<!-- 좌측 메뉴 -->
-		<div class="left_wrap">
-			<div class="left_area">
-				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
-			</div>
-		</div>
+		<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
 
 		<div class="content_wrap">
 			<div class="content_area">
@@ -63,42 +59,42 @@
 								<input type="hidden" id="srchIdx" name="srchIdx" value="${param.srchIdx}">
 								
 								<div class="post_wrap">
-		                            <h2>프로젝트 상세</h2>
-									<div class="post_view">
-										<dl>
-											<dt>제목</dt>
-											<dd>${defaultInfo.projTitle}</dd>
-											<dt>담당자</dt>
-											<dd>${defaultInfo.orgNm} ${defaultInfo.ownerNm} ${defaultInfo.rankNm}</dd>
+                                    <h2 class="content_heading">프로젝트 상세</h2>
+                                    <div class="post_view form_panel form_document">
+                                        <dl class="form_row">
+                                            <dt class="form_label">제목</dt>
+                                            <dd class="form_value">${defaultInfo.projTitle}</dd>
+                                            <dt class="form_label">담당자</dt>
+                                            <dd class="form_value">${defaultInfo.orgNm} ${defaultInfo.ownerNm} ${defaultInfo.rankNm}</dd>
 										</dl>
-										<dl class="post_info">
-											<dt>계약기간</dt>
-											<dd>
+                                        <dl class="post_info form_row">
+                                            <dt class="form_label">계약기간</dt>
+                                            <dd class="form_value">
 												<span class="date">
 													${defaultInfo.projSdt} ~ ${defaultInfo.projEdt}
 												</span>	
 											</dd>
-											<dt>진행상태</dt>
-											<dd>${defaultInfo.statusNm}</dd>
+                                            <dt class="form_label">진행상태</dt>
+                                            <dd class="form_value">${defaultInfo.statusNm}</dd>
 										</dl>
-										<dl>
-											<dt>계약금</dt>
-											<dd>
+                                        <dl class="form_row">
+                                            <dt class="form_label">계약금</dt>
+                                            <dd class="form_value">
 												${defaultInfo.deposit}
 												&nbsp; <span id="amtNm">(${defaultInfo.depositNm})</span>
 											</dd>
-											<dt>태그</dt>
-											<dd>${defaultInfo.tag}</dd>
+                                            <dt class="form_label">태그</dt>
+                                            <dd class="form_value">${defaultInfo.tag}</dd>
 										</dl>
-										<dl>
-											<dt>설명/개요</dt>
-											<dd class="post_text h310p">
+                                        <dl class="form_row">
+                                            <dt class="form_label">설명/개요</dt>
+                                            <dd class="post_text form_value form_content">
 												<pre>${defaultInfo.projCont}</pre>
 											</dd>
 										</dl>
-										<dl class="post_file">
-											<dt>첨부파일</dt>
-											<dd class="post_file">
+                                        <dl class="post_file form_row">
+                                            <dt class="form_label">첨부파일</dt>
+                                            <dd class="post_file form_value form_attachments">
 												<div class="file_wrap">
 													<ul id="fileUl"> 
 													<c:forEach var="list" items="${fileList}" varStatus="status">
@@ -114,10 +110,10 @@
 										</dl>
 									</div><!-- End post_view -->
 		
-									<div class="btn_wrap align_right">
+                                    <div class="btn_right btn_wrap">
 										<div class="float_right">
-											<button type="button" class="btn_navy_thin" onclick="modCall();">수정</button>
-											<button type="button" class="btn_gray_thin" onclick="listCall();">목록으로</button>
+                                            <button type="button" class="btn_navy_thin btn_action action_compact" onclick="modCall();">수정</button>
+                                            <button type="button" class="btn_gray_thin btn_action action_compact" onclick="listCall();">목록으로</button>
 										</div>
 									</div>
 								</div><!-- End post_wrap -->

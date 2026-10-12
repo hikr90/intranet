@@ -136,11 +136,7 @@
 
 	<div class="main_wrap">
 		<!-- 좌측 메뉴 -->
-		<div class="left_wrap">
-			<div class="left_area">
-				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
-			</div>
-		</div>
+		<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
 		
 		<div class="content_wrap">
 			<div class="content_area">
@@ -159,129 +155,129 @@
 									<input type="hidden" id="hireNm" name="hireNm" value="${param.hireNm}">
 									<input type="hidden" id="filetypeCd" name="filetypeCd" value="EMP">
 		
-		                            <h2>사원 등록</h2>
-	                                <div class="post_write">
-	                                    <dl>
-	                                        <dt>
+                                    <h2 class="content_heading">사원 등록</h2>
+                                    <div class="form_panel">
+                                        <dl class="form_row">
+                                            <dt class="form_label">
 	                                        	<label>사진 등록</label>
 	                                        </dt>
-	                                        <dd>
+                                            <dd class="form_value">
 	                                        	<div class="profile_wrap inline_flex">
-		                                        	<div class="profile_area">
+
 		                                        		<img class="emp_img" id="empImg" width="200" height="200" src="resources/images/icon/icon_profile.png">
-	                                        		</div>
+
 	    
-		                                        	<div class="profile_box ml20">
+                                                    <div class="profile_box ml20 form_profile">
 		                                        		<br><span id="profText">사진을 등록해주세요.</span>
 			                                        	<div class="mt5">
-			                                        		<label for="profBtn" class="btn_blue">등록</label> 
-															<input type="file" id="profBtn">
+                                                            <label for="profBtn" class="btn_blue btn_action upload_label">등록</label>
+                                                            <input class="upload_input" type="file" id="profBtn">
 															<input type="hidden" id="isUploadImg" name="isUploadImg" value="N">
-		                                        			<input type="button" class="btn_gray" id="profDel" value="삭제"> 
+                                                            <input type="button" class="btn_gray btn_action" id="profDel" value="삭제">
 		                                        		</div>
 		                                        	</div>
 	                                        	</div>
 	                                        </dd>
 	                                    </dl>
-	                                    <dl>
-	                                        <dt><label>&#10003; 사원명</label></dt>
-	                                        <dd class="sel_2part">
-	                                            <input type="text" title="사원명" id="empNm" name="empNm" isRequired="Y">
+                                        <dl class="form_row">
+                                            <dt class="form_label"><label>&#10003; 사원명</label></dt>
+                                            <dd class="form_value form_pair">
+                                                <input class="form_input" type="text" title="사원명" id="empNm" name="empNm" isRequired="Y">
 	                                        </dd>
 	                                        
-	                                        <dt><label>성별</label></dt>
-	                                        <dd class="sel_2part">
+                                            <dt class="form_label"><label>성별</label></dt>
+                                            <dd class="form_value form_pair">
 	                                        	<div class="radio_box enter-check_box">
 	                                            	<span class="radio-area">
-	                                                	<input type="radio" id="chk-yes" name="isMale" value="Y" checked="checked">
-	                                                	<label for="chk-yes">남자<span></span></label>
+                                                        <input class="radio_input" type="radio" id="chk-yes" name="isMale" value="Y" checked="checked">
+                                                        <label class="radio_label_lead radio_label" for="chk-yes">남자<span class="radio_mark"></span></label>
 	                                            	</span>
 	                                            	<span class="radio-area">
-	                                                	<input type="radio" id="chk-no" name="isMale" value="N" >
-	                                                	<label for="chk-no">여자<span></span></label>
+                                                        <input class="radio_input" type="radio" id="chk-no" name="isMale" value="N" >
+                                                        <label class="radio_label" for="chk-no">여자<span class="radio_mark"></span></label>
 	                                            	</span>
 	                                            </div>
 	                                        </dd>
 	                                    </dl>
-	                                    <dl>
-	                                    	<dt><label>&#10003; 부서</label></dt>
-	                                        <dd class="sel_2part">
+                                        <dl class="form_row">
+                                            <dt class="form_label"><label>&#10003; 부서</label></dt>
+                                            <dd class="form_value form_pair">
 												<div class="select_wrap">
-													<div id="orgList" class="sList select_box">부서를 선택해주세요.</div>
+													<div id="orgList" class="sList select_box choice_value">부서를 선택해주세요.</div>
 													<input type="hidden" id="setOrgCd" name="setOrgCd" value="">
 													<input type="hidden" id="setOrgNm" name="setOrgNm" value="">
 												
-													<ul class="sUl select_ul scroll_wrap">
+													<ul class="sUl select_ul scroll_wrap choice_options">
 														<c:forEach var="list" items="${orgList}">
-															<c:if test="${not empty list.orgCd}"><li setNm="${list.orgNm}" setCd="${list.orgCd}">${list.orgNm}</li></c:if>
+															<c:if test="${not empty list.orgCd}"><li class="choice_item" setNm="${list.orgNm}" setCd="${list.orgCd}">${list.orgNm}</li></c:if>
 														</c:forEach>
 													</ul>
 												</div>
 	                                        </dd>
 	                                        
-	                                        <dt><label>&#10003; 직급</label></dt>
-	                                        <dd class="sel_2part">
+                                            <dt class="form_label"><label>&#10003; 직급</label></dt>
+                                            <dd class="form_value form_pair">
 	                                        	<div class="select_wrap">
-													<div id="rankList" class="sList select_box">직급을 선택해주세요.</div>
+													<div id="rankList" class="sList select_box choice_value">직급을 선택해주세요.</div>
 													<input type="hidden" id="setRankCd" name="setRankCd" value="">
 													<input type="hidden" id="setRankNm" name="setRankNm" value="">
 												
-													<ul class="sUl select_ul scroll_wrap">
+													<ul class="sUl select_ul scroll_wrap choice_options">
 														<c:forEach var="list" items="${rankList}">
-															<c:if test="${not empty list.rankCd}"><li setNm="${list.rankNm}" setCd="${list.rankCd}">${list.rankNm}</li></c:if>
+															<c:if test="${not empty list.rankCd}"><li class="choice_item" setNm="${list.rankNm}" setCd="${list.rankCd}">${list.rankNm}</li></c:if>
 														</c:forEach>
 													</ul>
 												</div>
 	                                        </dd>
 	                                    </dl>
-	                                    <dl>
-	                                        <dt><label>&#10003; 연락처</label></dt>
-	                                        <dd class="sel_2part">
-	                                            <input type="text" title="연락처" id="mobNo" name="mobNo" maxlength="13" onkeydown="mobProc(this);" isRequired="Y" >
+                                        <dl class="form_row">
+                                            <dt class="form_label"><label>&#10003; 연락처</label></dt>
+                                            <dd class="form_value form_pair">
+                                                <input class="form_input" type="text" title="연락처" id="mobNo" name="mobNo" maxlength="13" onkeydown="mobProc(this);" isRequired="Y" >
 	                                        </dd>
 											
-											<dt></dt>
-											<dd></dd>
+                                            <dt class="form_label"></dt>
+                                            <dd class="form_value"></dd>
 	                                    </dl>
-	                                    <dl>
-	                                        <dt><label>&#10003; 주소</label></dt>
-	                                        <dd class="sel_2part">
-	                                            <input type="text" title="주소" readonly="readonly" id="addr" name="addr" isRequired="Y">
-	                                            <input type="button" class="btn_blue align_top" value="주소 검색" onclick="addrProc();">
+                                        <dl class="form_row">
+                                            <dt class="form_label"><label>&#10003; 주소</label></dt>
+                                            <dd class="form_value form_pair">
+                                                <input class="form_input" type="text" title="주소" readonly="readonly" id="addr" name="addr" isRequired="Y">
+                                                <input type="button" class="btn_blue vertical_top btn_action" value="주소 검색" onclick="addrProc();">
 	                                        </dd>
 	                                        
-	                                        <dt><label>&#10003; 상세 주소</label></dt>
-	                                        <dd class="sel_2part">
-	                                            <input type="text" title="상세주소" id="addrInfo" name="addrInfo" isRequired="Y">
+                                            <dt class="form_label"><label>&#10003; 상세 주소</label></dt>
+                                            <dd class="form_value form_pair">
+                                                <input class="form_input" type="text" title="상세주소" id="addrInfo" name="addrInfo" isRequired="Y">
 	                                        </dd>
 	                                    </dl>
-	                                    <dl>
-	                                        <dt><label>&#10003; 아이디</label></dt>
-	                                        <dd class="sel_2part">
-	                                            <input type="text" title="아이디" name="empId" id="empId" oninput="this.value=this.value.replace(/[^a-zA-Z0-9]/g,'')" isRequired="Y">
-	                                            <input type="button" class="btn_blue align_top" value="중복 확인" onclick="chqEmpId(this.form)">
+                                        <dl class="form_row">
+                                            <dt class="form_label"><label>&#10003; 아이디</label></dt>
+                                            <dd class="form_value form_pair">
+                                                <input class="form_input" type="text" title="아이디" name="empId" id="empId" oninput="this.value=this.value.replace(/[^a-zA-Z0-9]/g,'')" isRequired="Y">
+                                                <input type="button" class="btn_blue vertical_top btn_action" value="중복 확인" onclick="chqEmpId(this.form)">
 	                                        </dd>
 	                                        
-	                                        <dt><label>&#10003; 메일 주소</label></dt>
-	                                        <dd class="sel_2part">
-	                                            <input type="text" title="메일 주소" id="email" name="email" isRequired="Y">
+                                            <dt class="form_label"><label>&#10003; 메일 주소</label></dt>
+                                            <dd class="form_value form_pair">
+                                                <input class="form_input" type="text" title="메일 주소" id="email" name="email" isRequired="Y">
 	                                        </dd>
 	                                    </dl>
-										<dl>
-											<dt><label>&#10003; 비밀번호</label></dt>
-	                                        <dd class="sel_2part">
+                                        <dl class="form_row">
+                                            <dt class="form_label"><label>&#10003; 비밀번호</label></dt>
+                                            <dd class="form_value form_pair">
 	                                            <input type="password" title="비밀번호" id="empPwd" name="empPwd" isRequired="Y">
 	                                        </dd>
-	                                        <dt><label>&#10003; 비밀번호 확인</label></dt>
-	                                        <dd class="sel_2part">
+                                            <dt class="form_label"><label>&#10003; 비밀번호 확인</label></dt>
+                                            <dd class="form_value form_pair">
 	                                        	<input type="password" title="비밀번호 (확인)" id="chqPwd" name="chqPwd" isRequired="Y">
 	                                       	</dd>
 	                                    </dl>
 									</div><!-- End post_write -->
 										
-	                                <div class="btn_wrap align_right">
-	                                	<button type="button" class="btn_navy_thin" onclick="regProc(this.form);">등록</button>
-	                                    <button type="button" class="btn_gray_thin" onclick="listCall();">취소</button>
+                                    <div class="btn_right btn_wrap">
+                                        <button type="button" class="btn_navy_thin btn_action action_compact" onclick="regProc(this.form);">등록</button>
+                                        <button type="button" class="btn_gray_thin btn_action action_compact" onclick="listCall();">취소</button>
 	                                </div>
 		                        </div><!-- End post_wrap -->
 							</div><!-- End content_area form_area -->

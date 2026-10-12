@@ -56,30 +56,24 @@
 			var str = "";
 			
 			str += "<tr class='setCorpTr'>";
-			str += 		"<td class='first_td'>";
-			str += 		"	<input type='text' class='srch_cdt_date srchSdt add_height' name='useDt' value='" + obj["useDt"] + "' readonly='readonly' />";
+            str += 		"<td class='table_cell'>";
+			str += 		"	<input type='text' class='srch_cdt_date srchSdt table_input' name='useDt' value='" + obj["useDt"] + "' readonly='readonly' />";
 			str += 		"</td>";
-			str += 		"<td>";
-			str += 			"<input type='text' id='useLoc' class='add_height' name='useLoc' style='width:240px;' value='" + obj["useLoc"] + "'>"
+            str += 		"<td class='table_cell'>";
+			str += 			"<input type='text' id='useLoc' class='table_input' name='useLoc' style='width:240px;' value='" + obj["useLoc"] + "'>"
 			str += 		"</td>";
-			str += 		"<td>";
-			str += 			"<input type='text' id='useAmt' class='add_height' name='useAmt' style='width:190px; text-align:center;' value='" + obj["useAmt"] + "' oninput='amtProc(this);'>";
+            str += 		"<td class='table_cell'>";
+			str += 			"<input type='text' id='useAmt' class='table_input entry_number' name='useAmt' style='width:190px;' value='" + obj["useAmt"] + "' oninput='amtProc(this);'>";
 			str += 		"</td>";
-			str += 		"<td>";
-			str += 			"<input type='text' id='useRsn' class='add_height' name='useRsn' style='width:345px;' value='" + obj["useRsn"] + "'>";
+            str += 		"<td class='table_cell'>";
+			str += 			"<input type='text' id='useRsn' class='table_input' name='useRsn' style='width:345px;' value='" + obj["useRsn"] + "'>";
 			str += 		"</td>";
-			str += 		"<td>";
+            str += 		"<td class='table_cell'>";
 			str += 			"<span id='corp_del' class='task_del' onclick=\"delCall(this);\"></span>";
 			str += 		"</td>";
 			str += "</tr>";
 			//
 			$(".corpTbl").append(str);
-			
-			// 목록 높이 지정
-			$(".add_height").css({
-					'height':'35px'
-				,	'line-height':'35px'
-			});
 			
 			// 달력 생성
 			$('input[name="useDt"]').daterangepicker(
@@ -236,22 +230,22 @@
 </script>
 
 <div class="post_table_wrap scroll_wrap">
-	<table class="post_table corpTbl">
+	<table class="post_table data_table entry_table corpTbl">
 		<caption>정산내역 등록 목록</caption>
 		<colgroup>
-			<col class="w12per">
+			<col class="w15per">
 			<col class="w25per">
 			<col class="w20per">
 			<col class="wAutoper">
-			<col class="w8per">
+			<col class="w10per">
 		</colgroup>
 		<thead>
-			<tr class="lh10">
-				<th scope="col">사용 일자</th>
-				<th scope="col">사용처</th>
-				<th scope="col">사용 금액</th>
-				<th scope="col">용도</th>
-				<th scope="col">삭제</th>
+			<tr>
+                <th class="table_header" scope="col">사용 일자</th>
+                <th class="table_header" scope="col">사용처</th>
+                <th class="table_header" scope="col">사용 금액</th>
+                <th class="table_header" scope="col">용도</th>
+                <th class="table_header" scope="col">삭제</th>
 			</tr>
 		</thead>
 		<tbody></tbody>

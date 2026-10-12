@@ -94,7 +94,7 @@
 		    				alert("<spring:message code="PROC.SUCCESS"/>"); // ALERT
 		    				
 		    				// 재 조회
-		            		$(".listCall").trigger("click");	
+		            		$("#listCall").trigger("click");	
 		            },
 		            error : function(data){
 		            	//
@@ -236,11 +236,7 @@
 	
 	<div class="main_wrap">
 		<!-- 좌측 메뉴 -->
-		<div class="left_wrap">
-			<div class="left_area">
-				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
-			</div>
-		</div>
+		<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
 		
 		<div class="content_wrap">
 			<div class="content_area">
@@ -250,11 +246,11 @@
 							<div class="form_area">
 								<div class="post_wrap">
 								<input type="hidden" id="roleCd" name="roleCd" value="0">
-								<input type="button" class="listCall display_none" onclick="listCall(this.form);">
+								<input type="button" id="listCall" class="hide" onclick="listCall(this.form);">
 								
-									<h2>권한 관리
+                                    <h2 class="content_heading">권한 관리
 										<span class="float_right">
-											<input type="button" class="btn_blue_thin" value="등록" onclick="regCall();">
+                                            <input type="button" class="btn_blue_thin btn_action action_compact" value="등록" onclick="regCall();">
 										</span>
 									</h2>
 									
@@ -265,36 +261,36 @@
 												<label class="srch_label">제목</label>		
 												<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="enterListCall(this.form);">
 											
-												<input type="button" class="btn_blue" value="조회" onclick="listCall(this.form);">
-												<input type="button" class="btn_gray" value="초기화" onclick="initCall();">
+                                                <input type="button" class="btn_blue btn_action" value="조회" onclick="listCall(this.form);">
+                                                <input type="button" class="btn_gray btn_action" value="초기화" onclick="initCall();">
 											</div>
 										</div>
 		                            </div>
 									
-									<div class="tree_wrap">
-										<div id="tree_area" class="tree_area w400p h525p"> 
+									<div class="tree_wrap tree_workspace permission_workspace">
+										<div id="tree_area" class="scroll_wrap tree_area tree_navigation">
 											<div id="roleTree" class="tree">
 												<c:if test="${not empty defaultList}">
 													<ul class="ul_1">
 														<c:forEach var="list" items="${defaultList}" varStatus="status">
 						           						   	<c:set var="spanIcon" 	value="icon_list"/> 
 				
-															<li class="li_1 ml15">
-															<span class="${spanIcon}"></span>
+                                                            <li class="tree_item li_1">
+															<span class="tree_icon ${spanIcon}"></span>
 															<a class="a_btn" id="${list.roleCd}" href="#" onclick="detCall('${list.roleCd}');">${list.roleNm}</a>
 														</c:forEach>
 													</ul>
 												</c:if>
 												<c:if test="${empty defaultList}">
 													<ul class="ul_1">
-														<li class="li_1 ml15">
+                                                        <li class="tree_item li_1">
 															등록된 권한이 없습니다.
 														</li>
 													</ul>
 												</c:if>
 											</div>	
 										</div>
-										<div id="tree_info" class="tree_info pl20 w1120p"></div>
+										<div id="tree_info" class="tree_info tree_detail pl20"></div>
 									</div>
 								</div><!-- End post_wrap -->
 							</div><!-- End form_area -->

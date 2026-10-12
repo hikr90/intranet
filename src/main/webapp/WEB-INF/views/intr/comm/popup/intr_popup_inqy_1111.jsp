@@ -16,17 +16,17 @@
 	});
 </script>
 
-<div class="post_view mg0 mt20">
-	<dl>
-		<dt>반환 데이터 복사</dt>
-		<dd>
-			<input type="button" class="btn_blue mb5" value="복사" onclick="copyUrl('#jObj');">
+<div class="post_view mg0 mt20 form_panel duty_form">
+    <dl class="form_row">
+        <dt class="form_label">반환 데이터 복사</dt>
+        <dd class="form_value">
+            <input type="button" class="btn_blue mb5 btn_action" value="복사" onclick="copyUrl('#jObj');">
 		</dd>
 	</dl>
-	<dl>
-		<dt>반환 데이터</dt>
-		<dd class="post_text h440p">
-			<textarea id="jObj" class="c_727272" readonly="readonly"></textarea>
+    <dl class="form_row">
+        <dt class="form_label">반환 데이터</dt>
+        <dd class="post_text form_value form_content">
+            <textarea id="jObj" class="form_textarea" readonly="readonly"></textarea>
 		</dd>
 	</dl>
 </div><!-- End post_view -->

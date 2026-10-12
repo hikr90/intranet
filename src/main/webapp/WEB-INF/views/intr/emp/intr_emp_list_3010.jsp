@@ -68,11 +68,7 @@
 	
 	<div class="main_wrap">
 		<!-- 좌측 메뉴 -->
-		<div class="left_wrap">
-			<div class="left_area">
-				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
-			</div>
-		</div>
+		<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
 	
 		<div class="content_wrap">
 			<div class="content_area">
@@ -86,14 +82,14 @@
 									<input type="hidden" id="tabCd" name="tabCd" value="${param.tabCd}">
 									<input type="hidden" id="empIdx" name="empIdx" value="${empVO.empIdx}">
 									<input type="hidden" id="sequenceId" name="sequenceId" value="">
-									<h2 id="title">담당업무 조회</h2>
+                                    <h2 class="content_heading" id="title">담당업무 조회</h2>
 
 									<!-- 탭 목록 -->
 								    <div class="tab_container">
 									    <div class="tab_wrapper">
 										    <ul class="tab_list">
-								    			<li class="tab_item ${list.tabCd eq param.tabCd or empty list.tabCd ? 'active' : ''}"><a href="javascript:void(0);" onclick="tabCall(this);" tabCd="list">담당업무 조회</a></li>
-								    			<li class="tab_item ${list.tabCd eq param.tabCd and not empty list.tabCd ? 'active' : ''}"><a href="javascript:void(0);" onclick="tabCall(this);" tabCd="reg">담당업무 등록</a></li>
+                                                <li class="tab_item ${list.tabCd eq param.tabCd or empty list.tabCd ? 'active' : ''}"><a class="tab_link" href="javascript:void(0);" onclick="tabCall(this);" tabCd="list">담당업무 조회</a></li>
+                                                <li class="tab_item ${list.tabCd eq param.tabCd and not empty list.tabCd ? 'active' : ''}"><a class="tab_link" href="javascript:void(0);" onclick="tabCall(this);" tabCd="reg">담당업무 등록</a></li>
 										    </ul>
 									    </div>
 								    </div>
@@ -120,47 +116,47 @@
 														<label class="srch_label">업무명 및 상세</label>
 														<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="enterListCall(this.form);">
 													
-														<input type="button" class="btn_blue" value="조회" onclick="listCall(this.form);">
-														<input type="button" class="btn_gray" value="초기화" onclick="initCall();">
+                                                        <input type="button" class="btn_blue btn_action" value="조회" onclick="listCall(this.form);">
+                                                        <input type="button" class="btn_gray btn_action" value="초기화" onclick="initCall();">
 													</div>
 			                                	</div>
 			                                </div>
 										</div>
 										
 										<div class="post_table_wrap">
-											<table class="post_table">
+											<table class="post_table data_table">
 												<caption>담당업무 목록페이지 입니다.</caption>
 												<colgroup>
-													<col class="w8per">
-													<col class="w8per">
+													<col class="w10per">
+													<col class="w10per">
 													<col class="w15per">
 													<col class="w30per">
-													<col class="w8per">
+													<col class="w10per">
 												</colgroup>
 												<thead>
 													<tr>
-														<th scope="col">담당자</th>
-														<th scope="col">연락처</th>
-														<th scope="col">담당업무</th>
-														<th scope="col">상세</th>
-														<th scope="col">대직자</th>
+                                                        <th class="table_header" scope="col">담당자</th>
+                                                        <th class="table_header" scope="col">연락처</th>
+                                                        <th class="table_header" scope="col">담당업무</th>
+                                                        <th class="table_header" scope="col">상세</th>
+                                                        <th class="table_header" scope="col">대직자</th>
 													</tr>
 												</thead>
 												<tbody>
 			                                    	<c:forEach var="list" items="${defaultList}" varStatus="status"> 
 														<tr>
-															<td class="first_td">${list.empInfo}</td>
-															<td>${list.mobNo}</td>
-															<td>${list.dutyTitle}</td>
-															<td>${list.dutyCont}</td>
-															<td>${list.tpicInfo}</td>
+                                                            <td class="table_cell">${list.empInfo}</td>
+                                                            <td class="table_cell">${list.mobNo}</td>
+                                                            <td class="table_cell">${list.dutyTitle}</td>
+                                                            <td class="table_cell">${list.dutyCont}</td>
+                                                            <td class="table_cell">${list.tpicInfo}</td>
 				                                        </tr>
 			                                        </c:forEach>
 			                                        
 			                                        <!-- 글이 없는 경우 -->
 			                                        <c:if test="${empty defaultList}">
 			                                            <tr>
-			                                                <td align="center" colspan="5">
+                                                            <td class="table_cell" align="center" colspan="5">
 			                                              	      등록된 사원이 없습니다.
 			                                                </td>
 			                                            </tr>

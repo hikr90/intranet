@@ -204,17 +204,13 @@
 	<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1030.jsp" %>
 
 	<!-- 업무 캘린더 팝업 -->
- 	<div id="tldrArea" class="popupArea hidden">
+ 	<div id="tldrArea" class="popupArea hide">
 		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1120.jsp"></c:import>	
 	</div>
 
 	<div class="main_wrap">
 		<!-- 좌측 메뉴 -->
-		<div class="left_wrap">
-			<div class="left_area">
-				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
-			</div>
-		</div>
+		<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
 	
 		<div class="content_wrap">
 			<div class="content_area">
@@ -225,9 +221,9 @@
 						<div class="sub_content">					
 							<div class="form_area">
 								<div class="post_wrap">
-									<h2>업무 캘린더
+                                    <h2 class="content_heading">업무 캘린더
 										<span class="float_right">
-											<input type="button" class="btn_blue_thin" value="등록" onclick="regCall();">
+                                            <input type="button" class="btn_blue_thin btn_action action_compact" value="등록" onclick="regCall();">
 										</span>
 									</h2>
 									
@@ -238,7 +234,7 @@
 													<label class="srch_label">업무명</label>
 													<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="enterListCall(this.form);">
 													
-													<input type="button" id="listBtn" class="btn_blue" value="조회" onclick="listCall(this.form);">
+                                                    <input type="button" id="listBtn" class="btn_blue btn_action" value="조회" onclick="listCall(this.form);">
 												</div>	
 		                                </div>
 									</div>

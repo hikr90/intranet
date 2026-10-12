@@ -30,27 +30,23 @@
 	<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1030.jsp" %>
 
 	<!-- 담당자 팝업 -->
- 	<div id="empArea" class="popupArea hidden">
+ 	<div id="empArea" class="popupArea hide">
 		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1010.jsp"></c:import>	
 	</div>
 
 	<!-- 프로젝트 팝업 -->
- 	<div id="projArea" class="popupArea hidden">
+ 	<div id="projArea" class="popupArea hide">
 		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1030.jsp"></c:import>	
 	</div>
 	
 	<!-- 결재선 팝업 -->
- 	<div id="lineArea" class="popupArea hidden">
+ 	<div id="lineArea" class="popupArea hide">
 		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1040.jsp"></c:import>	
 	</div>
 	
 	<div class="main_wrap">
 		<!-- 좌측 메뉴 -->
-		<div class="left_wrap">
-			<div class="left_area">
-				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
-			</div>
-		</div>
+		<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
 		
 		<div class="content_wrap">
 			<div class="content_area">
@@ -67,82 +63,82 @@
 								<input type="hidden" id="formtypeCd" name="formtypeCd" value="LEAV">
 										
 								<div class="post_wrap">
-		                        	<h2>휴가 신청서
-											<button type="button" class="btn_blue_thin main_ie" onclick="listCall();">목록으로</button>											
+                                    <h2 class="content_heading document_heading">휴가 신청서
+                                            <button type="button" class="btn_blue_thin btn_action action_compact" onclick="listCall();">목록으로</button>
 		                        	</h2>
-									<div class="post_view">
-										<dl>
-											<dt>
+                                    <div class="post_view form_panel">
+                                        <dl class="form_row">
+                                            <dt class="form_label">
 												<label for="post-title">&#10003; 기안명</label>
 											</dt>
-											<dd>
-												<input type="text" id="aprvTitle" title="기안명" name="aprvTitle" isRequired="Y">
+                                            <dd class="form_value">
+                                                <input class="form_input" type="text" id="aprvTitle" title="기안명" name="aprvTitle" isRequired="Y">
 											</dd>
 										</dl>
-										<dl>
-											<dt>
+                                        <dl class="form_row">
+                                            <dt class="form_label">
 												<label for="post-title">&#10003; 프로젝트명</label>
 											</dt>
-											<dd>
-												<input type="button" class="btn_blue align_top" value="선택" onclick="projCall();">
-												<input type="text" id="projPnm" class="w1320p" title="프로젝트명" name="projPnm" readonly="readonly" isRequired="Y">
+                                            <dd class="form_value form_picker project_picker">
+                                                <input type="button" class="btn_blue vertical_top btn_action" value="선택" onclick="projCall();">
+                                                <input type="text" id="projPnm" class="form_input field_input" title="프로젝트명" name="projPnm" readonly="readonly" isRequired="Y">
 												<input type="hidden" id="projPcd" name="projPcd" value="">
 											</dd>
 										</dl>
-										<dl>
-								        	<dt>&#10003; 휴가기간</dt>
-											<dd>
-												<input type="text" class="srch_cdt_date srchDt" id="leavSdt" name="leavSdt" title="휴가기간 (시작)" value="" readonly="readonly" isRequired="Y" />
+                                        <dl class="form_row">
+                                            <dt class="form_label">&#10003; 휴가기간</dt>
+                                            <dd class="form_value">
+                                                <input type="text" class="srch_cdt_date srchDt form_input" id="leavSdt" name="leavSdt" title="휴가기간 (시작)" value="" readonly="readonly" isRequired="Y" />
 													~
-												<input type="text" class="srch_cdt_date srchDt" id="leavEdt" name="leavEdt" title="휴가기간 (종료)" value="" readonly="readonly" isRequired="Y" />
+                                                <input type="text" class="srch_cdt_date srchDt form_input" id="leavEdt" name="leavEdt" title="휴가기간 (종료)" value="" readonly="readonly" isRequired="Y" />
 											</dd>
-											<dt>&#10003; 휴가 타입</dt>
-											<dd class="sel_2part">
+                                            <dt class="form_label">&#10003; 휴가 타입</dt>
+                                            <dd class="form_value form_pair">
 									        	<div class="select_wrap">
-													<div id="leavList" class="sList select_box">${leavList[1].commcodeNm}</div>
+													<div id="leavList" class="sList select_box choice_value">${leavList[1].commcodeNm}</div>
 													<input type="hidden" id="leavtypeCd" name="leavtypeCd" value="${leavList[1].commcodeCd}">
 													<input type="hidden" id="leavtypeNm" name="leavtypeNm" value="${leavList[1].commcodeNm}">
 											
-													<ul class="sUl select_ul scroll_wrap">
+													<ul class="sUl select_ul scroll_wrap choice_options">
 														<c:forEach var="list" items="${leavList}">
 															<c:if test="${list.commcodeCd != null and  list.commcodeCd != ''}">
-																<li setNm="${list.commcodeNm}" setCd="${list.commcodeCd}">${list.commcodeNm}</li>
+																<li class="choice_item" setNm="${list.commcodeNm}" setCd="${list.commcodeCd}">${list.commcodeNm}</li>
 															</c:if>
 														</c:forEach>
 													</ul>
 												</div>
 									    	</dd>
-									    	<dt>&#10003; 대직자</dt>
-											<dd>
-												<input type="button" class="btn_blue align_top" value="선택" onclick="empCall();">
-												<input type="text" id="empPnm" class="width30" name="leavSubst" title="대직자" value="" readonly="readonly" isRequired="Y">
+                                            <dt class="form_label">&#10003; 대직자</dt>
+                                            <dd class="form_value">
+                                                <input type="button" class="btn_blue vertical_top btn_action" value="선택" onclick="empCall();">
+                                                <input type="text" id="empPnm" class="w30per form_input" name="leavSubst" title="대직자" value="" readonly="readonly" isRequired="Y">
 											</dd>
 										</dl>
-								        <dl>
-								        	<dt>&#10003; 사유</dt>
-											<dd>
-												<input type="text" id="leavRsn" title="사유" name="leavRsn" isRequired="Y">
+                                        <dl class="form_row">
+                                            <dt class="form_label">&#10003; 사유</dt>
+                                            <dd class="form_value">
+                                                <input class="form_input" type="text" id="leavRsn" title="사유" name="leavRsn" isRequired="Y">
 											</dd>
 								        </dl>
-								        <dl>
-											<dt><label for="post_text">&#10003; 기안내용</label></dt>
-											<dd class="post_text">
-												<textarea id="editor" name="aprvCont" title="기안내용" isRequired="Y">${tempInfo.tempCont}</textarea>
+                                        <dl class="form_row">
+                                            <dt class="form_label"><label for="post_text">&#10003; 기안내용</label></dt>
+                                            <dd class="post_text form_value form_content">
+                                                <textarea class="form_textarea" id="editor" name="aprvCont" title="기안내용" isRequired="Y">${tempInfo.tempCont}</textarea>
 											</dd>
 										</dl>
-								        <dl class="post_info">
-											<dt>파일 첨부</dt>
-											<dd>
-												<div class="file_box">
-													<label for="fileUpd">업로드</label>
+                                        <dl class="post_info form_row">
+                                            <dt class="form_label">파일 첨부</dt>
+                                            <dd class="form_value">
+                                                <div class="file_box form_upload">
+                                                    <label class="upload_label" for="fileUpd">업로드</label>
 													<h4 class="file_text">업로드할 파일을 선택해주세요.</h4>
-													<input type="file" id="fileUpd" name="fileUpd" class="btn_blue" multiple="multiple">
+                                                    <input type="file" id="fileUpd" name="fileUpd" class="btn_blue btn_action upload_input" multiple="multiple">
 												</div>
 											</dd>
 										</dl>
-										<dl class="post_info">
-											<dt></dt>
-											<dd class="post_file">
+                                        <dl class="post_info form_row">
+                                            <dt class="form_label"></dt>
+                                            <dd class="post_file form_value form_attachments">
 												<div class="file_wrap">
 													<!-- 파일 목록 -->
 													<c:import url="/WEB-INF/views/intr/comm/include/intr_include_1040.jsp">
@@ -155,7 +151,7 @@
 									
 									<div class="btn_wrap">
 										<div class="float_right">
-											<button type="button" class="btn_gray_thin" onclick="lineReg();">기안하기</button>
+                                            <button type="button" class="btn_gray_thin btn_action action_compact" onclick="lineReg();">기안하기</button>
 										</div>
 									</div>
 									

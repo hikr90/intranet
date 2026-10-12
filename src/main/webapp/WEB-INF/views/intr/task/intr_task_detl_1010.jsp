@@ -26,11 +26,7 @@
 	
 	<div class="main_wrap">
 		<!-- 좌측 메뉴 -->
-		<div class="left_wrap">
-			<div class="left_area">
-				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
-			</div>
-		</div>
+		<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
 
 		<div class="content_wrap">
 			<div class="content_area">
@@ -47,38 +43,38 @@
 								<input type="hidden" id="orgCd" name="orgCd" value="${param.orgCd}">
 								
 								<div class="post_wrap">
-		                            <h2>업무일지 상세
-		                            	<button type="button" class="btn_blue_thin float_right" onclick="listCall();">목록으로</button>
+                                    <h2 class="content_heading">업무일지 상세
+                                        <button type="button" class="btn_blue_thin float_right btn_action action_compact" onclick="listCall();">목록으로</button>
 		                            </h2>
 									<div id="taskWrap">
 										<!-- 업무 작성 -->
 										<c:forEach var="list" items="${defaultList}" varStatus="status"> 
 											<div class="taskArea">
-												<div class="post_view">
-													<dl>
-														<dt>업무 제목</dt>
-														<dd>
+                                                <div class="post_view form_panel">
+                                                    <dl class="form_row">
+                                                        <dt class="form_label">업무 제목</dt>
+                                                        <dd class="form_value">
 															${list.taskTitle}
 														</dd>
-														<dt>등록 일자</dt>
-														<dd>
+                                                        <dt class="form_label">등록 일자</dt>
+                                                        <dd class="form_value">
 															<fmt:parseDate value="${list.taskDt}" var="parseDt" pattern="yyyyMMdd"/>
 															<fmt:formatDate value="${parseDt}" var="fomatDt" pattern="yyyy-MM-dd"/>
 															${fomatDt}
 														</dd>
 													</dl>
-													<dl class="post_info">
-														<dt>업무 시간</dt>
-														<dd>
+                                                    <dl class="post_info form_row">
+                                                        <dt class="form_label">업무 시간</dt>
+                                                        <dd class="form_value">
 															${list.taskHh}시간 ${list.taskMm}분
 														</dd>
-														<dt>등록자</dt>
-														<dd>${list.orgNm} ${list.empNm}</dd>
+                                                        <dt class="form_label">등록자</dt>
+                                                        <dd class="form_value">${list.orgNm} ${list.empNm}</dd>
 													</dl>
 													
-													<dl>
-														<dt>업무 내용</dt>
-														<dd class="post_text h300p">
+                                                    <dl class="form_row">
+                                                        <dt class="form_label">업무 내용</dt>
+                                                        <dd class="post_text form_value form_content form_content_short">
 															${list.taskCont}
 														</dd>
 													</dl>

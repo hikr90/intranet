@@ -77,7 +77,7 @@
 </head>
 <body id="sub">
 	<!-- 정보 찾기 -->
- 	<div id="findArea" class="hidden">
+ 	<div id="findArea" class="hide">
 		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1020.jsp"></c:import>	
 	</div>
 
@@ -86,25 +86,25 @@
 		<div class="body">
 			<div class="login_wrap">
 				<div class="login_area">
-					<h3>LOGIN</h3>
-					<input type="text" placeholder="아이디" title="아이디" id="empId" name="empId" onkeydown="enterLoginCall(this.form);" value="${defaultList[0].empId}">
-					<input type="password" id="empPwd" name="empPwd" placeholder="비밀번호" title="비밀번호" onkeydown="enterLoginCall(this.form);" value="${defaultList[0].decpwd}">
+					<h3 class="login_heading">LOGIN</h3>
+					<input class="login_input" type="text" placeholder="아이디" title="아이디" id="empId" name="empId" onkeydown="enterLoginCall(this.form);" value="${defaultList[0].empId}">
+					<input class="login_input" type="password" id="empPwd" name="empPwd" placeholder="비밀번호" title="비밀번호" onkeydown="enterLoginCall(this.form);" value="${defaultList[0].decpwd}">
 					<input type="button" class="login_btn" value="로그인" onclick="loginProc(this.form);">
                     <input type="button" class="btn_find" value="아이디/비밀번호 찾기" onclick="popCall();">
 				</div>
 					
 				<div class="role_area">
 					<div class="post_table_wrap scroll_wrap">
-						<table class="post_table">
+						<table class="post_table permission_table">
 							<caption>로그인 권한 목록 조회</caption>
 							<colgroup>
 								<col class="auto">
 								<col class="w70per">
 							</colgroup>
 							<thead>
-								<tr class="bb_none">
-									<th scope="col">권한</th>
-									<th scope="col">소유자</th>
+								<tr>
+                                    <th class="table_header" scope="col">권한</th>
+                                    <th class="table_header" scope="col">소유자</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -112,8 +112,8 @@
                                 <c:forEach var="list1" items="${defaultList}" varStatus="status1">
 									<c:if test="${list1.roleCd ne defaultList[status1.index + 1].roleCd}">
 										<tr>
-											<td class="align_center">${list1.roleNm}</td>
-											<td class="title align_left">
+                                            <td class="align_center table_cell">${list1.roleNm}</td>
+                                            <td class="title align_left table_cell">
 												<c:forEach var="list2" items="${defaultList}" varStatus="status2">
 													<c:if test="${list1.roleCd eq list2.roleCd}">
 														<a class="c_214b97" href="javascript:setInfo('${list2.empId}','${list2.decpwd}');">${list2.empNm}</a>
@@ -127,7 +127,7 @@
                                </c:if>
                                <c:if test="${empty defaultList}">
 									<tr>
-										<td class="text_center" colspan="2">권한 소유자가 없습니다.</td>
+                                        <td class="align_center table_cell" colspan="2">권한 소유자가 없습니다.</td>
 									</tr>
 								</c:if>
 							</tbody>

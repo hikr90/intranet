@@ -26,7 +26,7 @@ function ajaxPopup(obj){
 			success : function(data){
 				//
 				$("#"+con).html(data);
-				$("#"+area).removeClass("hidden");
+				$("#"+area).removeClass("hide");
 				//
 				$("#overlay").show();
 			  	$("#"+area).show();
@@ -101,7 +101,7 @@ function popClose(type){
 	try {
 		//
 		var area = type + "Area";
-		$("#"+area).addClass('hidden');
+		$("#"+area).addClass('hide');
 		$("#"+area).hide();
 		$('#overlay').hide();
 	  	$('body').css('overflow', '');

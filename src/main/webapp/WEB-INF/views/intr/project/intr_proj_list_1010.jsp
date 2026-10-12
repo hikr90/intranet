@@ -96,11 +96,7 @@
 
 	<div class="main_wrap">
 		<!-- 좌측 메뉴 -->
-		<div class="left_wrap">
-			<div class="left_area">
-				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
-			</div>
-		</div>
+		<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
 		
 		<div class="content_wrap">
 			<div class="content_area">
@@ -113,10 +109,10 @@
 									<input type="hidden" id="page" name="page" value="${param.page}">
 									<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
 									
-									<h2>프로젝트 관리
+                                    <h2 class="content_heading">프로젝트 관리
 										<span class="float_right">
-											<input type="button" class="btn_blue_thin" value="등록" onclick="regCall();">
-											<input type="button" class="btn_gray_thin" value="삭제" onclick="delProc(this.form);">
+                                            <input type="button" class="btn_blue_thin btn_action action_compact" value="등록" onclick="regCall();">
+                                            <input type="button" class="btn_gray_thin btn_action action_compact" value="삭제" onclick="delProc(this.form);">
 										</span>
 									</h2>
 									
@@ -132,13 +128,13 @@
 												<div class="srch_area">
 													<label class="srch_label">진행상태</label>
 													<div class="select_wrap">
-														<div id="statList" class="sList select_box">${empty param.srchStatNm ? '전체' : param.srchStatNm}</div>
+														<div id="statList" class="sList select_box choice_value">${empty param.srchStatNm ? '전체' : param.srchStatNm}</div>
 														<input type="hidden" name="srchStatCd" value="${param.srchStatCd}">
 														<input type="hidden" name="srchStatNm" value="${param.srchStatNm}">
 													
-														<ul class="sUl select_ul scroll_wrap">
+														<ul class="sUl select_ul scroll_wrap choice_options">
 															<c:forEach var="list" items="${statList}">
-																<li setNm="${list.commcodeNm}" setCd="${list.commcodeCd}">${list.commcodeNm}</li>
+																<li class="choice_item" setNm="${list.commcodeNm}" setCd="${list.commcodeCd}">${list.commcodeNm}</li>
 															</c:forEach>
 														</ul>
 													</div>
@@ -168,57 +164,57 @@
 														<label class="srch_label">프로젝트명</label>
 														<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="enterListCall(this.form);">
 													
-														<input type="button" class="btn_blue" value="조회" onclick="listCall(this.form);">
-														<input type="button" class="btn_gray" value="초기화" onclick="initCall();">
+                                                        <input type="button" class="btn_blue btn_action" value="조회" onclick="listCall(this.form);">
+                                                        <input type="button" class="btn_gray btn_action" value="초기화" onclick="initCall();">
 													</div>
 			                                	</div>
 											</div>
 										</div>
 									
 									<div class="post_table_wrap">
-										<table class="post_table">
+										<table class="post_table data_table">
 											<caption>프로젝트 목록 조회</caption>
 											<colgroup>
-												<col class="w7per">
-												<col class="w12per">
+												<col class="w5per">
+												<col class="w15per">
 												<col class="auto">
 												<col class="w20per">
-												<col class="w12per">
-												<col class="w12per">
+												<col class="w15per">
+												<col class="w15per">
 											</colgroup>
 											<thead>
 												<tr>
-													<th scope="col">
+                                                    <th class="table_header" scope="col">
 														<span class="check_box">
-															<input type="checkbox" class="check_box everyChk"> 
-															<label for="check_label"><span class="check_label"></span></label>
+                                                            <input type="checkbox" class="checkbox_input check_box everyChk">
+                                                            <label class="checkbox_label" for="check_label"><span class="checkbox_mark check_label"></span></label>
 														</span>
 													</th>
-													<th scope="col">진행상태</th>
-													<th scope="col">프로젝트명</th>
-													<th scope="col">담당자</th>
-													<th scope="col">시작일</th>
-													<th scope="col">종료일</th>
+                                                    <th class="table_header" scope="col">진행상태</th>
+                                                    <th class="table_header" scope="col">프로젝트명</th>
+                                                    <th class="table_header" scope="col">담당자</th>
+                                                    <th class="table_header" scope="col">시작일</th>
+                                                    <th class="table_header" scope="col">종료일</th>
 												</tr>
 											</thead>
 											<tbody>
 		                                    	<c:forEach var="list" items="${defaultList}" varStatus="status"> 
 													<tr>
-														<td class="first_td">
+                                                        <td class="table_cell">
 					                                       <span class="check_box">
-																<input type="checkbox"  name="checkBox" class="check_box deleteIdx" id="deleteIdx${status.index}" value="${list.projCd}"> 
-																<label for="check_label"><span></span></label>
+                                                                <input type="checkbox"  name="checkBox" class="checkbox_input check_box deleteIdx" id="deleteIdx${status.index}" value="${list.projCd}">
+                                                                <label class="checkbox_label" for="check_label"><span class="checkbox_mark"></span></label>
 															</span>
 														</td>
-														<td>${list.statusNm}</td>
-														<td class="_title">
+                                                        <td class="table_cell">${list.statusNm}</td>
+                                                        <td class="_title table_cell">
 															<c:if test="${list.fileYn eq 'Y'}">
 																<img id="fileImg" src='resources/images/icon/icon_file.png' width="15" height="15" />
 															</c:if>
 															<a class="show_view a_title" onclick="detCall('${list.projCd}');">${list.projTitle}</a>
 														</td>
-														<td>${list.orgNm} ${list.ownerNm} ${list.rankNm}</td>
-														<td>
+                                                        <td class="table_cell">${list.orgNm} ${list.ownerNm} ${list.rankNm}</td>
+                                                        <td class="table_cell">
 															<span class="date">
 																<fmt:parseDate value="${list.projSdt}" var="parseDt" pattern="yyyyMMdd"/>
 																<fmt:formatDate value="${parseDt}" var="formatDt" pattern="yyyy-MM-dd"/>
@@ -226,7 +222,7 @@
 																${formatDt}
 															</span>
 														</td>
-														<td>
+                                                        <td class="table_cell">
 															<span class="date">
 																<fmt:parseDate value="${list.projEdt}" var="parseDt" pattern="yyyyMMdd"/>
 																<fmt:formatDate value="${parseDt}" var="formatDt" pattern="yyyy-MM-dd"/>
@@ -240,7 +236,7 @@
 		                                        <!-- 글이 없는 경우 -->
 		                                        <c:if test="${empty defaultList}">
 		                                            <tr>
-		                                                <td align="center" colspan="6">
+                                                        <td class="table_cell" align="center" colspan="6">
 		                                              	      등록된 글이 없습니다.
 		                                                </td>
 		                                            </tr>

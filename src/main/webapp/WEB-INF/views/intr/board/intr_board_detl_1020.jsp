@@ -71,18 +71,14 @@
 	
 	<div class="main_wrap">
 		<!-- 좌측 메뉴 -->
-		<div class="left_wrap">
-			<div class="left_area">
-				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
-			</div>
-		</div>
+		<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
 
 		<div class="content_wrap">
 			<div class="content_area">
 			<article class="sub_article">
 				<div class="content">
 					<div class="sub_content">					
-						<div class=" form_area">
+                        <div class="form_area">
 							<input type="hidden" id="empIdx" name="empIdx"  value="${empVO.empIdx}">
 							<input type="hidden" id="page" name="page" value="${param.page}">
 							<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
@@ -95,54 +91,54 @@
 							<input type="hidden" id="filetypeCd" name="filetypeCd" value="BOARD">
 								
 							<div class="post_wrap">
-								<h2>공지사항 등록</h2>
-								<div class="post_view">
-									<dl>
-										<dt>
+                                <h2 class="content_heading">공지사항 등록</h2>
+                                <div class="post_view form_panel">
+                                    <dl class="form_row">
+                                        <dt class="form_label">
 											<label for="post-title">&#10003; 제목</label>
 										</dt>
-										<dd>
-											<input type="text" id="brdTitle" title="제목" name="brdTitle" isRequired="Y">
+                                        <dd class="form_value">
+                                            <input class="form_input" type="text" id="brdTitle" title="제목" name="brdTitle" isRequired="Y">
 										</dd>
-										<dt>사용여부</dt>
-                                        <dd class="sel_2part">
+                                        <dt class="form_label">사용여부</dt>
+                                        <dd class="form_value form_pair">
                                         	<div class="radio_box enter-check_box">
                                             	<span class="radio-area">
-                                                	<input type="radio" id="chk-yes" name="useYn" value="Y" checked="checked">
-                                                	<label for="chk-yes">Y<span></span></label>
+                                                    <input class="radio_input" type="radio" id="chk-yes" name="useYn" value="Y" checked="checked">
+                                                    <label class="radio_label_lead radio_label" for="chk-yes">Y<span class="radio_mark"></span></label>
                                             	</span>
                                             	<span class="radio-area">
-                                                	<input type="radio" id="chk-no" name="useYn" value="N" >
-                                                	<label for="chk-no">N<span></span></label>
+                                                    <input class="radio_input" type="radio" id="chk-no" name="useYn" value="N" >
+                                                    <label class="radio_label" for="chk-no">N<span class="radio_mark"></span></label>
                                             	</span>
                                             </div>
                                         </dd>
 									</dl>
-									<dl>
-										<dt>부서</dt>
-										<dd>${empVO.orgNm}</dd>
-										<dt>작성자</dt>
-										<dd>${empVO.empNm} ${empVO.rankNm}</dd>
+                                    <dl class="form_row">
+                                        <dt class="form_label">부서</dt>
+                                        <dd class="form_value">${empVO.orgNm}</dd>
+                                        <dt class="form_label">작성자</dt>
+                                        <dd class="form_value">${empVO.empNm} ${empVO.rankNm}</dd>
 									</dl>
-									<dl>
-										<dt><label for="post_text">&#10003; 내용</label></dt>
-										<dd class="post_text">
-											<textarea id="brdCont" name="brdCont" title="내용" isRequired="Y"></textarea>
+                                    <dl class="form_row">
+                                        <dt class="form_label"><label for="post_text">&#10003; 내용</label></dt>
+                                        <dd class="post_text form_value form_content">
+                                            <textarea class="form_textarea" id="brdCont" name="brdCont" title="내용" isRequired="Y"></textarea>
 										</dd>
 									</dl>
-									<dl class="post_info">
-										<dt>첨부 파일</dt>
-										<dd>
-											<div class="file_box">
-												<label for="fileUpd">업로드</label>
+                                    <dl class="post_info form_row">
+                                        <dt class="form_label">첨부 파일</dt>
+                                        <dd class="form_value">
+                                            <div class="file_box form_upload">
+                                                <label class="upload_label" for="fileUpd">업로드</label>
 												<h4 class="file_text">업로드할 파일을 선택해주세요.</h4>
-												<input type="file" id="fileUpd" name="fileUpd" class="btn_blue" multiple="multiple">
+                                                <input type="file" id="fileUpd" name="fileUpd" class="btn_blue btn_action upload_input" multiple="multiple">
 											</div>
 										</dd>
 									</dl>
-									<dl class="post_info">
-										<dt></dt>
-										<dd class="post_file">
+                                    <dl class="post_info form_row">
+                                        <dt class="form_label"></dt>
+                                        <dd class="post_file form_value form_attachments">
 											<div class="file_wrap">
 												<!-- 파일 목록 -->
 												<c:import url="/WEB-INF/views/intr/comm/include/intr_include_1040.jsp">
@@ -152,9 +148,9 @@
 										</dd>
 									</dl>
 								</div><!-- End post_write -->
-								<div class="btn_wrap align_right">
-									<button type="button" class="btn_navy_thin" onclick="regProc(this.form);">등록</button>
-									<button type="button" class="btn_gray_thin" onclick="listCall();">취소</button>
+                                <div class="btn_right btn_wrap">
+                                    <button type="button" class="btn_navy_thin btn_action action_compact" onclick="regProc(this.form);">등록</button>
+                                    <button type="button" class="btn_gray_thin btn_action action_compact" onclick="listCall();">취소</button>
 								</div>
 							</div><!-- End post_wrap -->
 						</div><!-- End form_area -->

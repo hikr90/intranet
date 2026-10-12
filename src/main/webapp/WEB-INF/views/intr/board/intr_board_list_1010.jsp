@@ -98,11 +98,7 @@
 	
 	<div class="main_wrap">
 		<!-- 좌측 메뉴 -->
-		<div class="left_wrap">
-			<div class="left_area">
-				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
-			</div>
-		</div>
+		<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
 		
 		<div class="content_wrap">
 			<div class="content_area">
@@ -115,10 +111,10 @@
 										<input type="hidden" id="page" name="page" value="${param.page}">
 										<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
 			
-										<h2>공지사항 관리
+                                        <h2 class="content_heading">공지사항 관리
 											<span class="float_right">
-												<input type="button" class="btn_blue_thin" value="등록" onclick="regCall();">
-												<input type="button" class="btn_gray_thin" value="삭제" onclick="delProc(this.form);">
+                                                <input type="button" class="btn_blue_thin btn_action action_compact" value="등록" onclick="regCall();">
+                                                <input type="button" class="btn_gray_thin btn_action action_compact" value="삭제" onclick="delProc(this.form);">
 											</span>
 										</h2>
 										
@@ -156,74 +152,74 @@
 														<label class="srch_label">제목</label>
 														<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="enterListCall(this.form);">
 													
-														<input type="button" class="btn_blue" value="조회" onclick="listCall(this.form);">
-														<input type="button" class="btn_gray" value="초기화" onclick="initCall();">
+                                                        <input type="button" class="btn_blue btn_action" value="조회" onclick="listCall(this.form);">
+                                                        <input type="button" class="btn_gray btn_action" value="초기화" onclick="initCall();">
 													</div>
 			                                	</div>
 											</div>
 										</div>
 										
 										<div class="post_table_wrap">
-											<table class="post_table">
+											<table class="post_table data_table">
 												<caption>공지사항 목록 조회</caption>
 												<colgroup>
-													<col class="w7per">
+													<col class="w5per">
 													<col class="auto">
-													<col class="w12per">
-													<col class="w12per">
 													<col class="w15per">
-													<col class="w7per">
-													<col class="w7per">
+													<col class="w15per">
+													<col class="w15per">
+													<col class="w5per">
+													<col class="w5per">
 												</colgroup>
 												<thead>
 													<tr>
-														<th scope="col">
+                                                        <th class="table_header" scope="col">
 															<span class="check_box">
-																<input type="checkbox" class="check_box everyChk"> 
-																<label for="check_label"><span class="check_label"></span></label>
+                                                                <input type="checkbox" class="checkbox_input check_box everyChk">
+                                                                <label class="checkbox_label" for="check_label"><span class="checkbox_mark check_label"></span></label>
 															</span>
 														</th>
-														<th scope="col">제목</th>
-														<th scope="col">부서</th>
-														<th scope="col">작성자</th>
-														<th scope="col">작성일자</th>
-														<th scope="col">조회수</th>
-														<th scope="col">사용여부</th>
+                                                        <th class="table_header" scope="col">제목</th>
+                                                        <th class="table_header" scope="col">부서</th>
+                                                        <th class="table_header" scope="col">작성자</th>
+                                                        <th class="table_header" scope="col">작성일자</th>
+                                                        <th class="table_header" scope="col">조회수</th>
+                                                        <th class="table_header" scope="col">사용여부</th>
 													</tr>
 												</thead>
 												<tbody>
 			                                       <c:forEach var="list" items="${defaultList}" varStatus="status"> 
 													<tr>
-														<td class="first_td">
+                                                        <td class="table_cell">
 					                                       <span class="check_box">
-																<input type="checkbox"  name="checkBox" class="check_box deleteIdx" id="deleteIdx${status.index}" value="${list.brdId}"> 
-																<label for="check_label"><span></span></label>
+                                                                <input type="checkbox"  name="checkBox" class="checkbox_input check_box deleteIdx" id="deleteIdx${status.index}" value="${list.brdId}">
+                                                                <label class="checkbox_label" for="check_label"><span class="checkbox_mark"></span></label>
 															</span>
 														</td>
-														<td class="_title">
+                                                        <td class="_title table_cell">
 															<a class="show_view a_title" onclick="detCall('${list.brdId}');">${list.brdTitle}</a>
 															<c:if test="${list.fileYn eq 'Y'}">
 																<img id="fileImg" src='resources/images/icon/icon_file.png' width="15" height="15" />
 															</c:if>
 														</td>
-														<td>${list.orgNm}</td>
-														<td>${list.empNm} ${list.rankNm}</td>
-														<td>
+                                                        <td class="table_cell">${list.orgNm}</td>
+                                                        <td class="table_cell">${list.empNm} ${list.rankNm}</td>
+                                                        <td class="table_cell">
 															<span class="date">
 																<fmt:parseDate value="${list.regDt}" var="parseDt" pattern="yyyyMMdd"/>
 																<fmt:formatDate value="${parseDt}" var="formatDt" pattern="yyyy-MM-dd"/>
 																${formatDt} 
 															</span>	
 														</td>
-														<td>${list.readHit}</td>
-														<td>${list.useYn}</td>
+                                                        <td class="table_cell">${list.readHit}</td>
+                                                        <td class="table_cell">${list.useYn}</td>
 			                                        </tr>
 			                                        </c:forEach>
 			                                        
 			                                        <!-- 글이 없는 경우 -->
 			                                        <c:if test="${empty defaultList}">
 			                                            <tr>
-			                                                <td align="center" colspan="7">
+                                                            <td class="table_cell" align="center" colspan="7">
 			                                              	      등록된 글이 없습니다.
 			                                                </td>
 			                                            </tr>

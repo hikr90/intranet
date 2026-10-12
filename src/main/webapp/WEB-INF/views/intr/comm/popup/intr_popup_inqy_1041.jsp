@@ -70,26 +70,26 @@
 		 	];
 			
 			str += "<tr class='setListTr' empIdx='" + obj["aprvIdx"] + "'>"
-			str += "		<td>" + obj["orgNm"] + "</td>";
-			str += "		<td>" + obj["empNm"] + " " + obj["rankNm"] + "</td>";
-			str += "		<td style='padding: 0;'>";
+            str += "		<td class='table_cell'>" + obj["orgNm"] + "</td>";
+            str += "		<td class='table_cell'>" + obj["empNm"] + " " + obj["rankNm"] + "</td>";
+            str += "		<td class='table_cell table_select_cell'>";
 			//
 			str += "  		<div class='select_wrap'>";
-			str += "    			<div class='pop_sbox' style='width:126px; border:unset; text-indent:0px;'>" + obj["aprvNm"] + "</div>";
+            str += "    			<div class='pop_sbox table_select_value choice_value'>" + obj["aprvNm"] + "</div>";
 			str += "    			<input type='hidden' id='aprvtypeCd' name='aprvtypeCd' name='aprvtypeCd' value='" + obj["aprvtypeCd"] + "'>";
 			str += "    			<input type='hidden' id='aprvIdx' name='aprvIdx' name='aprvIdx' value='" + obj["aprvIdx"] + "'>";
 			str += "				";
-			str += "    			<ul class='sUl pop_sul scroll_wrap' style='width:126.5px; margin-left: -1px;'>";
+            str += "    			<ul class='sUl pop_sul scroll_wrap table_select_options choice_options' style='width:126.5px;'>";
 			
 			// 반복문 동작
 			arrLine.forEach(item => {
-			  str += "      			<li setNm='"+item.name+"' setCd='"+item.code+"' setIdx='" + obj["aprvIdx"] + "'>" + item.name + "</li>";
+			  str += "      			<li class='choice_item' setNm='"+item.name+"' setCd='"+item.code+"' setIdx='" + obj["aprvIdx"] + "'>" + item.name + "</li>";
 			});
 			//
 			str += "    			</ul>";
 			str += "  		</div>";
 			str += "		</td>";
-			str += "		<td><div id='divArea' onclick=\"delCall(this);\"><a>삭제</a></div></td>";
+            str += "		<td class='table_cell'><div id='divArea' onclick=\"delCall(this);\"><a>삭제</a></div></td>";
 			str += "</tr>";
 			//
 			$(".aprvTbl").append(str);
@@ -135,10 +135,10 @@
 	}
 </script>
 
-<div id="custom" style="display: inline-flex;">
+<div id="custom" class="approval_picker" style="display: inline-flex;">
 	<!-- 부서 사용자 트리 -->
-	<div class="tree_wrap">
-		<div class="tree_area" id="tree_area" style="width: 300px; height: 445px;"> 
+	<div class="tree_wrap tree_workspace">
+		<div class="scroll_wrap tree_area tree_navigation" id="tree_area" style="width: 300px; height: 445px;">
 			<div class="tree">
 				<ul class="ul_1">
 												
@@ -162,16 +162,16 @@
 					<c:choose>
 						<c:when test="${list.lv gt prevLv}">
 							<ul class="ul_${list.lv}">
-								<li class="li_${list.lv}">
-								<span class="${spanIcon}"></span>
+								<li class="tree_item li_${list.lv}">
+								<span class="tree_icon ${spanIcon}"></span>
 								<c:if test="${list.isleaf eq 'Y'}">
-									<input type="radio" id="radio${status.index}" name="radioIdx" value="${list.empIdx}" orgNm="${list.orgNm}" empNm="${list.empNm}" rankNm="${list.rankNm}">
+									<input class="tree_radio tree_input" type="radio" id="radio${status.index}" name="radioIdx" value="${list.empIdx}" orgNm="${list.orgNm}" empNm="${list.empNm}" rankNm="${list.rankNm}">
 								</c:if>
 								<label for="radio${status.index}">${spanNm}</label>
 						</c:when>
 						<c:when test="${list.lv eq prevLv}">
 							<c:if test="${list.isleaf eq 'Y'}">
-								<input type="radio" id="radio${status.index}" name="radioIdx" value="${list.empIdx}" orgNm="${list.orgNm}" empNm="${list.empNm}" rankNm="${list.rankNm}">
+								<input class="tree_radio tree_input" type="radio" id="radio${status.index}" name="radioIdx" value="${list.empIdx}" orgNm="${list.orgNm}" empNm="${list.empNm}" rankNm="${list.rankNm}">
 							</c:if>
 							<label for="radio${status.index}">${spanNm}</label>
 						</c:when>
@@ -205,10 +205,10 @@
 	<div id="treeArrow" class="tree_arrow" onclick="initAprvLine();"></div>
 	
 	<!-- 결재선 목록 -->
-	<div id="tree_info" class="tree_info b_f6f6f6 pd10 w640p h425p">
-		<div class="post_wrap">
-			<div class="scroll_wrap h410p">
-				<table class="post_table aprvTbl">
+    <div id="tree_info" class="tree_info approval_members">
+		<div class="list_panel approval_selection_list">
+			<div class="scroll_wrap list_body">
+				<table class="post_table data_table aprvTbl">
 					<caption>결재선 목록</caption>
 					<colgroup>
 						<col class="w30per">
@@ -218,18 +218,18 @@
 					</colgroup>
 					<thead>
 						<tr>
-							<th scope="col">부서</th>
-							<th scope="col">이름</th>
-							<th scope="col">결재유형</th>
-							<th scope="col">삭제</th>
+                            <th class="table_header" scope="col">부서</th>
+                            <th class="table_header" scope="col">이름</th>
+                            <th class="table_header" scope="col">결재유형</th>
+                            <th class="table_header" scope="col">삭제</th>
 						</tr>
 					</thead>
 					<tbody>
 						<!-- 결재선 추가 -->
 						<tr class="setListTr" empIdx="${empVO.empIdx}">
-							<td>${empVO.orgNm}</td>
-							<td>${empVO.empNm} ${empVO.rankNm}</td>
-							<td>기안
+                            <td class="table_cell">${empVO.orgNm}</td>
+                            <td class="table_cell">${empVO.empNm} ${empVO.rankNm}</td>
+                            <td class="table_cell">기안
 								<input type="hidden" id="aprvtypeCd" name="aprvtypeCd" value="TYPE_0010">
 								<input type="hidden" id="aprvNm" name="aprvNm" value="기안">
 								<input type="hidden" id="aprvIdx" name="aprvIdx" value="${empVO.empIdx}">
@@ -237,7 +237,7 @@
 								<input type="hidden" id="rankNm" name="rankNm" value="${empVO.rankNm}">
 								<input type="hidden" id="empNm" name="empNm" value="${empVO.empNm}">
 							</td>
-							<td></td>
+                            <td class="table_cell"></td>
 						</tr>
 					</tbody>
 				</table>
@@ -246,16 +246,16 @@
 	</div>
 </div>
 
-<div id="selected" class="tree_wrap" style="display: none;">
-	<div id="treeArea" class="tree_area w350p h445p">
+<div id="selected" class="tree_wrap tree_workspace approval_picker" style="display: none;">
+	<div id="treeArea" class="scroll_wrap tree_area tree_navigation">
 		<div id="lineTree" class="tree">
 			<c:if test="${not empty defaultList}">
 				<ul class="ul_1">
 					<c:forEach var="list" items="${defaultList}" varStatus="status">
        					<c:set var="spanIcon" 	value="icon_list"/> 
 
-						<li class="li_1 ml15">
-							<span class="${spanIcon}"></span>
+                        <li class="tree_item li_1">
+							<span class="tree_icon ${spanIcon}"></span>
 							<a class="a_btn" id="${list.aprvlineId}" href="javascript:void(0);" onclick="detCall('${list.aprvlineId}');">${list.aprvlineNm}</a>
 						</li>
 					</c:forEach>
@@ -263,7 +263,7 @@
 			</c:if>
 			<c:if test="${empty defaultList}">
 				<ul class="ul_1">
-					<li class="li_1 ml15">
+                    <li class="tree_item li_1">
 						등록된 결재선이 없습니다.
 					</li>
 				</ul>
@@ -272,5 +272,5 @@
 	</div>
 	
 	<!-- 사용자 목록 -->
-	<div id="aprvlineTb" class="tree_info ml25 pd10 b_f6f6f6 w640p h425p"></div>
+    <div id="aprvlineTb" class="tree_info ml25 approval_members"></div>
 </div>

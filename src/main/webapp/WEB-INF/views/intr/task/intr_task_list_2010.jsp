@@ -63,11 +63,7 @@
 	
 	<div class="main_wrap">
 		<!-- 좌측 메뉴 -->
-		<div class="left_wrap">
-			<div class="left_area">
-				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
-			</div>
-		</div>
+		<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
 	
 		<div class="content_wrap">
 			<div class="content_area">
@@ -81,7 +77,7 @@
 										<input type="hidden" id="orgCd" name="orgCd" value="${param.orgCd}">
 										<input type="hidden" id="taskId" name="taskId" value="">
 										
-										<h2>업무일지 조회</h2><br>
+                                        <h2 class="content_heading">업무일지 조회</h2><br>
 										<div class="srch_wrap mt5">
 											<div class="right_srch_area">
 												<!-- 작성일자 -->
@@ -96,13 +92,13 @@
 												<div class="srch_area">
 													<label class="srch_label">부서</label>
 													<div class="select_wrap">
-														<div id="orgList" class="sList select_box">${empty param.orgNm ? '전체' : param.orgNm}</div>
+														<div id="orgList" class="sList select_box choice_value">${empty param.orgNm ? '전체' : param.orgNm}</div>
 														<input type="hidden" name="orgCd" value="${param.orgCd}">
 														<input type="hidden" name="orgNm" value="${param.orgNm}">
 													
-														<ul class="sUl select_ul scroll_wrap">
+														<ul class="sUl select_ul scroll_wrap choice_options">
 															<c:forEach var="list" items="${orgList}">
-																<li setNm="${list.orgNm}" setCd="${list.orgCd}">${list.orgNm}</li>
+																<li class="choice_item" setNm="${list.orgNm}" setCd="${list.orgCd}">${list.orgNm}</li>
 															</c:forEach>
 														</ul>
 													</div>
@@ -114,8 +110,8 @@
 														<label class="srch_label">작성자</label>
 														<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="enterListCall(this.form);">
 														
-														<input type="button" class="btn_blue" value="조회" onclick="listCall();">
-														<input type="button" class="btn_gray" value="초기화" onclick="initCall();">
+                                                        <input type="button" class="btn_blue btn_action" value="조회" onclick="listCall();">
+                                                        <input type="button" class="btn_gray btn_action" value="초기화" onclick="initCall();">
 													</div>
 			                                	</div>
 			                                </div>
@@ -123,7 +119,7 @@
 										
 										<!-- 탭 내용 -->
 										<div id="tabArea" class="tab_content_area">
-											<table class="post_table">
+											<table class="post_table data_table">
 												<caption>업무일지 조회</caption>
 												<colgroup>
 													<col class="w5per">
@@ -133,10 +129,10 @@
 												</colgroup>
 												<thead>
 													<tr>
-														<th scope="col">+/-</th>
-														<th scope="col">업무 제목</th>
-														<th scope="col">등록 시간</th>
-														<th scope="col">등록자</th>
+                                                        <th class="table_header" scope="col">+/-</th>
+                                                        <th class="table_header" scope="col">업무 제목</th>
+                                                        <th class="table_header" scope="col">등록 시간</th>
+                                                        <th class="table_header" scope="col">등록자</th>
 													</tr>
 												</thead>
 												<tbody>
@@ -144,17 +140,17 @@
 											        	<c:set var="none" value="none${status.index}" />
 														<tr id="${list.rowNum eq 1 ? list.taskId : none}" class="${list.rowNum eq 1 ? '' : list.taskId} ${list.rowNum eq 1 ? 'show' : 'hide'}" spreadType="${list.rowNum eq 1 ? 'Y' : 'N'}">
 													        <c:if test="${list.rowNum eq 1}">
-													            <td rowspan="${list.rowCnt}">
+                                                                <td class="table_cell" rowspan="${list.rowCnt}">
 													                <a class="spread" onclick="spreadProc('${list.taskId}');">+</a>
 													            </td>
 													        </c:if>
 											
-													        <td class="_title">
+                                                            <td class="_title table_cell">
 											    		        <a href="javascript:void(0);" class="show_view a_title c_214b97" onclick="detCall('${list.taskId}');">${list.taskTitle}</a>
 											    		    </td>
 											
 													        <c:if test="${list.rowNum eq 1}">
-													            <td rowspan="${list.rowCnt}">
+                                                                <td class="table_cell" rowspan="${list.rowCnt}">
 													                <span class="date">
 													                    <fmt:parseDate value="${list.taskDt}" var="parseDt" pattern="yyyyMMdd"/>
 													                    <fmt:formatDate value="${parseDt}" var="formatDt" pattern="yyyy-MM-dd"/>
@@ -162,7 +158,7 @@
 													                    ${formatDt}
 													                </span>
 													            </td>
-													            <td rowspan="${list.rowCnt}">${list.orgNm} ${list.empNm}</td>
+                                                                <td class="table_cell" rowspan="${list.rowCnt}">${list.orgNm} ${list.empNm}</td>
 													        </c:if>
 													</tr>
 												</c:forEach>
@@ -170,7 +166,7 @@
 													<!-- 글이 없는 경우 -->
 													<c:if test="${empty defaultList}">
 												    	<tr>
-															<td align="center" colspan="4">등록된 글이 없습니다.</td>
+                                                            <td class="table_cell" align="center" colspan="4">등록된 글이 없습니다.</td>
 														</tr>
 													</c:if>
 												</tbody>

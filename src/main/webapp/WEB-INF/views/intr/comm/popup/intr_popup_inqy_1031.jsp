@@ -11,9 +11,9 @@
 			<c:forEach var="list" items="${projList}" varStatus="status">
 				<c:set var="spanIcon"	value="icon_folder"/>
 				
-				<li class="li_">
-					<input type="radio" id="projPcd${status.index}" class="projPcd" name="projPcd" value="${list.projCd}" projPnm="${list.projTitle}" projPcd="${list.projCd}" >
-					<span class="${spanIcon}"></span>
+				<li class="tree_item li_">
+					<input type="radio" id="projPcd${status.index}" class="tree_radio tree_input projPcd" name="projPcd" value="${list.projCd}" projPnm="${list.projTitle}" projPcd="${list.projCd}" >
+					<span class="tree_icon ${spanIcon}"></span>
 					<label for="projPcd${status.index}">${list.projTitle}</label>
 				</li>
 			</c:forEach>

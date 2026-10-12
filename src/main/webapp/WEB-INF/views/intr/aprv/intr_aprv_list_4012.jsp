@@ -20,26 +20,26 @@
 		 	];
 			
 			str += "<tr class='setListTr' empIdx='" + obj["aprvIdx"] + "'>"
-			str += "		<td>" + obj["orgNm"] + "</td>";
-			str += "		<td>" + obj["empNm"] + " " + obj["rankNm"] + "</td>";
-			str += "		<td style='padding: 0;'>";
+            str += "		<td class='table_cell'>" + obj["orgNm"] + "</td>";
+            str += "		<td class='table_cell'>" + obj["empNm"] + " " + obj["rankNm"] + "</td>";
+            str += "		<td class='table_cell table_select_cell'>";
 			//
 			str += "  		<div class='select_wrap'>";
-			str += "    			<div class='pop_sbox' style='width:126px; border:unset; text-indent:0px;'>" + obj["aprvNm"] + "</div>";
+            str += "    			<div class='pop_sbox table_select_value choice_value'>" + obj["aprvNm"] + "</div>";
 			str += "    			<input type='hidden' id='aprvtypeCd' name='aprvtypeCd' name='aprvtypeCd' value='" + obj["aprvtypeCd"] + "'>";
 			str += "    			<input type='hidden' id='aprvIdx' name='aprvIdx' name='aprvIdx' value='" + obj["aprvIdx"] + "'>";
 			str += "				";
-			str += "    			<ul class='sUl pop_sul scroll_wrap' style='width:125px; margin-left: -1px;'>";
+            str += "    			<ul class='sUl pop_sul scroll_wrap table_select_options choice_options'>";
 			
 			// 반복문 동작
 			arrLine.forEach(item => {
-			  str += "      			<li setNm='"+item.name+"' setCd='"+item.code+"' setIdx='" + obj["aprvIdx"] + "'>" + item.name + "</li>";
+			  str += "      			<li class='choice_item' setNm='"+item.name+"' setCd='"+item.code+"' setIdx='" + obj["aprvIdx"] + "'>" + item.name + "</li>";
 			});
 			//
 			str += "    			</ul>";
 			str += "  		</div>";
 			str += "		</td>";
-			str += "		<td><div id='divArea' onclick=\"delCall(this);\"><a>삭제</a></div></td>";
+            str += "		<td class='table_cell'><div id='divArea' onclick=\"delCall(this);\"><a>삭제</a></div></td>";
 			str += "</tr>";
 			//
 			$(".aprvTbl").append(str);
@@ -50,20 +50,21 @@
 	}
 </script>
 
-<div class="mb10 pd8 b_f6f6f6">
-    <input type="text" id="aprvlineNm" class="h36p w410p" placeholder="결재선 명칭을 입력하세요">
+<div class="approval_document">
+<div class="approval_editor">
+    <input type="text" id="aprvlineNm" class="approval_title" placeholder="결재선 명칭을 입력하세요">
 
-    <div class="float_right">
-        <button type="button" class="btn_navy_thin" onclick="saveProc('');">저장</button>
-        <button type="button" class="btn_blue_thin ml5" onclick="initCall('');">새로고침</button>
+    <div class="approval_actions">
+        <button type="button" class="btn_navy_thin btn_action action_compact" onclick="saveProc('');">저장</button>
+        <button type="button" class="btn_blue_thin ml5 btn_action action_compact" onclick="initCall('');">새로고침</button>
     </div>
 </div>
 
 <!-- 결재선 목록 -->
-<div id="tree_info" class="tree_info pd10 b_f6f6f6 w623p h390p">
-	<div class="post_wrap">
-		<div class="scroll_wrap h390p">
-			<table class="post_table aprvTbl">
+<div id="tree_info" class="tree_info approval_members">
+	<div class="list_panel list_panel_fill">
+		<div class="scroll_wrap list_body">
+			<table class="post_table data_table aprvTbl">
 				<caption>결재선 목록</caption>
 				<colgroup>
 					<col class="w30per">
@@ -73,25 +74,26 @@
 				</colgroup>
 				<thead>
 					<tr>
-						<th scope="col">부서</th>
-						<th scope="col">이름</th>
-						<th scope="col">결재유형</th>
-						<th scope="col">삭제</th>
+                        <th class="table_header" scope="col">부서</th>
+                        <th class="table_header" scope="col">이름</th>
+                        <th class="table_header" scope="col">결재유형</th>
+                        <th class="table_header" scope="col">삭제</th>
 					</tr>
 				</thead>
 				<tbody>
 					<!-- 결재선 추가 -->
 					<tr class="setListTr" empIdx="${empVO.empIdx}">
-						<td>${empVO.orgNm}</td>
-						<td>${empVO.empNm} ${empVO.rankNm}</td>
-						<td>기안
+                        <td class="table_cell">${empVO.orgNm}</td>
+                        <td class="table_cell">${empVO.empNm} ${empVO.rankNm}</td>
+                        <td class="table_cell">기안
 							<input type="hidden" id="aprvtypeCd" name="aprvtypeCd" value="TYPE_0010">
 							<input type="hidden" id="aprvIdx" name="aprvIdx" value="${empVO.empIdx}">
 						</td>
-						<td></td>
+                        <td class="table_cell"></td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 	</div><!-- End post_wrap -->
 </div>
+</div><!-- End approval_document -->
